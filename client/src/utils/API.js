@@ -22,7 +22,6 @@ export default {
     return axios.post("/api/books", bookData);
   },
   sendText: function(text) {
-    console.log(text)
     return axios.post("https://language.googleapis.com/v1/documents:annotateText?key=" + process.env.REACT_APP_GOOGLE_API_KEY, {
       document: text.document,
       features: { extractSyntax: true, extractEntities: true },

@@ -20,11 +20,23 @@ class Home extends Component {
           let roots = tok.filter(function (o) {
             return o.dependencyEdge.label === "ROOT"
           })
+          let vmods = tok.filter(function (o) {
+            return o.dependencyEdge.label === "VMOD"
+          })
           let dobjs = tok.filter(function (o) {
             return o.dependencyEdge.label === "DOBJ"
           })
+          let pobjs = tok.filter(function (o) {
+            return o.dependencyEdge.label === "POBJ"
+          })
           let amods = tok.filter(function (o) {
             return o.dependencyEdge.label === "AMOD"
+          })
+          let nns = tok.filter(function (o) {
+            return o.dependencyEdge.label === "NN"
+          })
+          let rcmods = tok.filter(function (o) {
+            return o.dependencyEdge.label === "RCMOD"
           })
           // let salients = ent. 
           // var nouns = tok.filter(function (o) {
@@ -39,18 +51,50 @@ class Home extends Component {
           // var adverbs = tok.filter(function (o) {
           //   return o.partOfSpeech.tag === "ADV"
           // })
+          console.log(response)
           let masterList = []
-          ent.forEach(function(e) {
-            masterList.push(e.name)
-            }
-          )
           roots.forEach(function(e) {
-            masterList.push(e.text.content)
+            masterList.push(e.text.content + " (ROOT Verb)")
+            //Verb Type
             }
           )
-          dobjs.forEach(function(e) {
-            masterList.push(e.text.content)
+          vmods.forEach(function(e) {
+            masterList.push(e.text.content + " (VMOD Verb)")
+            //Verb Type
             }
+          )
+
+          dobjs.forEach(function(e) {
+            masterList.push(e.text.content + " (DOBJ Noun)")
+            //Noun Type
+            //Remove Proper nouns
+            }
+          )
+          pobjs.forEach(function(e) {
+            masterList.push(e.text.content + " (POBJ Noun)")
+            //Noun Type
+            //Remove Proper nouns
+            }
+          )
+          amods.forEach(function(e) {
+            masterList.push(e.text.content + " (AMOD Adjective)")
+            //Adjective type
+            }
+          )
+          nns.forEach(function(e) {
+            masterList.push(e.text.content + " (NN Noun)")
+            //Noun type
+            //If the headTokenIndex is equal to the index of another NN, remove the other NN from replacement
+            }
+          
+          )
+
+          rcmods.forEach(function(e) {
+            masterList.push(e.text.content + " (RCMOD Verb)")
+            //Noun type
+            //If the headTokenIndex is equal to the index of another NN, remove the other NN from replacement
+            }
+          
           )
           var masterUnique = Array.from(new Set(masterList))
           console.log(masterUnique)
