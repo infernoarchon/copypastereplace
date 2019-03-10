@@ -61,7 +61,7 @@ class Home extends Component {
   }
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPO","NSUBJ"]
+      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPO","NSUBJ", "CONJ"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -74,6 +74,12 @@ class Home extends Component {
             switch(e.dependencyEdge.label) {
               case "VMOD":
                 helpText="Enter a verb that modifies a noun (e.g. shag, disgusted)..."
+                break;
+              case "CONJ":
+                if(e.partOfSpeech.tense === "PAST")
+                  {helpText="Enter a verb ending in -ed..."} 
+                else 
+                  {helpText="Enter a verb"}
                 break;
               // case "DOBJ":
               //   if(e.partOfSpeech.number === "PLURAL")
