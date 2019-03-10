@@ -81,7 +81,7 @@ class Home extends Component {
               case "CONJ":
                 if(e.partOfSpeech.tense === "PAST")
                   {helpText="Enter a verb in past tense..."}
-                else if(e.partofSpeech.tense === "PRESENT") {
+                else if(e.partOfSpeech.tense === "PRESENT") {
                   {helpText="Enter a verb in present tense... (e.g. marries, tickles"}
                 }
                 else 
