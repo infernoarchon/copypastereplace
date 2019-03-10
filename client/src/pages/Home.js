@@ -84,8 +84,11 @@ class Home extends Component {
                 else if(e.partOfSpeech.tense === "PRESENT") {
                   {helpText="Enter a verb conjunction in present tense... (e.g. he _____s his car)..."}
                 }
+                else if(!e.partOfSpeech.tag === "ADJ") {
+                  {helpText="Enter a verb conjunction (e.g. to _____ someone)..."}
+                }
                 else 
-                  {helpText="Enter a verb conjunction... (e.g. to _____ someone)..."}
+                  {helpText="Enter a state of being (e.g. frustrated, gigantic)..."}
                 break;
               // case "DOBJ":
               //   if(e.partOfSpeech.number === "PLURAL")
@@ -103,10 +106,13 @@ class Home extends Component {
                   helpText="Enter an adjective..."
                   break;
               case "NN":
-                helpText="Enter a descriptive noun (e.g. an office worker, an apple orchard)..."
+                helpText="Enter a descriptive noun (e.g. a _____ worker, a _____ orchard)..."
                 break;
               case "RCMOD":
-                helpText="Enter a descriptive verb in present tense (e.g. someone who _____s something)..."
+                if(e.partOfSpeech.tense === "PAST")
+                  {helpText="Enter a descriptive verb in past tense (e.g. someone who _____ed yesterday)..."} 
+                else 
+                  {helpText="Enter a descriptive verb in present tense (e.g. someone who _____s)..."}
                 break;
               case "APPO":
                   if(e.partOfSpeech.number === "PLURAL")
