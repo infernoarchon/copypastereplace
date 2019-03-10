@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
@@ -20,5 +21,6 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
+  console.log(`Google API key is ${process.env.REACT_APP_GOOGLE_API_KEY}`)
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
