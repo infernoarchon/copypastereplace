@@ -1,14 +1,13 @@
 import axios from "axios";
 require('dotenv').config()
 
-
 export default {
   // Gets all books
   getBooks: function() {
     return axios.get("/api/books");
   },
   searchBooks: function(query) {
-    return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query+ "&key=" + process.env.REACT_APP_API_KEY);
+    return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query+ "&key=");
   },
   // Gets the book with the given id
   getBook: function(id) {

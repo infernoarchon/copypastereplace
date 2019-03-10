@@ -21,6 +21,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Google API key is ${process.env.REACT_APP_GOOGLE_API_KEY}`)
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
