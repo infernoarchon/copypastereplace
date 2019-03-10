@@ -35,8 +35,15 @@ class Home extends Component {
         } else{
           return
         }
-      })
+        })
+        const inputLength = this.state.inputs.length
+        const lastWord = this.state.inputs[inputLength-1]
+        console.log(lastWord.word)
+      if(lastWord.word) {
+        this.getStory()
+      } else{
       event.target.nextSibling.focus();
+      }
     }
   }
     getWords = token => {
@@ -48,7 +55,7 @@ class Home extends Component {
         })
         filteredArr.forEach(e => {
           let helpText;
-          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.lemma === "be") {
+          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be") {
             return
           } else{
             switch(e.dependencyEdge.label) {
@@ -179,7 +186,7 @@ class Home extends Component {
             <Input name={input.number} key={input.number} placeholder={input.help} onChange={this.handleInputChange} onKeyDown={this.handleKeyDownInput} />
               ))}
         </div>
-            <FormBtn onClick={this.getStory}>Done</FormBtn>
+            {/* <FormBtn onClick={this.getStory}>Done</FormBtn> */}
   
         </div>
     )
