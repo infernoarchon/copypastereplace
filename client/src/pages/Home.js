@@ -75,10 +75,16 @@ class Home extends Component {
                 helpText="Enter a verb that modifies a noun (e.g. shag, disgusted)..."
                 break;
               case "DOBJ":
-                helpText="Enter a noun..."
+                if(e.partOfSpeech.number === "PLURAL")
+                  {helpText="Enter a plural noun..."} 
+                else 
+                  {helpText="Enter a noun..."}
                 break;
               case "POBJ":
-                helpText="Enter a noun..."
+                if(e.partOfSpeech.number === "PLURAL")
+                  {helpText="Enter a plural noun..."} 
+                else 
+                  {helpText="Enter a noun..."}
                 break;
               case "AMOD":
                 helpText="Enter an adjective..."
@@ -90,10 +96,16 @@ class Home extends Component {
                 helpText="Enter a verb relative clause modifier (e.g. kills, sleeps with)..."
                 break;
               case "APPO":
-                helpText="Enter a noun..."
+                  if(e.partOfSpeech.number === "PLURAL")
+                    {helpText="Enter a plural noun..."} 
+                  else 
+                    {helpText="Enter a noun..."}
                 break;
               case "NSUBJ":
-                helpText="Enter a noun..."
+                  if(e.partOfSpeech.number === "PLURAL")
+                    {helpText="Enter a plural noun..."} 
+                  else 
+                    {helpText="Enter a noun..."}
                 break;
               case "XCOMP":
                 helpText="Enter a verb clausal complement (e.g. kidnap, ride)..."
@@ -196,7 +208,7 @@ class Home extends Component {
     
     render() {
     return(
-        <div>
+        <div className="container">
         <h3>Copy Paste Replace</h3>
         { !this.state.showTextArea ? <div id="counter">{this.state.words.length}/{this.state.inputs.length}</div> : null }
             <form>
