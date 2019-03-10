@@ -60,26 +60,26 @@ class Home extends Component {
   }
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["VMOD","DOBJ","POBJ","AMOD","NN","RCMOD","APPO","NSUBJ","XCOMP"]
+      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPO","NSUBJ"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
         })
         filteredArr.forEach(e => {
           let helpText;
-          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be") {
+          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which") {
             return
           } else{
             switch(e.dependencyEdge.label) {
               case "VMOD":
                 helpText="Enter a verb that modifies a noun (e.g. shag, disgusted)..."
                 break;
-              case "DOBJ":
-                if(e.partOfSpeech.number === "PLURAL")
-                  {helpText="Enter a plural noun..."} 
-                else 
-                  {helpText="Enter a noun..."}
-                break;
+              // case "DOBJ":
+              //   if(e.partOfSpeech.number === "PLURAL")
+              //     {helpText="Enter a plural noun..."} 
+              //   else 
+              //     {helpText="Enter a noun..."}
+              //   break;
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
                   {helpText="Enter a plural noun..."} 
@@ -90,10 +90,10 @@ class Home extends Component {
                 helpText="Enter an adjective..."
                 break;
               case "NN":
-                helpText="Enter a noun you would use to describe something... e.g. gold, leather, office"
+                helpText="Enter a descriptive noun (e.g. a _____ worker)..."
                 break;
               case "RCMOD":
-                helpText="Enter a verb relative clause modifier (e.g. kills, sleeps with)..."
+                helpText="Enter a descriptive verb (e.g. someone who _____ something)..."
                 break;
               case "APPO":
                   if(e.partOfSpeech.number === "PLURAL")
@@ -107,9 +107,9 @@ class Home extends Component {
                   else 
                     {helpText="Enter a noun..."}
                 break;
-              case "XCOMP":
-                helpText="Enter a verb clausal complement (e.g. kidnap, ride)..."
-                break;
+              // case "XCOMP":
+              //   helpText="Enter a verb clausal complement (e.g. kidnap, ride)..."
+              //   break;
             }
             masterObj.push(new Word(e.text.content,token.indexOf(e),e.dependencyEdge.label, helpText))
           }
@@ -129,7 +129,6 @@ class Home extends Component {
       })
       token.forEach(f => {
         if(stripText.includes(f.text.content)) {
-          let targetWord;
           let targetIndex = token.indexOf(f)
           list.forEach(h => {
             if(h.number === targetIndex) {
@@ -210,7 +209,7 @@ class Home extends Component {
     return(
         <div className="container">
         <h3>Copy Paste Replace</h3>
-        { !this.state.showTextArea ? <div id="counter">{this.state.words.length}/{this.state.inputs.length}</div> : null }
+        { !this.state.showTextArea ? <div id="counter">{this.state.words.length + 1}/{this.state.inputs.length}</div> : null }
             <form>
             { this.state.showTextArea ?
                 <div>
