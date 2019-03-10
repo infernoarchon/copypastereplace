@@ -53,7 +53,7 @@ class Home extends Component {
           } else{
             switch(e.dependencyEdge.label) {
               case "VMOD":
-                helpText="A verb that modifies a noun"
+                helpText="A verb that modifies a noun (e.g. repulsed, disgusted)"
                 break;
               case "DOBJ":
                 helpText="A noun"
@@ -68,10 +68,10 @@ class Home extends Component {
                 helpText="A noun"
                 break;
               case "RCMOD":
-                helpText="A verb relative clause modifier (e.g. kills, sleeps with"
+                helpText="A verb relative clause modifier (e.g. kills, sleeps with)"
                 break;
               case "APPO":
-                helpText="A descriptive noun (e.g. bird, superhero, scuba diver"
+                helpText="A descriptive noun (e.g. bird, superhero, scuba diver)"
                 break;
               case "NSUBJ":
                 helpText="A noun"
@@ -160,6 +160,7 @@ class Home extends Component {
       }
       getStory = ()=> {
         console.log("creating story")
+        console.log(this.state.inputs)
         console.log(this.joinWords(this.state.data, this.state.inputs))
       }
 
