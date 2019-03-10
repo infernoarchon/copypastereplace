@@ -61,7 +61,7 @@ class Home extends Component {
   }
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPO","NSUBJ"]
+      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPO","NSUBJ", "CONJ"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -74,16 +74,19 @@ class Home extends Component {
             switch(e.dependencyEdge.label) {
               case "VMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb in the past tense..."} 
+                  {helpText="Enter a verb in past tense..."} 
                 else 
                   {helpText="Enter a verb that modifies a noun (e.g. shag, disgusted)..."}
                 break;
-              // case "CONJ":
-              //   if(e.partOfSpeech.tense === "PAST")
-              //     {helpText="Enter a verb in the past tense..."} 
-              //   else 
-              //     {helpText="Enter a verb..."}
-              //   break;
+              case "CONJ":
+                if(e.partOfSpeech.tense === "PAST")
+                  {helpText="Enter a verb in past tense..."}
+                else if(e.partofSpeech.tense === "PRESENT") {
+                  {helpText="Enter a verb in present tense... (e.g. marries, tickles"}
+                }
+                else 
+                  {helpText="Enter a verb..."}
+                break;
               // case "DOBJ":
               //   if(e.partOfSpeech.number === "PLURAL")
               //     {helpText="Enter a plural noun..."} 
@@ -97,8 +100,8 @@ class Home extends Component {
                   {helpText="Enter a noun..."}
                 break;
               case "AMOD":
-                helpText="Enter an adjective..."
-                break;
+                  helpText="Enter an adjective..."
+                  break;
               case "NN":
                 helpText="Enter a descriptive noun (e.g. a _____ worker)..."
                 break;
