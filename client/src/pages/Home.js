@@ -76,13 +76,13 @@ class Home extends Component {
                 if(e.partOfSpeech.tense === "PAST")
                   {helpText="Enter a verb in past tense..."} 
                 else 
-                  {helpText="Enter a verb that modifies a noun (e.g. shag, disgusted)..."}
+                  {helpText="Enter a verb that modifies a noun (e.g. buy, carry)..."}
                 break;
               case "CONJ":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb in past tense..."}
+                  {helpText="Enter a verb in past tense... (e.g. bought, tried)"}
                 else if(e.partOfSpeech.tense === "PRESENT") {
-                  {helpText="Enter a verb in present tense... (e.g. marries, tickles"}
+                  {helpText="Enter a verb in present tense... (e.g. marries, tickles)"}
                 }
                 else 
                   {helpText="Enter a verb..."}
