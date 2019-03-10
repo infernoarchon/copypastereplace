@@ -73,13 +73,16 @@ class Home extends Component {
           } else{
             switch(e.dependencyEdge.label) {
               case "VMOD":
-                helpText="Enter a verb that modifies a noun (e.g. shag, disgusted)..."
+                if(e.partOfSpeech.tense === "PAST")
+                  {helpText="Enter a verb in the past tense..."} 
+                else 
+                  {helpText="Enter a verb that modifies a noun (e.g. shag, disgusted)..."}
                 break;
               case "CONJ":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb ending in -ed..."} 
+                  {helpText="Enter a verb in the past tense..."} 
                 else 
-                  {helpText="Enter a verb"}
+                  {helpText="Enter a verb..."}
                 break;
               // case "DOBJ":
               //   if(e.partOfSpeech.number === "PLURAL")
