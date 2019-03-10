@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import { isDate } from "util";
+const a = require('indefinite');
+
 
 class Word {
   constructor(content, number, label, help, word) {
@@ -47,7 +49,6 @@ class Home extends Component {
             return
           }
         })
-        console.log(stripWords)
       if(this.state.inputs.length === stripWords.length) {
         document.getElementById("input-container").innerHTML = ''
         document.getElementById("counter").innerHTML = ''
@@ -121,9 +122,15 @@ class Home extends Component {
       return masterObj
     }
 
+    capitalizeString = string => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     joinWords = (token,list) => {
       let storyStr = []
       let stripText = []
+      let indefCount = 0
+      const indefinites = ["an", "a", "An", "A"]
       list.forEach(g => {
         stripText.push(g.content)
       })
@@ -132,7 +139,20 @@ class Home extends Component {
           let targetIndex = token.indexOf(f)
           list.forEach(h => {
             if(h.number === targetIndex) {
+              if(indefinites.includes(token[targetIndex - 1].lemma)) {
+                console.log("found indefinite")
+                if(token[targetIndex-1].lemma === "An" || token[targetIndex-1].lemma === "A") {
+                  storyStr.push(this.capitalizeString(a(h.word)))
+                  indefCount++
+                  storyStr.splice(targetIndex-indefCount, 1)
+                } else{
+                  storyStr.push(a(h.word))
+                  indefCount++
+                  storyStr.splice(targetIndex-indefCount, 1)
+                }
+              } else{
               storyStr.push(h.word)
+              }
             } else{
               return
             }
