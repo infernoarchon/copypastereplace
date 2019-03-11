@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import API from "../utils/API";
-import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
+// import API from "../utils/API";
+// import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 // import { isDate } from "util";
 

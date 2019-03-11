@@ -54,7 +54,6 @@ class Create extends Component {
         document.getElementById("input-container").innerHTML = ''
         this.getStory()
       } else{
-      console.log(event.target.parentNode)
       event.target.parentNode.nextSibling.firstChild.nextSibling.focus();
       document.getElementById("input-container").firstChild.remove()
       }
@@ -91,12 +90,10 @@ class Create extends Component {
                 else 
                   {helpText="Enter a state of being (frustrated, gigantic)..."}
                 break;
-              // case "DOBJ":
-              //   if(e.partOfSpeech.number === "PLURAL")
-              //     {helpText="Enter a plural noun..."} 
-              //   else 
-              //     {helpText="Enter a noun..."}
-              //   break;
+              case "DOBJ":
+                console.log(e)
+                helpText="DOBJ"
+                break;
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
                   {helpText="Enter a plural noun..."} 
@@ -137,6 +134,7 @@ class Create extends Component {
       })
       // var masterUnique = Array.from(new Set(masterList))
       this.setState({inputs: masterObj})
+      
       console.log(this.state.inputs)
       return masterObj
     }
@@ -148,29 +146,37 @@ class Create extends Component {
     joinWords = (token,list) => {
       let storyStr = []
       let stripText = []
+      let stripNumbers = []
       const indefinites = ["an", "a", "An", "A"]
       list.forEach(g => {
         stripText.push(g.content)
+        stripNumbers.push(g.number)
       })
+      console.log(token)
+      console.log("stripText is",stripText)
       token.forEach(f => {
-        if(stripText.includes(f.text.content)) {
+        if(stripNumbers.includes(token.indexOf(f))) {
           let targetIndex = token.indexOf(f)
           list.forEach(h => {
+
+            //1: If input list item h index is equal to token item f index,
             if(h.number === targetIndex) {
-              
+              //1A: Set a or an and push input word to story string
               if(token[targetIndex - 1] ? indefinites.includes(token[targetIndex - 1].lemma) : false) {
-                console.log("found indefinite")
                 if(token[targetIndex-1].lemma === "An" || token[targetIndex-1].lemma === "A") {
                   storyStr.push(this.capitalizeString(a(h.word)))
                   storyStr.splice(storyStr.length-2, 1)
                 } else{
                   storyStr.push(a(h.word))
-                  console.log("lowercasefound")
                   storyStr.splice(storyStr.length-2, 1)
                 }
               } else{
+              //1B: Push input word into story string
+              console.log(h.word)
               storyStr.push(h.word)
               }
+
+
             } else{
               return
             }
@@ -269,7 +275,7 @@ class Create extends Component {
                     { !this.state.showTextArea ? <div id="counter"><span className="input-labels">{this.state.words.length + 1}/{this.state.inputs.length}</span></div> : null }
 
               <Label htmlFor={"input-" + input.number}><span className="input-labels">{input.help}</span></Label>
-              <Input id={"input-" + input.number} name={input.number} onChange={this.handleInputChange} onKeyDown={this.handleKeyDownInput} />
+              <Input id={"input-" + input.number} name={input.number} placeholder="Type here..." onChange={this.handleInputChange} onKeyDown={this.handleKeyDownInput} />
             </FormGroup>
             
             ))}

@@ -75,6 +75,17 @@
   font-size: 1rem;
 }
 
+.word-input {
+  border-style: none;
+  border-bottom: 1px solid #533790;
+  padding-left: 0.25rem;
+}
+
+.word-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 @media screen and (max-width: 640px) {
   .wrapper {
     max-width: 95%;

@@ -15,7 +15,7 @@ export function Label(props) {
 
 export function Input(props) {
   return (
-      <input type="text" className="form-control" {...props} />
+      <input type="text" className="form-control word-input" {...props} />
   );
 }
 
