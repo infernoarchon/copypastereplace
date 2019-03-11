@@ -147,7 +147,6 @@ class Home extends Component {
     joinWords = (token,list) => {
       let storyStr = []
       let stripText = []
-      let indefCount = 0
       const indefinites = ["an", "a", "An", "A"]
       list.forEach(g => {
         stripText.push(g.content)
@@ -161,12 +160,11 @@ class Home extends Component {
                 console.log("found indefinite")
                 if(token[targetIndex-1].lemma === "An" || token[targetIndex-1].lemma === "A") {
                   storyStr.push(this.capitalizeString(a(h.word)))
-                  indefCount++
-                  storyStr.splice(targetIndex-indefCount, 1)
+                  storyStr.splice(storyStr.length-2, 1)
                 } else{
                   storyStr.push(a(h.word))
-                  indefCount++
-                  storyStr.splice(targetIndex-indefCount, 1)
+                  console.log("lowercasefound")
+                  storyStr.splice(storyStr.length-2, 1)
                 }
               } else{
               storyStr.push(h.word)
