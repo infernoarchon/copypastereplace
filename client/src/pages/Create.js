@@ -83,7 +83,7 @@ class Create extends Component {
                 if(e.partOfSpeech.tense === "PAST")
                   {helpText="Enter a verb conjuction in past tense (e.g. she _____ed at her husband yesterday)..."}
                 else if(e.partOfSpeech.tense === "PRESENT") {
-                  {helpText="Enter a verb conjunction in present tense... (e.g. he _____s his car)..."}
+                  {helpText="Enter a verb conjunction in present tense (e.g. he _____s his car)..."}
                 }
                 else if(!e.partOfSpeech.tag === "ADJ") {
                   {helpText="Enter a verb conjunction (e.g. to _____ someone)..."}
