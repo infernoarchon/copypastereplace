@@ -71,6 +71,12 @@
   left: auto;
  }
 
+ .main-container {
+   width: 100vw !important;
+   margin: 0 !important;
+   padding: 0 !important;
+ }
+
 #story-container {
   font-size: 1rem;
 }
@@ -86,7 +92,7 @@
   box-shadow: none;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 1024px) {
   .wrapper {
     max-width: 95%;
   }

@@ -61,68 +61,69 @@ class Create extends Component {
   }
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPOS","NSUBJ", "CONJ"]
+      const wordTypes =["POBJ","AMOD","RCMOD","NSUBJ", "CONJ"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
         })
         filteredArr.forEach(e => {
           let helpText;
+          //General exceptions to replacing a word
           if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which" || e.lemma === "make" || e.lemma === "that") {
             return
-          } else{
+          //Don't replace if conjunction is indicative (richer content experience)
+          } else if(e.dependencyEdge.label === "CONJ" && e.partOfSpeech.mood === "INDICATIVE") {
+            return
+          } 
+          else{
+            console.log(e.dependencyEdge.label,e.partOfSpeech.mood)
             switch(e.dependencyEdge.label) {
-              case "VMOD":
-                if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a targeted verb in past tense (carried, eloped with)"} 
-                else 
-                  {helpText="Enter a targeted verb (buy, carry)..."}
-                break;
+              // case "VMOD":
+              //   if(e.partOfSpeech.tense === "PAST")
+              //     {helpText="Enter a targeted verb in past tense (carried, eloped with)"} 
+              //   else 
+              //     {helpText="Enter a targeted verb (buy, carry)..."}
+              //   break;
               case "CONJ":
-                if(e.partOfSpeech.tense === "PAST")
+                if(e.partOfSpeech.tag === "NOUN")
+                  {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun" : helpText="Enter a singular noun"}
+                else if(e.partOfSpeech.tense === "PAST")
                   {helpText="Enter a verb in past tense (she _____ed yesterday)..."}
                 else if(e.partOfSpeech.tense === "PRESENT") {
                   {helpText="Enter a verb in present tense (he _____s his car)..."}
                 }
-                else if(!e.partOfSpeech.tag === "ADJ") {
-                  {helpText="Enter a verb conjunction (to _____ someone)..."}
-                }
                 else 
                   {helpText="Enter a state of being (frustrated, gigantic)..."}
-                break;
-              case "DOBJ":
-                console.log(e)
-                helpText="DOBJ"
                 break;
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
                   {helpText="Enter a plural noun..."} 
                 else 
-                  {helpText="Enter a noun..."}
+                  {helpText="Enter a singular noun..."}
                 break;
               case "AMOD":
                   helpText="Enter an adjective..."
                   break;
-              case "NN":
-                helpText="Enter a descriptive noun (e.g. a ____ worker)..."
-                break;
+              // case "NN":
+              //   helpText="Enter an adjective..."
+              //   break;
               case "RCMOD":
                 if(e.partOfSpeech.tense === "PAST")
                   {helpText="Enter a descriptive verb in past tense (I _____ed yesterday)..."} 
-                else 
-                  {helpText="Enter a descriptive verb in present tense (he _____s a lot)..."}
+                else if(e.partOfSpeech.tense === "PRESENT")
+                  {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing..." : helpText="Enter a descriptive verb in present tense (he _____s a lot)..."}
                 break;
-              case "APPOS":
-                  if(e.partOfSpeech.number === "PLURAL")
-                    {helpText="Enter a plural noun..."} 
-                  else 
-                    {helpText="Enter a noun..."}
-                break;
+              // case "APPOS":
+              //     if(e.partOfSpeech.number === "PLURAL")
+              //       {helpText="Enter a plural noun..."} 
+              //     else 
+              //       {helpText="Enter a singular noun..."}
+              //   break;
               case "NSUBJ":
                   if(e.partOfSpeech.number === "PLURAL")
                     {helpText="Enter a plural noun..."} 
                   else 
-                    {helpText="Enter a noun..."}
+                    {helpText="Enter a singular noun..."}
                 break;
               // case "XCOMP":
               //   helpText="Enter a verb clausal complement (e.g. kidnap, ride)..."
@@ -134,7 +135,7 @@ class Create extends Component {
       })
       // var masterUnique = Array.from(new Set(masterList))
       this.setState({inputs: masterObj})
-      
+      console.log(token)
       console.log(this.state.inputs)
       return masterObj
     }
@@ -152,8 +153,7 @@ class Create extends Component {
         stripText.push(g.content)
         stripNumbers.push(g.number)
       })
-      console.log(token)
-      console.log("stripText is",stripText)
+
       token.forEach(f => {
         if(stripNumbers.includes(token.indexOf(f))) {
           let targetIndex = token.indexOf(f)
@@ -172,7 +172,7 @@ class Create extends Component {
                 }
               } else{
               //1B: Push input word into story string
-              console.log(h.word)
+
               storyStr.push(h.word)
               }
 
@@ -208,7 +208,6 @@ class Create extends Component {
 
           //Make these a switch case
           
-          console.log(tok)
           this.getWords(tok)
           this.randomizeInputs()
           document.getElementById("input-container").firstChild.firstChild.focus()
@@ -234,11 +233,6 @@ class Create extends Component {
         });
       };
 
-      handleKeyPress = event => {
-        if(event.key == "Enter") {
-          console.log('pressed enter')
-        }
-      }
       getStory = ()=> {
         console.log("creating story")
         document.getElementById("story-container").textContent = this.joinWords(this.state.data, this.state.inputs)

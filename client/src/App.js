@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <Router>
         
-      <div>
+      <div className="main-container">
         <Nav/>
         <Switch>
             <Route exact path="/" component={New} />
