@@ -6,6 +6,11 @@
   opacity: 0;
 }
 
+#input-container {
+  max-height: 30vh;
+  overflow: hidden;
+}
+
 input:first-child {
   opacity: 1 !important;
 }

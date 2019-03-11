@@ -74,7 +74,7 @@ class Home extends Component {
             switch(e.dependencyEdge.label) {
               case "VMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb in past tense..."} 
+                  {helpText="Enter a verb that modifies a noun in past tense (e.g. carried, eloped with)"} 
                 else 
                   {helpText="Enter a verb that modifies a noun (e.g. buy, carry)..."}
                 break;
@@ -156,7 +156,8 @@ class Home extends Component {
           let targetIndex = token.indexOf(f)
           list.forEach(h => {
             if(h.number === targetIndex) {
-              if(indefinites.includes(token[targetIndex - 1].lemma)) {
+              
+              if(token[targetIndex - 1] ? indefinites.includes(token[targetIndex - 1].lemma) : false) {
                 console.log("found indefinite")
                 if(token[targetIndex-1].lemma === "An" || token[targetIndex-1].lemma === "A") {
                   storyStr.push(this.capitalizeString(a(h.word)))
@@ -179,7 +180,11 @@ class Home extends Component {
       })
       let joinedStr = storyStr.join(' ')
       joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
-      joinedStr = joinedStr.replace(/-\s/g,"-");
+      // joinedStr = joinedStr.replace(/-\s/g,"-");
+      joinedStr = joinedStr.replace(/\(\s/g," (");
+      joinedStr = joinedStr.replace(/"\s/g," \"");
+      joinedStr = joinedStr.replace(/\[\s/g," [");
+
       return joinedStr
     }
 
@@ -229,7 +234,6 @@ class Home extends Component {
       }
       getStory = ()=> {
         console.log("creating story")
-        console.log(this.state.inputs)
         document.getElementById("story-container").textContent = this.joinWords(this.state.data, this.state.inputs)
       }
       randomizeInputs = () => {
