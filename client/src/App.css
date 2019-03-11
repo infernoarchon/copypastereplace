@@ -32,7 +32,7 @@
 .navbar-brand {
   font-size: 1em;
   font-weight: 200;
-  border: 2px solid #fff !important;
+  /* border: 2px solid #fff !important; */
   display: block;
   padding: 0.25em 0.5em 0.25em 0.5em;
 }
