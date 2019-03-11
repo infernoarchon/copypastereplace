@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.dropdown-item:hover {
+  color: purple !important;
+  background-color: #fff;
+}
+
 #input-container .input-wrapper {
   opacity: 0;
 }
@@ -27,6 +32,9 @@
 .navbar-brand {
   font-size: 1em;
   font-weight: 200;
+  border: 2px solid #fff !important;
+  display: block;
+  padding: 0.25em 0.5em 0.25em 0.5em;
 }
 
 .logo-bold {
@@ -57,6 +65,12 @@
 .input-labels {
   font-size: 0.75em;
 }
+
+
+.user-dropdown {
+  right: 10px;
+  left: auto;
+ }
 
 @media screen and (max-width: 640px) {
   .wrapper {

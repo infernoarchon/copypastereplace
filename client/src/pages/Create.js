@@ -69,7 +69,7 @@ class Create extends Component {
         })
         filteredArr.forEach(e => {
           let helpText;
-          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which") {
+          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which" || e.lemma === "make" || e.lemma === "that") {
             return
           } else{
             switch(e.dependencyEdge.label) {
