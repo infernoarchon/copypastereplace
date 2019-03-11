@@ -56,32 +56,32 @@ class Create extends Component {
               //   break;
               case "CONJ":
                 if(e.partOfSpeech.tag === "NOUN")
-                  {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun..." : helpText="Enter a singular noun..."}
+                  {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun." : helpText="Enter a singular noun."}
                 else if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb in past tense (she _____ed yesterday)..."}
+                  {helpText="Enter a verb in past tense (she _____ed yesterday)."}
                 else if(e.partOfSpeech.tense === "PRESENT") {
-                  {helpText="Enter a verb in present tense (he _____s his car)..."}
+                  {helpText="Enter a verb in present tense (he _____s his car)."}
                 }
                 else 
-                  {helpText="Enter a state of being (frustrated, gigantic)..."}
+                  {helpText="Enter a state of being (frustrated, gigantic)."}
                 break;
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
-                  {helpText="Enter a plural noun..."} 
+                  {helpText="Enter a plural noun."} 
                 else 
-                  {helpText="Enter a singular noun..."}
+                  {helpText="Enter a singular noun."}
                 break;
               case "AMOD":
-                  helpText="Enter an adjective..."
+                  helpText="Enter an adjective."
                   break;
               // case "NN":
               //   helpText="Enter an adjective..."
               //   break;
               case "RCMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a descriptive verb in past tense (I _____ed yesterday)..."} 
+                  {helpText="Enter a descriptive verb in past tense (I _____ed yesterday)."} 
                 else if(e.partOfSpeech.tense === "PRESENT")
-                  {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing..." : helpText="Enter a descriptive verb in present tense (he _____s a lot)..."}
+                  {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a descriptive verb in present tense (he _____s a lot)."}
                 break;
               // case "APPOS":
               //     if(e.partOfSpeech.number === "PLURAL")
@@ -91,9 +91,9 @@ class Create extends Component {
               //   break;
               case "NSUBJ":
                   if(e.partOfSpeech.number === "PLURAL")
-                    {helpText="Enter a plural noun..."} 
+                    {helpText="Enter a plural noun."} 
                   else 
-                    {helpText="Enter a singular noun..."}
+                    {helpText="Enter a singular noun."}
                 break;
               // case "XCOMP":
               //   helpText="Enter a verb clausal complement (e.g. kidnap, ride)..."
