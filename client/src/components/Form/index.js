@@ -3,7 +3,7 @@ import React from "react";
 // This file exports the Input, TextArea, and FormBtn components
 export function FormGroup(props) {
   return (
-    <form className="input-wrapper mb-2" {...props} />
+    <form className="input-wrapper" {...props} />
 );
 }
 
@@ -21,9 +21,9 @@ export function Input(props) {
 
 export function TextArea(props) {
   return (
-    <div className="form-group">
+    <form className="form-group mt-3">
       <textarea className="form-control" rows="10" cols="100" {...props} />
-    </div>
+    </form>
   );
 }
 

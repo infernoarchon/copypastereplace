@@ -29,36 +29,7 @@ class Create extends Component {
     this.handleKeyDownInput = this.handleKeyDownInput.bind(this);
   }
   
-  handleKeyDownInput(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      let targetName = event.target.name
-      this.state.inputs.forEach(h => {
-        if(h.number == targetName) {
-          h.word = event.target.value
-          // storyStr.push(h.word)
-        } else{
-          return
-        }
-        })
-        let stripWords=[]
-        this.state.inputs.forEach(h => {
-          if(h.word) {
-          stripWords.push(h.word)
-          this.setState({words: this.state.words+1})
-          } else{
-            return
-          }
-        })
-      if(this.state.inputs.length === stripWords.length) {
-        document.getElementById("input-container").innerHTML = ''
-        this.getStory()
-      } else{
-      event.target.parentNode.nextSibling.firstChild.nextSibling.focus();
-      document.getElementById("input-container").firstChild.remove()
-      }
-    }
-  }
+
     getWords = token => {
       let masterObj = [];
       const wordTypes =["POBJ","AMOD","RCMOD","NSUBJ", "CONJ"]
@@ -76,7 +47,6 @@ class Create extends Component {
             return
           } 
           else{
-            console.log(e.dependencyEdge.label,e.partOfSpeech.mood)
             switch(e.dependencyEdge.label) {
               // case "VMOD":
               //   if(e.partOfSpeech.tense === "PAST")
@@ -86,7 +56,7 @@ class Create extends Component {
               //   break;
               case "CONJ":
                 if(e.partOfSpeech.tag === "NOUN")
-                  {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun" : helpText="Enter a singular noun"}
+                  {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun..." : helpText="Enter a singular noun..."}
                 else if(e.partOfSpeech.tense === "PAST")
                   {helpText="Enter a verb in past tense (she _____ed yesterday)..."}
                 else if(e.partOfSpeech.tense === "PRESENT") {
@@ -210,7 +180,9 @@ class Create extends Component {
           
           this.getWords(tok)
           this.randomizeInputs()
+
           document.getElementById("input-container").firstChild.firstChild.focus()
+          
           this.setState({data: tok})
           this.setState({showTextArea: false})
        
@@ -233,6 +205,40 @@ class Create extends Component {
         });
       };
 
+      handleKeyDownInput(event) {
+        if(!event.target.value) {
+          console.log("none")
+        }
+        else if (event.key === 'Enter') {
+          event.preventDefault();
+          let targetName = event.target.name
+          this.state.inputs.forEach(h => {
+            if(h.number == targetName) {
+              h.word = event.target.value
+              // storyStr.push(h.word)
+            } else{
+              return
+            }
+            })
+            let stripWords=[]
+            this.state.inputs.forEach(h => {
+              if(h.word) {
+              stripWords.push(h.word)
+              this.setState({words: this.state.words+1})
+              } else{
+                return
+              }
+            })
+          if(this.state.inputs.length === stripWords.length) {
+            document.getElementById("input-container").innerHTML = ''
+            this.getStory()
+          } else{
+          event.target.parentNode.nextSibling.firstChild.nextSibling.focus();
+          document.getElementById("input-container").firstChild.remove()
+          }
+        }
+      }
+
       getStory = ()=> {
         console.log("creating story")
         document.getElementById("story-container").textContent = this.joinWords(this.state.data, this.state.inputs)
@@ -253,15 +259,14 @@ class Create extends Component {
         <Col size="md-12">
 
         <div className="wrapper card">
-        <h5 className="pb-3 pt-2"><strong>Create Story</strong></h5>
-            <form>
+        <h5 className="pt-2"><strong>Create Story</strong></h5>
+           
             { this.state.showTextArea ?
                 <div>
               <TextArea name="synopsis" placeholder="Paste your story here..." onChange={this.handleInputChange} />
               <FormBtn disabled={!this.state.synopsis ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
                 </div>
               : null}
-            </form>
         <br/>
         <div id="input-container">
           {this.state.inputs.map(input => (

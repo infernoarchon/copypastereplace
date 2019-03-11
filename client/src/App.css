@@ -7,16 +7,15 @@
   background-color: #fff;
 }
 
-#input-container .input-wrapper {
+#input-container .input-wrapper  {
   opacity: 0;
+  height: 0;
 }
 
-#input-container {
-  height: 0px;
-}
 
 .input-wrapper:first-child {
   opacity: 1 !important;
+  height: 100% !important;
 }
 
 #counter {
@@ -49,7 +48,7 @@
 }
 
 .wrapper {
-  max-width: 768px;
+  max-width: 1024px;
   padding: 1.5rem;
   margin: auto;
   min-height: 410px;
@@ -91,6 +90,7 @@
   outline: none;
   box-shadow: none;
 }
+
 
 @media screen and (max-width: 1024px) {
   .wrapper {
