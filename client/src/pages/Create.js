@@ -62,7 +62,7 @@ class Create extends Component {
   }
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPO","NSUBJ", "CONJ"]
+      const wordTypes =["VMOD","POBJ","AMOD","NN","RCMOD","APPOS","NSUBJ", "CONJ"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -75,21 +75,21 @@ class Create extends Component {
             switch(e.dependencyEdge.label) {
               case "VMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb that modifies a noun in past tense (e.g. carried, eloped with)"} 
+                  {helpText="Enter a targeted verb in past tense (carried, eloped with)"} 
                 else 
-                  {helpText="Enter a verb that modifies a noun (e.g. buy, carry)..."}
+                  {helpText="Enter a targeted verb (buy, carry)..."}
                 break;
               case "CONJ":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb conjuction in past tense (e.g. she _____ed at her husband yesterday)..."}
+                  {helpText="Enter a verb in past tense (she _____ed yesterday)..."}
                 else if(e.partOfSpeech.tense === "PRESENT") {
-                  {helpText="Enter a verb conjunction in present tense (e.g. he _____s his car)..."}
+                  {helpText="Enter a verb in present tense (he _____s his car)..."}
                 }
                 else if(!e.partOfSpeech.tag === "ADJ") {
-                  {helpText="Enter a verb conjunction (e.g. to _____ someone)..."}
+                  {helpText="Enter a verb conjunction (to _____ someone)..."}
                 }
                 else 
-                  {helpText="Enter a state of being (e.g. frustrated, gigantic)..."}
+                  {helpText="Enter a state of being (frustrated, gigantic)..."}
                 break;
               // case "DOBJ":
               //   if(e.partOfSpeech.number === "PLURAL")
@@ -107,15 +107,15 @@ class Create extends Component {
                   helpText="Enter an adjective..."
                   break;
               case "NN":
-                helpText="Enter a descriptive noun (e.g. a _____ worker, a _____ orchard)..."
+                helpText="Enter a descriptive noun (e.g. a ____ worker)..."
                 break;
               case "RCMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a descriptive verb in past tense (e.g. someone who _____ed yesterday)..."} 
+                  {helpText="Enter a descriptive verb in past tense (I _____ed yesterday)..."} 
                 else 
-                  {helpText="Enter a descriptive verb in present tense (e.g. someone who _____s)..."}
+                  {helpText="Enter a descriptive verb in present tense (he _____s a lot)..."}
                 break;
-              case "APPO":
+              case "APPOS":
                   if(e.partOfSpeech.number === "PLURAL")
                     {helpText="Enter a plural noun..."} 
                   else 
