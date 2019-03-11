@@ -26,7 +26,15 @@
 
 .navbar-brand {
   font-size: 1em;
-  font-weight: 700;
+  font-weight: 200;
+}
+
+.logo-bold {
+  font-weight: 800;
+}
+
+.logo-strike {
+  text-decoration: line-through;
 }
 
 .nav-link {
