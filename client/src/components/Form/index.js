@@ -1,10 +1,21 @@
 import React from "react";
 
 // This file exports the Input, TextArea, and FormBtn components
+export function FormGroup(props) {
+  return (
+    <form className="input-wrapper mb-2" {...props} />
+);
+}
+
+export function Label(props) {
+  return (
+    <label {...props} />
+);
+}
 
 export function Input(props) {
   return (
-      <input type="text" className="form-control mb-2" {...props} />
+      <input type="text" className="form-control" {...props} />
   );
 }
 

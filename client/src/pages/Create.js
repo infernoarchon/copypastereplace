@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { Input, TextArea, FormBtn } from "../components/Form";
-import { isDate } from "util";
+import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
+import { Col, Row, Container } from "../components/Grid";
+// import { isDate } from "util";
 const a = require('indefinite');
 
 
@@ -15,7 +16,7 @@ class Word {
   }
 }
 
-class Home extends Component {
+class Create extends Component {
   state = {
     stories: [],
     inputs: [],
@@ -51,10 +52,10 @@ class Home extends Component {
         })
       if(this.state.inputs.length === stripWords.length) {
         document.getElementById("input-container").innerHTML = ''
-        document.getElementById("counter").innerHTML = ''
         this.getStory()
       } else{
-      event.target.nextSibling.focus();
+      console.log(event.target.parentNode)
+      event.target.parentNode.nextSibling.firstChild.nextSibling.focus();
       document.getElementById("input-container").firstChild.remove()
       }
     }
@@ -180,7 +181,7 @@ class Home extends Component {
       })
       let joinedStr = storyStr.join(' ')
       joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
-      // joinedStr = joinedStr.replace(/-\s/g,"-");
+      joinedStr = joinedStr.replace(/-\s/g," - ");
       joinedStr = joinedStr.replace(/\(\s/g," (");
       joinedStr = joinedStr.replace(/"\s/g," \"");
       joinedStr = joinedStr.replace(/\[\s/g," [");
@@ -204,7 +205,7 @@ class Home extends Component {
           console.log(tok)
           this.getWords(tok)
           this.randomizeInputs()
-          document.getElementById("input-container").firstChild.focus()
+          document.getElementById("input-container").firstChild.firstChild.focus()
           this.setState({data: tok})
           this.setState({showTextArea: false})
        
@@ -247,27 +248,40 @@ class Home extends Component {
     
     render() {
     return(
-        <div className="container">
-        <h3>Copy Paste Replace</h3>
-        { !this.state.showTextArea ? <div id="counter">{this.state.words.length + 1}/{this.state.inputs.length}</div> : null }
+      <Container fluid>
+      <Row>
+        <Col size="md-12">
+
+        <div className="wrapper card">
+        <h5 className="pb-3 pt-2"><strong>Create Story</strong></h5>
             <form>
             { this.state.showTextArea ?
                 <div>
               <TextArea name="synopsis" placeholder="Paste your story here..." onChange={this.handleInputChange} />
-              <FormBtn disabled={!this.state.synopsis ? true : false} onClick={this.handleFormSubmit}>Submit Story</FormBtn>
+              <FormBtn disabled={!this.state.synopsis ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
                 </div>
               : null}
             </form>
         <br/>
         <div id="input-container">
           {this.state.inputs.map(input => (
-            <Input name={input.number} key={input.number} placeholder={input.help} onChange={this.handleInputChange} onKeyDown={this.handleKeyDownInput} />
-              ))}
+            <FormGroup key={input.number}>
+                    { !this.state.showTextArea ? <div id="counter"><span className="input-labels">{this.state.words.length + 1}/{this.state.inputs.length}</span></div> : null }
+
+              <Label htmlFor={"input-" + input.number}><span className="input-labels">{input.help}</span></Label>
+              <Input id={"input-" + input.number} name={input.number} onChange={this.handleInputChange} onKeyDown={this.handleKeyDownInput} />
+            </FormGroup>
+            
+            ))}
+            
         </div>
         <div id="story-container"></div>
         </div>
+        </Col>
+      </Row>
+    </Container>
     )
     }
 }
 
-export default Home;
+export default Create;
