@@ -206,10 +206,7 @@ class Create extends Component {
       };
 
       handleKeyDownInput(event) {
-        if(!event.target.value) {
-          console.log("none")
-        }
-        else if (event.key === 'Enter') {
+        if (event.key === 'Enter') {
           event.preventDefault();
           let targetName = event.target.name
           this.state.inputs.forEach(h => {
@@ -233,7 +230,8 @@ class Create extends Component {
             document.getElementById("input-container").innerHTML = ''
             this.getStory()
           } else{
-          event.target.parentNode.nextSibling.firstChild.nextSibling.focus();
+          document.getElementById("input-container").firstChild.nextSibling.firstChild.nextSibling.nextSibling.firstChild.focus();
+          // event.target.parentNode.parentNode.firstChild.nextSibling.firstChild.nextSibling.firstChild.focus();
           document.getElementById("input-container").firstChild.remove()
           }
         }
