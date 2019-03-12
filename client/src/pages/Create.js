@@ -23,6 +23,7 @@ class Create extends Component {
     data: [],
     showTextArea: true,
     words: [],
+    pasted: [],
   };
   constructor(...args) {
     super(...args);
@@ -32,7 +33,7 @@ class Create extends Component {
 
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["POBJ","AMOD","RCMOD", "CONJ", "ADVMOD", "ADVPHMOD"]
+      const wordTypes =["POBJ","AMOD","RCMOD", "ADVPHMOD"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -54,21 +55,20 @@ class Create extends Component {
               //   else 
               //     {helpText="Enter a targeted verb (buy, carry)..."}
               //   break;
-              case "ADVMOD": 
               case "ADVPHMOD":
                 helpText="Enter an adverb."
                 break;
-              case "CONJ":
-                if(e.partOfSpeech.tag === "NOUN")
-                  {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun." : helpText="Enter a singular noun."}
-                else if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb in past tense (e.g. she _____ed yesterday)."}
-                else if(e.partOfSpeech.tense === "PRESENT") {
-                  {helpText="Enter a verb in present tense (e.g. he _____s his car)."}
-                }
-                else 
-                  {helpText="Enter a state of being (frustrated, gigantic)."}
-                break;
+              // case "CONJ":
+              //   if(e.partOfSpeech.tag === "NOUN")
+              //     {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun." : helpText="Enter a singular noun."}
+              //   else if(e.partOfSpeech.tense === "PAST")
+              //     {helpText="Enter a verb in past tense (e.g. she _____ed yesterday)."}
+              //   else if(e.partOfSpeech.tense === "PRESENT") {
+              //     {helpText="Enter a verb in present tense (e.g. he _____s his car)."}
+              //   }
+              //   else 
+              //     {helpText="Enter a state of being (frustrated, gigantic)."}
+              //   break;
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
                   {helpText="Enter a plural noun."} 
@@ -84,11 +84,8 @@ class Create extends Component {
               case "RCMOD":
                 if(e.partOfSpeech.tense === "PAST")
                   {helpText="Enter a descriptive verb in past tense (e.g. I _____ed yesterday)."} 
-                else if(e.partOfSpeech.tense === "PRESENT")
+                else
                   {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a descriptive verb in present tense (e.g. he _____s a lot)."}
-                else{
-                  helpText="Enter a verb."
-                }
                 break;
               // case "APPOS":
               //     if(e.partOfSpeech.number === "PLURAL")
@@ -164,10 +161,11 @@ class Create extends Component {
       })
       let joinedStr = storyStr.join(' ')
       joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
-      joinedStr = joinedStr.replace(/-\s/g," - ");
+      joinedStr = joinedStr.replace(/-\s/g,"-");
       joinedStr = joinedStr.replace(/\(\s/g," (");
       joinedStr = joinedStr.replace(/\(\s/g," (");
       joinedStr = joinedStr.replace(/"\s/g," ");
+      joinedStr = joinedStr.replace(/'\s/g," ");
       // joinedStr = joinedStr.replace(/\s"/g,"\"");
       joinedStr = joinedStr.replace(/\[\s/g," [");
       joinedStr = joinedStr.charAt(0).toUpperCase() + joinedStr.slice(1)
@@ -179,7 +177,7 @@ class Create extends Component {
         API.sendText({
           document : {
               type: "PLAIN_TEXT",
-              content: this.state.synopsis
+              content: this.state.pasted
           }
         }).then(response => {
           const ent = response.data.entities
@@ -239,13 +237,14 @@ class Create extends Component {
         }
       }
 
-      handleMovieSearch(event) {
+      handleMovieSearch = event => {
         if (event.key === 'Enter') {
           event.preventDefault();
           API.searchOMDB(event.target.value).then( response => {
             document.getElementById("story-input").value=response.data.Plot
+            this.setState({pasted:response.data.Plot})
             document.getElementById("preset-search").value=''
-            console.log(event)
+            console.log(this.state.pasted)
           })
       }
     }
@@ -280,8 +279,8 @@ class Create extends Component {
         </div>
             { this.state.showTextArea ?
                 <div>
-              <TextArea id="story-input" name="synopsis" placeholder="Paste your story here..." onChange={this.handleInputChange} />
-              <FormBtn disabled={!this.state.synopsis ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
+              <TextArea id="story-input" name="pasted" placeholder="Paste your story here..." onChange={this.handleInputChange} />
+              <FormBtn disabled={this.state.pasted.length === 0 ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
                 </div>
               : null}
         <br/>
