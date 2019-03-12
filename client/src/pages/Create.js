@@ -32,7 +32,7 @@ class Create extends Component {
 
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["POBJ","AMOD","RCMOD","NSUBJ", "CONJ"]
+      const wordTypes =["POBJ","AMOD","RCMOD", "CONJ", "ADVMOD", "ADVPHMOD"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -40,7 +40,7 @@ class Create extends Component {
         filteredArr.forEach(e => {
           let helpText;
           //General exceptions to replacing a word
-          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which" || e.lemma === "make" || e.lemma === "that") {
+          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which" || e.lemma === "make" || e.lemma === "that" || e.lemma === "have") {
             return
           //Don't replace if conjunction is indicative (richer content experience)
           } else if(e.dependencyEdge.label === "CONJ" && e.partOfSpeech.mood === "INDICATIVE") {
@@ -54,13 +54,17 @@ class Create extends Component {
               //   else 
               //     {helpText="Enter a targeted verb (buy, carry)..."}
               //   break;
+              case "ADVMOD": 
+              case "ADVPHMOD":
+                helpText="Enter an adverb."
+                break;
               case "CONJ":
                 if(e.partOfSpeech.tag === "NOUN")
                   {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun." : helpText="Enter a singular noun."}
                 else if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb in past tense (she _____ed yesterday)."}
+                  {helpText="Enter a verb in past tense (e.g. she _____ed yesterday)."}
                 else if(e.partOfSpeech.tense === "PRESENT") {
-                  {helpText="Enter a verb in present tense (he _____s his car)."}
+                  {helpText="Enter a verb in present tense (e.g. he _____s his car)."}
                 }
                 else 
                   {helpText="Enter a state of being (frustrated, gigantic)."}
@@ -79,9 +83,9 @@ class Create extends Component {
               //   break;
               case "RCMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a descriptive verb in past tense (I _____ed yesterday)."} 
+                  {helpText="Enter a descriptive verb in past tense (e.g. I _____ed yesterday)."} 
                 else if(e.partOfSpeech.tense === "PRESENT")
-                  {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a descriptive verb in present tense (he _____s a lot)."}
+                  {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a descriptive verb in present tense (e.g. he _____s a lot)."}
                 else{
                   helpText="Enter a verb."
                 }
@@ -92,12 +96,12 @@ class Create extends Component {
               //     else 
               //       {helpText="Enter a singular noun..."}
               //   break;
-              case "NSUBJ":
-                  if(e.partOfSpeech.number === "PLURAL")
-                    {helpText="Enter a plural noun."} 
-                  else 
-                    {helpText="Enter a singular noun."}
-                break;
+              // case "NSUBJ":
+              //     if(e.partOfSpeech.number === "PLURAL")
+              //       {helpText="Enter a plural noun."} 
+              //     else 
+              //       {helpText="Enter a singular noun."}
+              //   break;
               // case "XCOMP":
               //   helpText="Enter a verb clausal complement (e.g. kidnap, ride)..."
               //   break;
@@ -162,9 +166,11 @@ class Create extends Component {
       joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
       joinedStr = joinedStr.replace(/-\s/g," - ");
       joinedStr = joinedStr.replace(/\(\s/g," (");
-      joinedStr = joinedStr.replace(/"\s/g," \"");
+      joinedStr = joinedStr.replace(/\(\s/g," (");
+      joinedStr = joinedStr.replace(/"\s/g," ");
+      // joinedStr = joinedStr.replace(/\s"/g,"\"");
       joinedStr = joinedStr.replace(/\[\s/g," [");
-
+      joinedStr = joinedStr.charAt(0).toUpperCase() + joinedStr.slice(1)
       return joinedStr
     }
 
@@ -178,8 +184,6 @@ class Create extends Component {
         }).then(response => {
           const ent = response.data.entities
           const tok = response.data.tokens
-
-          //Make these a switch case
           
           this.getWords(tok)
           this.randomizeInputs()
@@ -192,10 +196,6 @@ class Create extends Component {
         })
       }
 
-      handleWordSubmit = event => {
-        event.preventDefault()
-
-      }
       
       handleInputChange = event => {
         // Pull the name and value properties off of the event.target (the element which triggered the event)
@@ -275,7 +275,7 @@ class Create extends Component {
         <h5 className="pt-2"><strong>Create Story</strong></h5>
         </div>
         <div className="col p-0 d-flex justify-content-end">
-        { this.state.showTextArea ? <SearchBox id="preset-search" placeholder="Search for a movie..." onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch}/> : null}
+        { this.state.showTextArea ? <SearchBox name="preset" id="preset-search" placeholder="Search for a movie or show..." onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch}/> : null}
         </div>
         </div>
             { this.state.showTextArea ?

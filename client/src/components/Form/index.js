@@ -49,7 +49,7 @@ export function SearchBox(props) {
       <div className="input-group-append">
       <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-search"></i></button>
         <div className="dropdown-menu dropdown-menu-right">
-          <a className="dropdown-item" href="#">Movies</a>
+          <a className="dropdown-item" href="#">Movies & Shows</a>
           <a className="dropdown-item" href="#">Books</a>
         </div>
       </div>
