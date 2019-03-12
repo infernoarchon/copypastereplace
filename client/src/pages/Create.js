@@ -256,6 +256,7 @@ class Create extends Component {
         document.getElementById("story-container").textContent = finalStory
         this.setState({final: finalStory})
         API.sendTextToSpeech(finalStory).then(response =>{
+          console.log(response)
           this.setState({audio: response.data.audioContent})
         })
           
@@ -305,7 +306,7 @@ class Create extends Component {
         </div>
         <div id="story-container"></div>
         {this.state.final.length === 0 ? null : 
-        <div className="audio-container"><audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
+        <div className="audio-container justify-content-center d-flex mt-3"><audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
         </div>
         }
         </div>
