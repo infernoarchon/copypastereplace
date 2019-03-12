@@ -12,6 +12,9 @@
   height: 0;
 }
 
+.wiki-search {
+  float:right;
+}
 
 .input-wrapper:first-child {
   opacity: 1 !important;
