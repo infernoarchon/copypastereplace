@@ -41,3 +41,18 @@ export function FormBtn(props) {
     </div>
   );
 }
+
+export function SearchBox(props) {
+  return (
+    <div className="input-group preset-search-container">
+      <input type="text" className="form-control search-input" {...props} />
+      <div className="input-group-append">
+      <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-search"></i></button>
+        <div className="dropdown-menu dropdown-menu-right">
+          <a className="dropdown-item" href="#">Movies</a>
+          <a className="dropdown-item" href="#">Books</a>
+        </div>
+      </div>
+    </div>
+  );
+}

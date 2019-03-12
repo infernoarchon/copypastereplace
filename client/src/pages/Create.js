@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
+import { Label, FormGroup, Input, TextArea, FormBtn, SearchBox } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 // import { isDate } from "util";
 const a = require('indefinite');
@@ -22,7 +22,7 @@ class Create extends Component {
     inputs: [],
     data: [],
     showTextArea: true,
-    words: []
+    words: [],
   };
   constructor(...args) {
     super(...args);
@@ -211,9 +211,8 @@ class Create extends Component {
       handleKeyDownInput(event) {
         if (event.key === 'Enter') {
           event.preventDefault();
-          let targetName = event.target.name
           this.state.inputs.forEach(h => {
-            if(h.number == targetName) {
+            if(h.number == event.target.name) {
               h.word = event.target.value
               // storyStr.push(h.word)
             } else{
@@ -240,6 +239,17 @@ class Create extends Component {
         }
       }
 
+      handleMovieSearch(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          API.searchOMDB(event.target.value).then( response => {
+            document.getElementById("story-input").value=response.data.Plot
+            document.getElementById("preset-search").value=''
+            console.log(event)
+          })
+      }
+    }
+
       getStory = ()=> {
         console.log("creating story")
         document.getElementById("story-container").textContent = this.joinWords(this.state.data, this.state.inputs)
@@ -260,11 +270,17 @@ class Create extends Component {
         <Col size="md-12">
 
         <div className="wrapper card">
+        <div className="row p-0">
+        <div className="col p-0">
         <h5 className="pt-2"><strong>Create Story</strong></h5>
-           
+        </div>
+        <div className="col p-0 d-flex justify-content-end">
+        { this.state.showTextArea ? <SearchBox id="preset-search" placeholder="Search for a movie..." onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch}/> : null}
+        </div>
+        </div>
             { this.state.showTextArea ?
                 <div>
-              <TextArea name="synopsis" placeholder="Paste your story here..." onChange={this.handleInputChange} />
+              <TextArea id="story-input" name="synopsis" placeholder="Paste your story here..." onChange={this.handleInputChange} />
               <FormBtn disabled={!this.state.synopsis ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
                 </div>
               : null}

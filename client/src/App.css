@@ -12,9 +12,11 @@
   height: 0;
 }
 
-.wiki-search {
-  float:right;
+.preset-search-container {
+  max-width: 200px;
 }
+
+
 
 .input-wrapper:first-child {
   opacity: 1 !important;

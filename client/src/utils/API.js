@@ -27,6 +27,9 @@ export default {
       features: { extractSyntax: true, extractEntities: true },
       encodingType: "UTF8"
     })
+  },
+  searchOMDB: function(text) {
+    return axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + text + "&plot=full")
   }
 
 };
