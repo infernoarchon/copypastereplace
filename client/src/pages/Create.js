@@ -82,6 +82,9 @@ class Create extends Component {
                   {helpText="Enter a descriptive verb in past tense (I _____ed yesterday)."} 
                 else if(e.partOfSpeech.tense === "PRESENT")
                   {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a descriptive verb in present tense (he _____s a lot)."}
+                else{
+                  helpText="Enter a verb."
+                }
                 break;
               // case "APPOS":
               //     if(e.partOfSpeech.number === "PLURAL")

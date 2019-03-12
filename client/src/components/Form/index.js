@@ -18,7 +18,7 @@ export function Input(props) {
     <div className="input-group">
       <input type="text" className="form-control word-input" {...props} />
       <div className="input-group-append">
-        <button class="btn btn-outline-secondary ml-1" type="button">Submit</button>
+        <button className="btn btn-outline-primary ml-1" type="button">Submit</button>
       </div>
     </div>
   );
