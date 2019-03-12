@@ -13,7 +13,7 @@
 }
 
 .preset-search-container {
-  max-width: 260px;
+  max-width: 200px;
 }
 
 
@@ -113,6 +113,9 @@
 
 @media screen and (max-width: 1024px) {
   .wrapper {
+    max-width: 95%;
+  }
+  .navbar {
     max-width: 95%;
   }
 }

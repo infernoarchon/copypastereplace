@@ -51,6 +51,8 @@ export function SearchBox(props) {
         <div className="dropdown-menu dropdown-menu-right">
           <a className="dropdown-item" href="#">Movies & Shows</a>
           <a className="dropdown-item" href="#">Books</a>
+          <a className="dropdown-item" href="#">News Articles</a>
+          <a className="dropdown-item" href="#">News Headlines</a>
         </div>
       </div>
     </div>
