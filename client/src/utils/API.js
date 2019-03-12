@@ -30,6 +30,14 @@ export default {
   },
   searchOMDB: function(text) {
     return axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + text + "&plot=full")
-  }
+  },
+  sendTextToSpeech: function(text) {
+    return axios.post("https://texttospeech.googleapis.com/v1/text:synthesize?key=" + process.env.REACT_APP_GOOGLE_API_KEY, {
+      input: {text: text},
+      voice: {languageCode: "en-GB", name: "en-GB-Wavenet-D"},
+      audioConfig: {audioEncoding: "MP3"}
+    })
+  },
+
 
 };

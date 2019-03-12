@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Label, FormGroup, Input, TextArea, FormBtn, SearchBox } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
-// import { isDate } from "util";
 const a = require('indefinite');
 
 
@@ -24,6 +23,8 @@ class Create extends Component {
     showTextArea: true,
     words: [],
     pasted: [],
+    final: [],
+    audio: []
   };
   constructor(...args) {
     super(...args);
@@ -251,7 +252,13 @@ class Create extends Component {
 
       getStory = ()=> {
         console.log("creating story")
-        document.getElementById("story-container").textContent = this.joinWords(this.state.data, this.state.inputs)
+        let finalStory = this.joinWords(this.state.data, this.state.inputs)
+        document.getElementById("story-container").textContent = finalStory
+        this.setState({final: finalStory})
+        API.sendTextToSpeech(finalStory).then(response =>{
+          this.setState({audio: response.data.audioContent})
+        })
+          
       }
       randomizeInputs = () => {
 
@@ -297,6 +304,10 @@ class Create extends Component {
             
         </div>
         <div id="story-container"></div>
+        {this.state.final.length === 0 ? null : 
+        <div className="audio-container"><audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
+        </div>
+        }
         </div>
         </Col>
       </Row>

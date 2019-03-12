@@ -110,6 +110,10 @@
   margin: 0;
 }
 
+.audio-container {
+  margin: auto;
+}
+
 
 @media screen and (max-width: 1024px) {
   .wrapper {
