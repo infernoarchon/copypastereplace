@@ -42,12 +42,9 @@ class Create extends Component {
         filteredArr.forEach(e => {
           let helpText;
           //General exceptions to replacing a word
-          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which" || e.lemma === "make" || e.lemma === "that" || e.lemma === "have") {
+          if(e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which" || e.lemma === "make" || e.lemma === "that" || e.lemma === "have" || e.partOfSpeech.mood === "INDICATIVE") {
             return
-          //Don't replace if conjunction is indicative (richer content experience)
-          } else if(e.dependencyEdge.label === "CONJ" && e.partOfSpeech.mood === "INDICATIVE") {
-            return
-          } 
+          }
           else{
             switch(e.dependencyEdge.label) {
               // case "VMOD":
