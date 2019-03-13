@@ -1,6 +1,14 @@
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #593196;
+
+  background: #9D50BB;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #6E48AA, #9D50BB);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #6E48AA, #9D50BB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  background-size: contain;
   font-size: 1.175em;
   margin: 0 !important;
   padding: 0 !important;
