@@ -256,7 +256,6 @@ class Create extends Component {
         document.getElementById("story-container").textContent = finalStory
         this.setState({final: finalStory})
         API.sendTextToSpeech(finalStory).then(response =>{
-          console.log(response)
           this.setState({audio: response.data.audioContent})
         })
           
