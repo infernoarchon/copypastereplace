@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../database/models/user')
+const Story = require('../database/models/story')
+
 const passport = require('../passport')
 
 router.post('/', (req, res) => {
@@ -64,5 +66,33 @@ router.post('/logout', (req, res) => {
         res.send({ msg: 'no user to log out' })
     }
 })
+
+//Story Routes
+router.post('/save', (req, res) => {
+    console.log('story save');
+
+    const { title, author, content, base64 } = req.body
+    // ADD VALIDATION
+    const newStory = new Story({
+        title: title,
+        author: author,
+        content: content,
+        base64: base64
+    })
+    newStory.save((err, savedStory) => {
+        if (err) return res.json(err)
+        res.json(savedStory)
+    })
+
+
+})
+
+// title: { type: String, unique: false, required: false },
+// author: { type: String, unique: false, required: false },
+// date: { type: Date, default: Date.now },
+// views: { type: Number, default:0 },
+// content: { type: String, unique: false, required: false },
+// base64: { type: String, unique: false, required: false }
+
 
 module.exports = router

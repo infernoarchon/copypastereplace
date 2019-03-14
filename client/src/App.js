@@ -66,7 +66,7 @@ class App extends Component {
             <Route exact path="/" component={Latest} />
             <Route exact path="/latest" component={Latest} />
             <Route exact path="/popular" component={Popular} />
-            <Route exact path="/create" component={Create} />
+            <Route exact path="/create" render={() => <Create userName={this.state.username} /> } />
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <SignUp/>} />
             <Route component={NoMatch} />

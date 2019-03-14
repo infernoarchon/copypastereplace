@@ -30,7 +30,7 @@ logout(event) {
   render() {
     const loggedIn = this.props.loggedIn;
     console.log('navbar render, props: ')
-    console.log(this.props);
+    // console.log(this.props);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">

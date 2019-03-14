@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import React, { Component } from "react";
 import API from "../utils/API";
 import { Label, FormGroup, Input, TextArea, FormBtn, SearchBox } from "../components/Form";
@@ -24,7 +26,8 @@ class Create extends Component {
     words: [],
     pasted: [],
     final: [],
-    audio: []
+    audio: [],
+    title: []
   };
   constructor(...args) {
     super(...args);
@@ -265,8 +268,34 @@ class Create extends Component {
         }
       }
 
+      handleSubmit = () => {
+        console.log(this.state.title)
+        axios.post('/user/save', {
+          title: this.state.title,
+          author: "test author",
+          content: this.state.final,
+          base64: "test"
+        })
+          .then( response => {
+            console.log(response)
+            if(!response.data.error) {
+              console.log('succesful save')
+              // this.setState({
+              //   redirectTo: '/latest'
+              // })
+            } else {
+              console.log('error occured')
+            }
+            }).catch(error => {
+              console.log(error)
+            })
+        }
+
+      
+
     
     render() {
+      console.log(this.state.title)
     return(
       <Container fluid>
       <Row>
@@ -301,10 +330,21 @@ class Create extends Component {
             
         </div>
         <div id="story-container"></div>
-        {this.state.final.length === 0 ? null : 
-        <div className="audio-container justify-content-center d-flex mt-3"><audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
-        </div>
-        }
+          {this.state.final.length === 0 ? null : 
+          <div>
+          <div className="audio-container justify-content-center d-flex mt-3">
+            <audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
+          </div>
+                  <form className="mt-4">
+                  <Label htmlFor="title">Story Title</Label>
+                  <Input name="title" type="text" className="w-100" value={this.state.title} onChange={this.handleInputChange} />
+
+                  <div
+                    onClick={this.handleSubmit}
+                  >Save Story</div>
+                </form>
+            </div>
+          }
         </div>
         </Col>
       </Row>

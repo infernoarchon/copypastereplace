@@ -9,7 +9,7 @@ export function FormGroup(props) {
 
 export function Label(props) {
   return (
-    <label {...props} />
+    <label className="input-label" {...props} />
 );
 }
 
