@@ -27,12 +27,15 @@ function Nav(props) {
       </div>
       <div className="w-100 nav-item dropdown navbar-collapse collapse order-2 dual-collapse2">
             <div className="navbar-nav ml-auto">
-            <a className="nav-link dropdown-toggle" id="userDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <NavLink to="/signin" className="nav-link">Sign In</NavLink>
+            <NavLink to="/signup" className="nav-link nav-link-box">Sign Up</NavLink>
+
+            {/* <a className="nav-link dropdown-toggle" id="userDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Login
             </a>
             <div className="dropdown-menu user-dropdown" aria-labelledby="navbarDropdownMenuLink">
             <a className="dropdown-item">Log Out</a>
-            </div>
+            </div> */}
             </div>
         </div>
     </nav>

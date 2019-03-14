@@ -183,8 +183,8 @@ class Create extends Component {
           
           this.getWords(tok)
           this.randomizeInputs()
-
-          document.getElementById("input-container").firstChild.firstChild.focus()
+          console.log(document.getElementById("input-container").firstChild.firstChild.nextSibling.firstChild)
+          document.getElementById("input-container").firstChild.firstChild.nextSibling.firstChild.focus()
           
           this.setState({data: tok})
           this.setState({showTextArea: false})
@@ -293,8 +293,8 @@ class Create extends Component {
             <FormGroup key={input.number}>
                     { !this.state.showTextArea ? <div id="counter"><span className="input-labels">{this.state.words.length + 1}/{this.state.inputs.length}</span></div> : null }
 
-              <Label htmlFor={"input-" + input.number}><span className="input-labels">{input.help}</span></Label>
-              <Input id={"input-" + input.number} name={input.number} placeholder="Type here..." onChange={this.handleInputChange} onKeyDown={this.handleKeyDownInput} />
+              <Label htmlFor={input.number}><span className="input-labels">{input.help}</span></Label>
+              <Input id={"input-" + input.number} className="word-input form-control" name={input.number} placeholder="Type here..." onChange={this.handleInputChange} onKeyDown={this.handleKeyDownInput} />
             </FormGroup>
             
             ))}

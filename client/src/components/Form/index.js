@@ -16,7 +16,7 @@ export function Label(props) {
 export function Input(props) {
   return (
     <div className="input-group">
-      <input type="text" className="form-control word-input" {...props} />
+      <input {...props} />
       {/* <div className="input-group-append">
         <button className="btn btn-outline-primary ml-1" type="button">Submit</button>
       </div> */}

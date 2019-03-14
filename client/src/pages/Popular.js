@@ -4,7 +4,7 @@ import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 // import { isDate } from "util";
 
-class Top extends Component {
+class Popular extends Component {
   
     render() {
     return(
@@ -22,4 +22,4 @@ class Top extends Component {
     }
 }
 
-export default Top;
+export default Popular;

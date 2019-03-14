@@ -16,7 +16,11 @@
   max-width: 200px;
 }
 
-
+.nav-link-box {
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 4px;
+  margin-left: 0.75em;
+}
 
 .input-wrapper:first-child {
   opacity: 1 !important;

@@ -4,6 +4,7 @@ import "./App.css";
 import Create from "./pages/Create";
 import Latest from "./pages/Latest";
 import Popular from "./pages/Popular";
+import SignUp from "./pages/SignUp";
 
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Nav from "./components/Nav"
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/latest" component={Latest} />
             <Route exact path="/popular" component={Popular} />
             <Route exact path="/create" component={Create} />
+            <Route exact path="/signup" component={SignUp} />
             <Route component={NoMatch} />
         </Switch>
   

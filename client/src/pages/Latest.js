@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 // import { isDate } from "util";
 
-class New extends Component {
+class Latest extends Component {
   
     render() {
     return(
@@ -22,4 +22,4 @@ class New extends Component {
     }
 }
 
-export default New;
+export default Latest;
