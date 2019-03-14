@@ -38,7 +38,7 @@ class SignUp extends Component {
           if(!response.data.error) {
             console.log('succesful signup')
             this.setState({
-              redirectTo: '/latest'
+              redirectTo: '/login'
             })
           } else {
             console.log('username already taken')
