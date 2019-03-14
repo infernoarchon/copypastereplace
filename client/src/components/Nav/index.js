@@ -1,7 +1,37 @@
-import React from "react";
+import React, { Component } from "react";
+
 import { NavLink } from 'react-router-dom'
 
-function Nav(props) {
+import axios from 'axios'
+
+
+class Nav extends Component {
+  constructor() {
+    super()
+    this.logout = this.logout.bind(this)
+}
+
+logout(event) {
+    event.preventDefault()
+    console.log('logging out')
+    axios.post('/user/logout').then(response => {
+      console.log(response.data)
+      if (response.status === 200) {
+        this.props.updateUser({
+          loggedIn: false,
+          username: null
+        })
+      }
+    }).catch(error => {
+        console.log('Logout error')
+    })
+  }
+
+  render() {
+    const loggedIn = this.props.loggedIn;
+    console.log('navbar render, props: ')
+    console.log(this.props);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <NavLink to="/latest" className="navbar-brand">Copy <span className="logo-strike">Paste </span><span className="logo-bold">Replace </span><i class="fas fa-laugh-squint"></i></NavLink>
@@ -27,6 +57,7 @@ function Nav(props) {
       </div>
       <div className="w-100 nav-item dropdown navbar-collapse collapse order-2 dual-collapse2">
             <div className="navbar-nav ml-auto">
+            {loggedIn ? <p>logged in as {this.props.userName}</p> : null}
             <NavLink to="/signin" className="nav-link">Sign In</NavLink>
             <NavLink to="/signup" className="nav-link nav-link-box">Sign Up</NavLink>
 
@@ -40,6 +71,7 @@ function Nav(props) {
         </div>
     </nav>
   );
+  }
 }
 
 export default Nav;
