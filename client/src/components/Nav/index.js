@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Redirect } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
 import axios from 'axios'
@@ -57,16 +57,26 @@ logout(event) {
       </div>
       <div className="w-100 nav-item dropdown navbar-collapse collapse order-2 dual-collapse2">
             <div className="navbar-nav ml-auto">
-            {loggedIn ? <p>logged in as {this.props.userName}</p> : null}
+            {loggedIn 
+            ? <div>
+                        <a className="nav-link dropdown-toggle" id="userDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {this.props.userName}
+                        </a>
+                        <div className="dropdown-menu user-dropdown" aria-labelledby="navbarDropdownMenuLink">
+                        <NavLink to="#" className="dropdown-item" onClick={this.logout}>Log Out</NavLink>
+                        </div>
+              </div>
+            : 
+            <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
             <NavLink to="/signin" className="nav-link">Sign In</NavLink>
-            <NavLink to="/signup" className="nav-link nav-link-box">Sign Up</NavLink>
+              </li>
+              <li className="nav-item">
+              <NavLink to="/signup" className="nav-link nav-link-box">Sign Up</NavLink>
+              </li>
+            </ul>
 
-            {/* <a className="nav-link dropdown-toggle" id="userDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Login
-            </a>
-            <div className="dropdown-menu user-dropdown" aria-labelledby="navbarDropdownMenuLink">
-            <a className="dropdown-item">Log Out</a>
-            </div> */}
+            }
             </div>
         </div>
     </nav>

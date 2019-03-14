@@ -17,9 +17,10 @@
 }
 
 .nav-link-box {
-  border: 1px solid rgba(255,255,255,0.5);
+  /* border: 1px solid rgba(255,255,255,0.5); */
   border-radius: 4px;
   margin-left: 0.75em;
+  box-shadow: 0 0 0 1pt rgba(255,255,255,0.5);
 }
 
 .input-wrapper:first-child {
@@ -113,6 +114,10 @@
 .row {
   margin: 0;
 }
+
+/* .login-links {
+  display: inline;
+} */
 
 @media screen and (max-width: 1024px) {
   .wrapper {

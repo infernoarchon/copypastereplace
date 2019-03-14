@@ -68,7 +68,7 @@ class App extends Component {
             <Route exact path="/popular" component={Popular} />
             <Route exact path="/create" component={Create} />
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
-            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/signup" render={() => <SignUp/>} />
             <Route component={NoMatch} />
         </Switch>
   

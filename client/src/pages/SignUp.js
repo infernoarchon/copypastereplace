@@ -2,6 +2,8 @@ import React, { Component } from "react";
 // import API from "../utils/API";
 import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
+import { Redirect } from 'react-router-dom'
+
 // import { isDate } from "util";
 import axios from 'axios'
 
@@ -13,6 +15,7 @@ class SignUp extends Component {
         username: '',
         password: '',
         confirmPassword: '',
+        redirectTo: null
       }
       this.handleSubmit = this.handleSubmit.bind(this)
       this.handleChange = this.handleChange.bind(this)
@@ -38,7 +41,7 @@ class SignUp extends Component {
           if(!response.data.error) {
             console.log('succesful signup')
             this.setState({
-              redirectTo: '/login'
+              redirectTo: '/signin'
             })
           } else {
             console.log('username already taken')
@@ -50,6 +53,9 @@ class SignUp extends Component {
     
 
     render() {
+      if (this.state.redirectTo) {
+        return <Redirect to={{ pathname: this.state.redirectTo }} />
+    } else{
     return(
       <Container fluid>
       <Row>
@@ -67,7 +73,7 @@ class SignUp extends Component {
 						className="btn btn-primary mt-3"
 						onClick={this.handleSubmit}
 						type="submit"
-					>Sign up</button>
+					>Sign Up</button>
 				</form>
 
 
@@ -78,6 +84,7 @@ class SignUp extends Component {
     </Container>
     )
     }
+  }
 }
 
 export default SignUp;
