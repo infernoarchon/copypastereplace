@@ -34,7 +34,7 @@ logout(event) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
-      <NavLink to="/latest" className="navbar-brand">Copy <span className="logo-strike">Paste </span><span className="logo-bold">Replace </span><i className="far fa-laugh-squint"></i></NavLink>
+      <NavLink to="/latest" className="navbar-brand">Copy <span className="logo-strike">Paste </span><span className="logo-bold">Replace </span><i className="far fa-copy"></i></NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
