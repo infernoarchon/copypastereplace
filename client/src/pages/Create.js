@@ -4,7 +4,10 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Label, FormGroup, Input, TextArea, FormBtn, SearchBox } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
+import { Redirect } from 'react-router-dom'
+
 const a = require('indefinite');
+
 
 
 class Word {
@@ -27,7 +30,8 @@ class Create extends Component {
     pasted: [],
     final: [],
     audio: [],
-    title: []
+    title: [],
+    redirectTo: null
   };
   constructor(...args) {
     super(...args);
@@ -272,9 +276,9 @@ class Create extends Component {
         console.log(this.state.title)
         axios.post('/user/save', {
           title: this.state.title,
-          author: "test author",
+          author: this.props.userName,
           content: this.state.final,
-          base64: "test"
+          base64: this.state.audio
         })
           .then( response => {
             console.log(response)
@@ -295,7 +299,9 @@ class Create extends Component {
 
     
     render() {
-      console.log(this.state.title)
+      if (this.state.redirectTo) {
+        return <Redirect to={{ pathname: this.state.redirectTo }} />
+    } else{
     return(
       <Container fluid>
       <Row>
@@ -339,9 +345,10 @@ class Create extends Component {
                   <Label htmlFor="title">Story Title</Label>
                   <Input name="title" type="text" className="w-100" value={this.state.title} onChange={this.handleInputChange} />
 
-                  <div
+                  <button
+                    className="btn btn-primary mt-2"
                     onClick={this.handleSubmit}
-                  >Save Story</div>
+                  >Save Story</button>
                 </form>
             </div>
           }
@@ -351,6 +358,7 @@ class Create extends Component {
     </Container>
     )
     }
+  }
 }
 
 export default Create;

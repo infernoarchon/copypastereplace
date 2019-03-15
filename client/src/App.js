@@ -64,7 +64,7 @@ class App extends Component {
         <Nav updateUser={this.updateUser} loggedIn={this.state.loggedIn} userName ={this.state.username} />
         <Switch>
             <Route exact path="/" component={Latest} />
-            <Route exact path="/latest" component={Latest} />
+            <Route exact path="/latest" render={() => <Latest/>} />
             <Route exact path="/popular" component={Popular} />
             <Route exact path="/create" render={() => <Create userName={this.state.username} /> } />
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
