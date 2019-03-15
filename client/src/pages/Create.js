@@ -341,9 +341,10 @@ class Create extends Component {
           <div className="audio-container justify-content-center d-flex mt-3">
             <audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
           </div>
-                  <form className="mt-4">
+          <hr />
+                  <form className="mt-3">
                   <Label htmlFor="title">Story Title</Label>
-                  <Input name="title" type="text" className="w-100" value={this.state.title} onChange={this.handleInputChange} />
+                  <Input name="title" type="text" className="w-50" value={this.state.title} onChange={this.handleInputChange} />
 
                   <button
                     className="btn btn-primary mt-2"

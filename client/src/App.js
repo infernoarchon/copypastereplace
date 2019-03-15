@@ -59,9 +59,11 @@ class App extends Component {
   render() {
     return (
       <Router>
-        
+        <div className="main-wrapper">
+        <div className="nav-bg"></div>
       <div className="main-container">
         <Nav updateUser={this.updateUser} loggedIn={this.state.loggedIn} userName ={this.state.username} />
+        <div className="spacer"></div>
         <Switch>
             <Route exact path="/" component={Latest} />
             <Route exact path="/latest" render={() => <Latest/>} />
@@ -72,6 +74,7 @@ class App extends Component {
             <Route component={NoMatch} />
         </Switch>
   
+      </div>
       </div>
       </Router>
   

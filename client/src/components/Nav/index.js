@@ -33,8 +33,8 @@ logout(event) {
     // console.log(this.props);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark">
-      <NavLink to="/latest" className="navbar-brand">Copy <span className="logo-strike">Paste </span><span className="logo-bold">Replace </span><i className="fas fa-laugh-squint"></i></NavLink>
+    <nav className="navbar navbar-expand-lg navbar-light">
+      <NavLink to="/latest" className="navbar-brand">Copy <span className="logo-strike">Paste </span><span className="logo-bold">Replace </span><i className="far fa-laugh-squint"></i></NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
