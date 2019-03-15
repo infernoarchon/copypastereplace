@@ -83,8 +83,14 @@ router.post('/save', (req, res) => {
         if (err) return res.json(err)
         res.json(savedStory)
     })
+})
 
-
+router.get("/latest", (req,res) => {
+    console.log("getting story")
+    Story.find((err, stories) => {
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(stories)
+    })
 })
 
 // title: { type: String, unique: false, required: false },
