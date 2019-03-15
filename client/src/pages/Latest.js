@@ -3,6 +3,7 @@ import API from "../utils/API";
 // import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 // import { isDate } from "util";
+const moment = require('moment');
 
 class Latest extends Component {
   state = {
@@ -28,11 +29,13 @@ class Latest extends Component {
       <Row>
         <Col size="md-12">
         {this.state.stories.map(story => (
-        <div className="wrapper card">
+        <div className="story-wrapper card mb-3">
 
           <div id="story-container">
+          <p class="author-attr">created {moment(story.date).fromNow()} by {story.author}</p>
           <h1>{story.title}</h1>
-          <p>by {story.author}</p>
+          <p className="story-summary">{story.content.slice(0,260) + "..."}</p>
+          
           
           </div>
 
