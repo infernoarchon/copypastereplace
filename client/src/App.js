@@ -49,7 +49,6 @@ class App extends Component {
           loggedIn: true,
           username: response.data.user.username,
         })
-        this.getPic(response.data.user.username)
       } else {
         console.log('Get user: no user');
         this.setState({
@@ -59,17 +58,10 @@ class App extends Component {
       }
     })
   }
-  getPic(user) {
-    axios.get('/user/icon',user).then(response => {
-      this.setState({
-        icon: response.data.icon,
-        color: response.data.color
-      })
-      console.log(this.state.color, this.state.icon)
-    })
-  }
+
 
   render() {
+    console.log(this.state.username)
     return (
       <Router>
         <div className="main-wrapper">
@@ -81,7 +73,7 @@ class App extends Component {
             <Route exact path="/" component={Latest} />
             <Route exact path="/latest" render={() => <Latest/>} />
             <Route exact path="/popular" component={Popular} />
-            <Route exact path="/create" render={() => <Create userName={this.state.username} /> } />
+            <Route exact path="/create" render={() => <Create getUser={this.getUser}userName={this.state.username} userIcon = {this.state.icon} userColor={this.state.color} /> } />
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <SignUp/>} />
             <Route component={NoMatch} />

@@ -10,7 +10,9 @@ const storySchema = new Schema({
     date: { type: Date, default: Date.now },
     views: { type: Number, default:0 },
     content: { type: String, unique: false, required: false },
-    base64: { type: String, unique: false, required: false }
+    base64: { type: String, unique: false, required: false },
+    color: { type: String, unique: false, required: false },
+    icon: { type: String, unique: false, required: false },
 
 })
 

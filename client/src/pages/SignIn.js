@@ -38,11 +38,8 @@ class SignIn extends Component {
                 console.log('login response: ')
                 console.log(response)
                 if (response.status === 200) {
+                  this.getPic(response.data.username)
                     // update App.js state
-                    this.props.updateUser({
-                        loggedIn: true,
-                        username: response.data.username
-                    })
                     // update the state to redirect to home
                     this.setState({
                         redirectTo: '/'
@@ -53,6 +50,17 @@ class SignIn extends Component {
                 console.log(error);
                 
             })
+    }
+    getPic(user) {
+      axios.get('/user/icon',user).then(response => {
+        this.props.updateUser({
+          loggedIn: true,
+          username: user,
+          icon: response.data.icon,
+          color: response.data.color
+      })
+        console.log(this.state.color, this.state.icon)
+      })
     }
 
     

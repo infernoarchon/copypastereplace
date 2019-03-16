@@ -156,6 +156,37 @@ h1 {
 
 }
 
+.profile-pic {
+  height: 40px;
+  position: absolute;
+  top: 0px;
+  width: 40px;
+  right: 25px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.profile-pic i {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-top: 0.25em;
+}
+
+.profile-pic-feed {
+  height: 40px;
+  float: left;
+  width: 40px;
+  border-radius: 20px;
+  text-align: center;
+  margin: 0.25em 0.75em 0 0;
+}
+
+.profile-pic-feed i {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-top: 0.25em;
+}
+
 .dropdown-item i {
   font-size: 2rem;
 }

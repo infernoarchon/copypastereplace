@@ -9,7 +9,8 @@ class Nav extends Component {
   constructor() {
     super()
     this.logout = this.logout.bind(this)
-}
+  }
+
 
 logout(event) {
     event.preventDefault()
@@ -19,7 +20,9 @@ logout(event) {
       if (response.status === 200) {
         this.props.updateUser({
           loggedIn: false,
-          username: null
+          username: null,
+          color: null,
+          icon: null
         })
       }
     }).catch(error => {
@@ -29,7 +32,7 @@ logout(event) {
 
   render() {
     const loggedIn = this.props.loggedIn;
-    console.log(this.props)
+    // console.log(this.props.userColor)
     // console.log(this.props);
 
   return (

@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Label, FormGroup, Input, TextArea, FormBtn, SearchBox } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 
 const a = require('indefinite');
 
@@ -31,7 +31,7 @@ class Create extends Component {
     final: [],
     audio: [],
     title: [],
-    redirectTo: null
+    // redirectTo: null
   };
   constructor(...args) {
     super(...args);
@@ -246,10 +246,15 @@ class Create extends Component {
         if (event.key === 'Enter') {
           event.preventDefault();
           API.searchOMDB(event.target.value).then( response => {
-            document.getElementById("story-input").value=response.data.Plot
-            this.setState({pasted:response.data.Plot})
-            document.getElementById("preset-search").value=''
-            console.log(this.state.pasted)
+            if(response.data.Response==="False") {
+              return
+            } else{
+              console.log("did not find anything")
+              document.getElementById("story-input").value=response.data.Plot
+              this.setState({pasted:response.data.Plot})
+              document.getElementById("preset-search").value=''
+              console.log(this.state.pasted)
+            }
           })
       }
     }
@@ -278,15 +283,17 @@ class Create extends Component {
           title: this.state.title,
           author: this.props.userName,
           content: this.state.final,
-          base64: this.state.audio
+          base64: this.state.audio,
+          color: this.props.userColor,
+          icon: this.props.userIcon
         })
           .then( response => {
             console.log(response)
             if(!response.data.error) {
               console.log('succesful save')
-              // this.setState({
-              //   redirectTo: '/latest'
-              // })
+              this.setState({
+                redirectTo: '/signin'
+              })
             } else {
               console.log('error occured')
             }
@@ -299,9 +306,10 @@ class Create extends Component {
 
     
     render() {
-      if (this.state.redirectTo) {
-        return <Redirect to={{ pathname: this.state.redirectTo }} />
-    } else{
+    //   if (this.state.redirectTo) {
+    //     return <Redirect to={{ pathname: this.state.redirectTo }} />
+    // } else{
+
     return(
       <Container fluid>
       <Row>
@@ -359,7 +367,7 @@ class Create extends Component {
     </Container>
     )
     }
-  }
+  
 }
 
 export default Create;

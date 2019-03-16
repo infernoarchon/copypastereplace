@@ -82,13 +82,15 @@ router.get("/icon", (req,res) => {
 router.post('/save', (req, res) => {
     console.log('story save');
 
-    const { title, author, content, base64 } = req.body
+    const { title, author, content, base64, color, icon } = req.body
     // ADD VALIDATION
     const newStory = new Story({
         title: title,
         author: author,
         content: content,
-        base64: base64
+        base64: base64,
+        color: color,
+        icon: icon
     })
     newStory.save((err, savedStory) => {
         if (err) return res.json(err)
