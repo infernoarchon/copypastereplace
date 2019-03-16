@@ -44,11 +44,7 @@ class App extends Component {
       console.log(response.data)
       if (response.data.user) {
         console.log('Get User: There is a user saved in the server session: ')
-        
-        this.setState({
-          loggedIn: true,
-          username: response.data.user.username,
-        })
+        this.getPic(response.data.user)
       } else {
         console.log('Get user: no user');
         this.setState({
@@ -58,10 +54,20 @@ class App extends Component {
       }
     })
   }
+  getPic(user) {
+    axios.get('/user/icon',user).then(response => {
+      this.setState({
+        loggedIn: true,
+        username: response.data.username,
+        icon: response.data.icon,
+        color: response.data.color
+    })
+    })
+  }
 
 
   render() {
-    console.log(this.state.username)
+    console.log(this.state.username, this.state.color, this.state.icon)
     return (
       <Router>
         <div className="main-wrapper">

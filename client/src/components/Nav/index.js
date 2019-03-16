@@ -10,7 +10,9 @@ class Nav extends Component {
     super()
     this.logout = this.logout.bind(this)
   }
-
+  componentDidMount() {
+    console.log("Nav Mounted")
+  }
 
 logout(event) {
     event.preventDefault()
@@ -66,6 +68,8 @@ logout(event) {
                         <div className="profile-pic" style={{backgroundColor: this.props.userColor}}><i className={this.props.userIcon}></i></div>
                         </a>
                         <div className="dropdown-menu user-dropdown" aria-labelledby="navbarDropdownMenuLink">
+                        <h3 className="dropdown-header"><strong>{this.props.userName}</strong></h3>
+                        <NavLink to="#" className="dropdown-item">Profile</NavLink>
                         <NavLink to="#" className="dropdown-item" onClick={this.logout}>Log Out</NavLink>
                         </div>
               </div>

@@ -33,7 +33,7 @@ class Latest extends Component {
           <div id="story-container">
           <div className="profile-pic-feed" style={{backgroundColor: story.color}}><i className={story.icon}></i></div>
           <h1>{story.title}</h1>
-          <p class="author-attr">created {moment(story.date).fromNow()} by {story.author}</p>
+          <p className="author-attr">created {moment(story.date).fromNow()} by {story.author}</p>
           <p className="story-summary">{story.content.slice(0,260) + "..."}</p>
           
           

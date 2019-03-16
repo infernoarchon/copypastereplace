@@ -31,13 +31,15 @@ class Create extends Component {
     final: [],
     audio: [],
     title: [],
-    // redirectTo: null
+    redirectTo: null
   };
   constructor(...args) {
     super(...args);
     this.handleKeyDownInput = this.handleKeyDownInput.bind(this);
   }
-  
+  componentDidMount() {
+    console.log("Create Mounted")
+  }
 
     getWords = token => {
       let masterObj = [];
@@ -291,9 +293,9 @@ class Create extends Component {
             console.log(response)
             if(!response.data.error) {
               console.log('succesful save')
-              this.setState({
-                redirectTo: '/signin'
-              })
+              // this.setState({
+              //   redirectTo: '/latest'
+              // })
             } else {
               console.log('error occured')
             }
@@ -306,9 +308,6 @@ class Create extends Component {
 
     
     render() {
-    //   if (this.state.redirectTo) {
-    //     return <Redirect to={{ pathname: this.state.redirectTo }} />
-    // } else{
 
     return(
       <Container fluid>
@@ -367,7 +366,7 @@ class Create extends Component {
     </Container>
     )
     }
-  
-}
+  }
+
 
 export default Create;
