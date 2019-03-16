@@ -5,6 +5,9 @@
 h1 {
   font-size: 1.25rem;
   font-weight: 500;
+  margin-bottom: 0;
+  line-height: 1.5;
+
 }
 
 .fa-copy {
@@ -118,10 +121,58 @@ h1 {
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
+.swatch {
+  width: 36px !important;
+  height: 36px !important;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: auto;
+}
+
+.swatch-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: 1px solid #fff;
+}
+
+.icon-preview {
+  width: 36px !important;
+  height: 36px !important;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: auto;
+  text-align: center;
+}
+
+.icon-preview i {
+  font-size: 1.675rem;
+  line-height: 1.2;
+  color: #fff;
+  width: 100%;
+  border-radius: 8px;
+  height: 100%;
+  border: 1px solid #fff;
+
+}
+
+.dropdown-item i {
+  font-size: 2rem;
+}
+
+.color-drop {
+  height: 30px;
+  padding: 1em;
+
+}
+
+option {
+  font-family: 'Font Awesome\ 5 Brands' , 'arial' !important;
+}
 
 
 .story-summary {
-  color: #999;
+  color: #666;
 }
 
 .input-labels {
@@ -171,7 +222,7 @@ h1 {
   display: inline;
 } */
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 992px) {
   .wrapper {
     max-width: 95%;
   }

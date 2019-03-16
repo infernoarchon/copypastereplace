@@ -32,8 +32,8 @@ class Latest extends Component {
         <div className="story-wrapper card mb-3">
 
           <div id="story-container">
-          <p class="author-attr">created {moment(story.date).fromNow()} by {story.author}</p>
           <h1>{story.title}</h1>
+          <p class="author-attr">created {moment(story.date).fromNow()} by {story.author}</p>
           <p className="story-summary">{story.content.slice(0,260) + "..."}</p>
           
           

@@ -310,7 +310,7 @@ class Create extends Component {
         <div className="wrapper card">
         <div className="row p-0">
         <div className="col-5 p-0">
-          <h1 className="pt-2">Create Story</h1>
+          <h1>Create Story</h1>
         </div>
         <div className="col-7 p-0 d-flex justify-content-end">
           { this.state.showTextArea ? <SearchBox name="preset" id="preset-search" placeholder="Movie or Show" onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch}/> : null}

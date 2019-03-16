@@ -16,7 +16,7 @@ export function Label(props) {
 export function Input(props) {
   return (
     <div className="input-group">
-      <input {...props} />
+      <input className="w-25" {...props} />
       {/* <div className="input-group-append">
         <button className="btn btn-outline-primary ml-1" type="button">Submit</button>
       </div> */}
@@ -56,5 +56,17 @@ export function SearchBox(props) {
         </div>
       </div>
     </div>
+  );
+}
+
+export function IconItem(props) {
+  return(
+  <button className="dropdown-item" type="button" {...props}></button>
+  );
+}
+
+export function IconIcon(props) {
+  return(
+  <i {...props}></i>
   );
 }

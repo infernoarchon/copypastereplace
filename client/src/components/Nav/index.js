@@ -29,11 +29,11 @@ logout(event) {
 
   render() {
     const loggedIn = this.props.loggedIn;
-    console.log('navbar render, props: ')
+    console.log(this.props)
     // console.log(this.props);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <NavLink to="/latest" className="navbar-brand">Copy <span className="logo-strike">Paste </span><span className="logo-bold">Replace </span><i className="far fa-copy"></i></NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -60,7 +60,7 @@ logout(event) {
             {loggedIn 
             ? <div>
                         <a className="nav-link dropdown-toggle" id="userDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {this.props.userName}
+                        <div className="profile-pic" style={{backgroundColor: this.props.userColor}}><i className={this.props.userIcon}></i></div>
                         </a>
                         <div className="dropdown-menu user-dropdown" aria-labelledby="navbarDropdownMenuLink">
                         <NavLink to="#" className="dropdown-item" onClick={this.logout}>Log Out</NavLink>

@@ -20,7 +20,9 @@ class App extends Component {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      color: null,
+      icon: null
     }
 
     this.getUser = this.getUser.bind(this)
@@ -42,27 +44,38 @@ class App extends Component {
       console.log(response.data)
       if (response.data.user) {
         console.log('Get User: There is a user saved in the server session: ')
-
+        
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
         })
+        this.getPic(response.data.user.username)
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          username: null,
         })
       }
     })
   }
+  getPic(user) {
+    axios.get('/user/icon',user).then(response => {
+      this.setState({
+        icon: response.data.icon,
+        color: response.data.color
+      })
+      console.log(this.state.color, this.state.icon)
+    })
+  }
+
   render() {
     return (
       <Router>
         <div className="main-wrapper">
         <div className="nav-bg"></div>
       <div className="main-container">
-        <Nav updateUser={this.updateUser} loggedIn={this.state.loggedIn} userName ={this.state.username} />
+        <Nav updateUser={this.updateUser} loggedIn={this.state.loggedIn} userName ={this.state.username} userIcon = {this.state.icon} userColor = {this.state.color} />
         <div className="spacer"></div>
         <Switch>
             <Route exact path="/" component={Latest} />

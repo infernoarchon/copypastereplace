@@ -8,7 +8,7 @@ const passport = require('../passport')
 router.post('/', (req, res) => {
     console.log('user signup');
 
-    const { username, password } = req.body
+    const { username, password, color, icon } = req.body
     // ADD VALIDATION
     User.findOne({ username: username }, (err, user) => {
         if (err) {
@@ -21,7 +21,9 @@ router.post('/', (req, res) => {
         else {
             const newUser = new User({
                 username: username,
-                password: password
+                password: password,
+                color: color,
+                icon: icon
             })
             newUser.save((err, savedUser) => {
                 if (err) return res.json(err)
@@ -50,7 +52,7 @@ router.post(
 
 router.get('/', (req, res, next) => {
     console.log('===== user!!======')
-    console.log(req.user)
+    console.log(req)
     if (req.user) {
         res.json({ user: req.user })
     } else {
@@ -65,6 +67,15 @@ router.post('/logout', (req, res) => {
     } else {
         res.send({ msg: 'no user to log out' })
     }
+})
+
+
+router.get("/icon", (req,res) => {
+    console.log("getting icon")
+    User.findOne({_id: req.user._id}, (err, userInfo) => {
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(userInfo)
+    })
 })
 
 //Story Routes
