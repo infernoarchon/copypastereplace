@@ -106,6 +106,41 @@ router.get("/latest", (req,res) => {
     })
 })
 
+router.get("/popular", (req,res) => {
+    console.log("getting popular")
+    Story.find({}, null, {sort: {views: -1}}, (err, stories) => {
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(stories)
+    })
+})
+
+router.post('/view', (req, res) => {
+    console.log('user viewed story');
+    const storyId = Object.keys(req.body)[0]
+    Story.findOneAndUpdate({ _id: storyId }, { $inc: { views: 1 } }, {new: true }, (err, response) => {
+        if (err) return res.json(err)
+        res.json(response)
+}) 
+    // ADD VALIDATION
+    // Story.findOne({_id: req.user._id}, (err, userInfo) => {
+    //     if (err) return res.status(500).send(err)
+    //     return res.status(200).send(userInfo)
+    // })
+    // newStory.save((err, savedStory) => {
+    //     if (err) return res.json(err)
+    //     res.json(savedStory)
+    // })
+})
+
+router.get("/story", (req,res) => {
+    console.log("getting story")
+    console.log(req)
+    // Story.findOne({_id: }, null, {sort: {views: -1}}, (err, stories) => {
+    //     if (err) return res.status(500).send(err)
+    //     return res.status(200).send(stories)
+    // })
+})
+
 // title: { type: String, unique: false, required: false },
 // author: { type: String, unique: false, required: false },
 // date: { type: Date, default: Date.now },

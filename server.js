@@ -7,6 +7,8 @@ const fs = require('fs');
 const dbConnection = require('./server/database')
 const passport = require('./server/passport')
 const user = require('./server/routes/user')
+const api = require('./server/routes/api')
+
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
@@ -38,6 +40,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/user',user)
+app.use('/api', api)
 
 
 // Send every other request to the React app

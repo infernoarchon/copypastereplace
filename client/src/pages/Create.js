@@ -281,7 +281,7 @@ class Create extends Component {
 
       handleSubmit = () => {
         console.log(this.state.title)
-        axios.post('/user/save', {
+        axios.post('/api/save', {
           title: this.state.title,
           author: this.props.userName,
           content: this.state.final,

@@ -6,6 +6,8 @@ import Latest from "./pages/Latest";
 import Popular from "./pages/Popular";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import Detail from "./pages/Detail";
+
 
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Nav from "./components/Nav"
@@ -82,6 +84,7 @@ class App extends Component {
             <Route exact path="/create" render={() => <Create getUser={this.getUser}userName={this.state.username} userIcon = {this.state.icon} userColor={this.state.color} /> } />
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <SignUp/>} />
+            <Route exact path="/story/:id" component={Detail} />
             <Route component={NoMatch} />
         </Switch>
   

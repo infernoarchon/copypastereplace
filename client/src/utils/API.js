@@ -4,7 +4,14 @@ require('dotenv').config()
 export default {
   // Gets all books
   getStories: function() {
-    return axios.get("/user/latest");
+    return axios.get("/api/latest");
+  },
+
+  getStory: function(id) {
+    return axios.get("/api/story/" + id);
+  },
+  getPopular: function() {
+    return axios.get("/api/popular");
   },
   // searchBooks: function(query) {
   //   return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query+ "&key=");
@@ -28,8 +35,9 @@ export default {
       encodingType: "UTF8"
     })
   },
+
   searchOMDB: function(text) {
-    return axios.get("http://www.omdbapi.com/?apikey=trilogy&t=" + text + "&plot=full")
+    return axios.get("http://www.omdbapi.com/?apikey=" + process.env.REACT_APP_OMDB_API_KEY  + "&t=" + text + "&plot=full")
   },
   sendTextToSpeech: function(text) {
     return axios.post("https://texttospeech.googleapis.com/v1/text:synthesize?key=" + process.env.REACT_APP_GOOGLE_API_KEY, {
