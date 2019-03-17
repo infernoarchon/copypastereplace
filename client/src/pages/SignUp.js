@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 // import { isDate } from "util";
 import axios from 'axios'
+import { maxHeaderSize } from "http";
 
 
 class SignUp extends Component {
@@ -33,12 +34,118 @@ class SignUp extends Component {
       console.log(this.state.username)
       console.log(this.state.password)
       event.preventDefault()
-
+      let iconRand = this.state.icon
+      let colorRand = this.state.color
+      const icons = [
+        "fas fa-flushed",
+        "fas fa-frown-open",
+        "fas fa-grimace",
+        "fas fa-grin",
+        "fas fa-grin-alt",
+        "fas fa-grin-beam",
+        "fas fa-grin-beam-sweat",
+        "fas fa-grin-hearts",
+        "fas fa-grin-squint",
+        "fas fa-grin-squint",
+        "fas fa-grin-squint-tears",
+        "fas fa-grin-stars",
+        "fas fa-grin-tears",
+        "fas fa-grin-tongue",
+        "fas fa-grin-tongue-squint",
+        "fas fa-grin-tongue-wink",
+        "fas fa-grin-wink",
+        "fas fa-kiss",
+        "fas fa-kiss-beam",
+        "fas fa-kiss-wink-heart",
+        "fas fa-laugh",
+        "fas fa-laugh-beam",
+        "fas fa-laugh-squint",
+        "fas fa-laugh-wink",
+        "fas fa-meh",
+        "fas fa-meh-blank",
+        "fas fa-meh-rolling-eyes",
+        "fas fa-sad-cry",
+        "fas fa-smile",
+        "fas fa-smile-beam",
+        "fas fa-smile-wink",
+        "fas fa-surprise",
+        "fas fa-user-astronaut",
+        "fas fa-user-ninja",
+        "fas fa-user-secret",
+        "fas fa-user-tie",
+        "fas fa-cat",
+        "fas fa-crow",
+        "fas fa-dog",
+        "fas fa-dove",
+        "fas fa-dragon",
+        "fas fa-fish",
+        "fas fa-frog",
+        "fas fa-hippo",
+        "fas fa-horse",
+        "fas fa-horse-head",
+        "fas fa-kiwi-bird",
+        "fas fa-otter",
+        "fas fa-spider",
+        "fas fa-bug",
+        "fas fa-chess-rook",
+        "fas fa-chess-queen",
+        "fas fa-chess-pawn",
+        "fas fa-chess-knight",
+        "fas fa-chess-king",
+        "fas fa-chess-bishop",
+        "fas fa-snowman",
+        "fas fa-ghost",
+        "fas fa-poo",
+        "fas fa-skull",
+        "fas fa-robot",
+        "fas fa-pastafarianism",
+        "fas fa-car-side",
+        "fas fa-motorcycle",
+        "fas fa-hamburger",
+        "fas fa-carrot",
+        "fas fa-pizza-slice",
+        "fas fa-pepper-hot",
+        "fas fa-football-ball",
+        "fas fa-futbol",
+        "fas fa-basketball-ball",
+        "fas fa-baseball-ball",
+        "fas fa-volleyball-ball",
+        "fas fa-snowboarding",
+        "fas fa-toilet-paper",
+        "fas fa-paper-plane",
+        "fas fa-tree",
+        "fas fa-air-freshener",
+        "fas fa-umbrella",
+        "fas fa-bomb",
+        "fas fa-atom",
+        "fas fa-brain",
+        "fas fa-meteor",
+        "fas fa-yin-yang",
+        "fas fa-haykal",
+        "fas fa-dice-d20",
+        "fas fa-hand-spock",
+      ]
+      const colors = [
+        '#ff4436',
+        '#9c27b0',
+        '#3f51b5',
+        '#2196f3',
+        '#009688',
+        '#8bc34a',
+        '#d8bf00',
+        '#ff9800',
+      ]
+      if(this.state.icon.length === 0 || this.state.color.length === 0) {
+        iconRand = icons[Math.floor(Math.random() * icons.length)]
+        colorRand = colors[Math.floor(Math.random() * colors.length)]
+        console.log(iconRand)
+        console.log(colorRand)
+      }
       axios.post('/user/', {
         username: this.state.username,
         password: this.state.password,
-        color: this.state.color,
-        icon: this.state.icon
+        color: colorRand,
+        icon: iconRand
       })
         .then( response => {
           console.log(response)

@@ -345,7 +345,7 @@ class Create extends Component {
         <div id="story-container"></div>
           {this.state.final.length === 0 ? null : 
           <div>
-          <div className="audio-container justify-content-center d-flex mt-3 mb-5">
+          <div className="audio-container justify-content-center d-flex mt-4 mb-5">
             <audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
           </div>
           <hr />

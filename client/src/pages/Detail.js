@@ -30,7 +30,7 @@ class Detail extends Component {
           <h1>{this.state.story.title}</h1>
           <p className="author-attr">created {moment(this.state.story.date).fromNow()} by {this.state.story.author}</p>
           <p className="story-summary">{this.state.story.content}</p>
-          <div className="audio-container justify-content-center d-flex mt-3 mb-5">
+          <div className="audio-container justify-content-center d-flex mt-4 mb-5">
             <audio controls src={"data:audio/mp3;base64," + this.state.story.base64}></audio>
           </div>
           
