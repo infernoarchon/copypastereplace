@@ -232,7 +232,23 @@ option {
 .user-dropdown {
   right: 10px;
   left: auto;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
  }
+
+ .user-dropdown::-webkit-scrollbar {
+   width: 0 !important;
+ }
+
+ .search-dropdown {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+ }
+
+ .search-dropdown::-webkit-scrollbar {
+   width: 0 !important;
+ }
+
 
  .main-container {
    width: 100vw !important;
