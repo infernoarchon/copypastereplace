@@ -99,6 +99,8 @@ class Create extends Component {
                   {helpText="Enter a plural noun."} 
                 else if(e.partOfSpeech === "SINGULAR")
                   {helpText="Enter a singular noun."}
+                else 
+                  {helpText="Enter an adjective."}
                 break;
               case "ATTR":
                 if(e.partOfSpeech.number === "PLURAL")
