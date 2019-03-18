@@ -68,6 +68,7 @@ class Create extends Component {
           || e.lemma === "charge"
           || e.lemma === "full"
           || e.lemma === "order"
+          || e.lemma === "plan"
           || e.partOfSpeech.mood === "INDICATIVE") {
             return
           }
