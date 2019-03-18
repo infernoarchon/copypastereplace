@@ -56,6 +56,7 @@ logout(event) {
             <NavLink to="/create" className="nav-link">Create</NavLink>
           </li>
         </ul>
+        
         </div>
       
       </div>
