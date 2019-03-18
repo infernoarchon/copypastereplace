@@ -11,6 +11,10 @@ class Detail extends Component {
   state = {
     story : []
   }
+  constructor(props) {
+      super(props);
+      this.goBack = this.goBack.bind(this);
+  }
 
   componentDidMount() {
     API.getStory(this.props.match.params.id)
@@ -18,14 +22,19 @@ class Detail extends Component {
       .catch(err => console.log(err));
   }
 
+  goBack() {
+      this.props.history.goBack();
+  }
+
     render() {
+        console.log(this.props)
     return(
       <Container fluid>
       <Row>
         <Col size="md-12">
         <div className="story-wrapper card mb-3">
           <div id="story-container">
-          <div className="back-button mb-3"><i class="fas fa-arrow-left"></i> Go Back</div>
+          <div className="back-button mb-3" onClick={this.goBack}><a href="#"><i className="fas fa-arrow-left"></i> Go Back</a></div>
           <div className="profile-pic-feed" style={{backgroundColor: this.state.story.color}}><i className={this.state.story.icon}></i></div>
           <h1>{this.state.story.title}</h1>
           <p className="author-attr">created {moment(this.state.story.date).fromNow()} by {this.state.story.author}</p>

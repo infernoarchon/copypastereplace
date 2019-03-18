@@ -14,10 +14,17 @@ a {
   color: #333;
 }
 
+a:hover {
+  text-decoration: none;
+}
 
 #story-container a:hover {
   color: #333;
   border-bottom: 1px solid;
+}
+
+.sign-in-prompt {
+  font-size: 1rem;
 }
 
 .fa-copy {
@@ -256,6 +263,10 @@ option {
 }
 
 .input-label {
+  font-size: 1rem;
+}
+
+label {
   font-size: 1rem;
 }
 

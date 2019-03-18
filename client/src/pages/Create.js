@@ -31,12 +31,16 @@ class Create extends Component {
     final: [],
     audio: [],
     title: [],
-    redirectTo: null
+    redirectTo: null,
+    username: [],
+    password: []
   };
   constructor(...args) {
     super(...args);
     this.handleKeyDownInput = this.handleKeyDownInput.bind(this);
   }
+
+
   componentDidMount() {
     console.log("Create Mounted")
   }
@@ -211,7 +215,15 @@ class Create extends Component {
         this.setState({
           [name]: value //NOTE: using a variable as a property name would set a new property
         });
+        console.log(this.state.username, this.state.password)
       };
+
+      handleChange(event) {
+        this.setState({
+          [event.target.name]: event.target.value
+        })
+      }
+  
 
       handleKeyDownInput(event) {
         if (event.key === 'Enter') {
@@ -304,11 +316,46 @@ class Create extends Component {
             })
         }
 
-      
+        handleLoginSubmit = (event) => {
+          event.preventDefault()
+          console.log('handleSubmit')
+  
+          axios
+              .post('/user/login', {
+                  username: this.state.username,
+                  password: this.state.password
+              })
+              .then(response => {
+                  console.log('login response: ')
+                  console.log(response)
+                  if (response.status === 200) {
+                    this.getPic(response.data.username)
+                      // update App.js state
+                      // update the state to redirect to home
+                      this.setState({
+                          redirectTo: '/'
+                      })
+                  }
+              }).catch(error => {
+                  console.log('login error: ')
+                  console.log(error);
+                  
+              })
+      }
+      getPic(user) {
+        axios.get('/user/icon',user).then(response => {
+          this.props.updateUser({
+            loggedIn: true,
+            username: user,
+            icon: response.data.icon,
+            color: response.data.color
+        })
+          console.log(this.state.color, this.state.icon)
+        })
+      }
 
     
     render() {
-
     return(
       <Container fluid>
       <Row>
@@ -349,6 +396,26 @@ class Create extends Component {
             <audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
           </div>
           <hr />
+                {!this.props.userName ? 
+
+                <form className="mt-4">
+                <p className="sign-in-prompt">
+                  Sign in to save this story. Not a member yet? Sign up!
+                </p>
+                <Label htmlFor="username">Username</Label>
+                <Input name="username" type="text" value={this.state.username} onChange={this.handleInputChange} />
+                <Label className="mt-3" htmlFor="password">Password</Label>
+                <Input name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
+                <button
+                  className="btn btn-primary mt-3"
+                  onClick={this.handleLoginSubmit}
+                  type="submit"
+                >Sign In</button>
+              </form>
+                
+                
+                
+                : 
                   <form className="mt-5">
                   <Label htmlFor="title">Story Title</Label>
                   <Input name="title" type="text" className="w-50" value={this.state.title} onChange={this.handleInputChange} />
@@ -358,6 +425,8 @@ class Create extends Component {
                     onClick={this.handleSubmit}
                   >Save Story</button>
                 </form>
+                }
+
             </div>
           }
         </div>

@@ -81,7 +81,7 @@ class App extends Component {
             <Route exact path="/" component={Latest} />
             <Route exact path="/latest" render={() => <Latest/>} />
             <Route exact path="/popular" component={Popular} />
-            <Route exact path="/create" render={() => <Create getUser={this.getUser}userName={this.state.username} userIcon = {this.state.icon} userColor={this.state.color} /> } />
+            <Route exact path="/create" render={() => <Create updateUser={this.updateUser} getUser={this.getUser}userName={this.state.username} userIcon = {this.state.icon} userColor={this.state.color} /> } />
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <SignUp/>} />
             <Route exact path="/story/:id" component={Detail} />
