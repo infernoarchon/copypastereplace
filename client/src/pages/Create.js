@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom'
 import API from "../utils/API";
 import { Label, FormGroup, Input, TextArea, FormBtn, SearchBox } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
@@ -413,9 +412,7 @@ class Create extends Component {
     
     render() {
       // console.log(this.state)
-      if (this.state.redirectTo) {
-        return <Redirect to={{ pathname: this.state.redirectTo }} />
-    } else{
+
     return(
       <Container fluid>
       <Row>
@@ -496,6 +493,6 @@ class Create extends Component {
     )
     }
   }
-}
+
 
 export default Create;
