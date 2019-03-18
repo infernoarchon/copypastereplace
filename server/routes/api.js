@@ -22,7 +22,7 @@ router.post('/save', (req, res) => {
 })
 
 router.get("/latest", (req,res) => {
-    console.log("getting story")
+    console.log("getting latest")
     Story.find({}, null, {sort: {date: -1}}, (err, stories) => {
         if (err) return res.status(500).send(err)
         return res.status(200).send(stories)

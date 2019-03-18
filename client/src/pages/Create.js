@@ -351,6 +351,7 @@ class Create extends Component {
 
       handleSubmit = () => {
         console.log(this.state.title)
+        console.log("submitting story")
         axios.post('/api/save', {
           title: this.state.title,
           author: this.props.userName,
@@ -363,9 +364,9 @@ class Create extends Component {
             console.log(response)
             if(!response.data.error) {
               console.log('succesful save')
-              this.setState({
-                redirectTo: '/signin'
-              })
+              // this.setState({
+              //   redirectTo: '/signin'
+              // })
             } else {
               console.log('error occured')
             }
