@@ -27,7 +27,7 @@ class SignIn extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        console.log('handleSubmit')
+        // console.log('handleSubmit')
 
         axios
             .post('/user/login', {
@@ -36,7 +36,7 @@ class SignIn extends Component {
             })
             .then(response => {
                 console.log('login response: ')
-                console.log(response)
+                // console.log(response)
                 if (response.status === 200) {
                   this.getPic(response.data.username)
                     // update App.js state
@@ -59,7 +59,7 @@ class SignIn extends Component {
           icon: response.data.icon,
           color: response.data.color
       })
-        console.log(this.state.color, this.state.icon)
+        // console.log(this.state.color, this.state.icon)
       })
     }
 

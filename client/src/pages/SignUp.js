@@ -138,8 +138,8 @@ class SignUp extends Component {
       if(this.state.icon.length === 0 || this.state.color.length === 0) {
         iconRand = icons[Math.floor(Math.random() * icons.length)]
         colorRand = colors[Math.floor(Math.random() * colors.length)]
-        console.log(iconRand)
-        console.log(colorRand)
+        // console.log(iconRand)
+        // console.log(colorRand)
       }
       axios.post('/user/', {
         username: this.state.username,
@@ -148,7 +148,7 @@ class SignUp extends Component {
         icon: iconRand
       })
         .then( response => {
-          console.log(response)
+          // console.log(response)
           if(!response.data.error) {
             console.log('succesful signup')
             this.setState({
@@ -163,15 +163,11 @@ class SignUp extends Component {
       }
     handleColorSelect = (event) => {
       event.preventDefault()
-      this.setState({color: event.target.value}, function() {
-        console.log(this.state.color)
-      })
+      this.setState({color: event.target.value})
     }
     handleIconSelect = (event) => {
       event.preventDefault()
-      this.setState({icon: event.target.value}, function() {
-        console.log(this.state.icon)
-      })
+      this.setState({icon: event.target.value})
     }
     
 

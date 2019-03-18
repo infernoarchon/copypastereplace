@@ -254,7 +254,7 @@ class Create extends Component {
           
           this.getWords(tok)
           this.randomizeInputs()
-          console.log(document.getElementById("input-container").firstChild.firstChild.nextSibling.firstChild)
+          // console.log(document.getElementById("input-container").firstChild.firstChild.nextSibling.firstChild)
           document.getElementById("input-container").firstChild.firstChild.nextSibling.firstChild.focus()
           
           this.setState({data: tok})
@@ -273,7 +273,7 @@ class Create extends Component {
         this.setState({
           [name]: value //NOTE: using a variable as a property name would set a new property
         });
-        console.log(this.state.username, this.state.password)
+        // console.log(this.state.username, this.state.password)
       };
 
       handleChange(event) {
@@ -411,7 +411,7 @@ class Create extends Component {
 
     
     render() {
-      console.log(this.state)
+      // console.log(this.state)
       if (this.state.redirectTo) {
         return <Redirect to={{ pathname: this.state.redirectTo }} />
     } else{

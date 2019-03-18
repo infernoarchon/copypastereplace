@@ -29,13 +29,13 @@ class Latest extends Component {
 
   incrementView = (event) => {
     // event.preventDefault()
-    console.log(event.target.id)
+    // console.log(event.target.id)
     axios.post("/api/view",event.target.id).then(response => {
       console.log(response)
     })
   }
     render() {
-      console.log(this.state.stories)
+      // console.log(this.state.stories)
     return(
       <Container fluid>
       <Row>
