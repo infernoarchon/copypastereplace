@@ -113,9 +113,9 @@ class Create extends Component {
               //   break;
               case "RCMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a descriptive verb in past tense (e.g. I _____ed yesterday)."} 
+                  {helpText="Enter a verb in past tense (e.g. flew, kissed, won)."} 
                 else
-                  {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a descriptive verb in present tense (e.g. he _____s a lot)."}
+                  {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a verb in present tense (e.g. drive, make, dance)."}
                 break;
               // case "APPOS":
               //     if(e.partOfSpeech.number === "PLURAL")
