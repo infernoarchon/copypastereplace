@@ -38,6 +38,7 @@ class Detail extends Component {
           <div className="profile-pic-feed" style={{backgroundColor: this.state.story.color}}><i className={this.state.story.icon}></i></div>
           <h1>{this.state.story.title}</h1>
           <p className="author-attr">created {moment(this.state.story.date).fromNow()} by {this.state.story.author}</p>
+          <hr />
           <p className="story-summary">{this.state.story.content}</p>
           <div className="audio-container justify-content-center d-flex mt-4 mb-5">
             <audio controls src={"data:audio/mp3;base64," + this.state.story.base64}></audio>
