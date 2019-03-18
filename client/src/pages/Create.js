@@ -54,7 +54,21 @@ class Create extends Component {
         filteredArr.forEach(e => {
           let helpText;
           //General exceptions to replacing a word
-          if(e.partOfSpeech.tag === "DET" || e.partOfSpeech.proper === "PROPER" || e.partOfSpeech.tag === "PRON" || e.partOfSpeech.tag === "NUM" || e.lemma === "be" || e.lemma === "which" || e.lemma === "make" || e.lemma === "that" || e.lemma === "have" || e.partOfSpeech.mood === "INDICATIVE") {
+          if(e.partOfSpeech.tag === "DET" 
+          || e.partOfSpeech.proper === "PROPER" 
+          || e.partOfSpeech.tag === "PRON" 
+          || e.partOfSpeech.tag === "NUM" 
+          || e.lemma === "be" 
+          || e.lemma === "which" 
+          || e.lemma === "make" 
+          || e.lemma === "that" 
+          || e.lemma === "have" 
+          || e.lemma === "own"
+          || e.lemma === "put"
+          || e.lemma === "charge"
+          || e.lemma === "full"
+          || e.lemma === "order"
+          || e.partOfSpeech.mood === "INDICATIVE") {
             return
           }
           else{
@@ -82,7 +96,7 @@ class Create extends Component {
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
                   {helpText="Enter a plural noun."} 
-                else 
+                else if(e.partOfSpeech === "SINGULAR")
                   {helpText="Enter a singular noun."}
                 break;
               case "ATTR":
