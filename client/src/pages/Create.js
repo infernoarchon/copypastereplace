@@ -199,8 +199,9 @@ class Create extends Component {
       joinedStr = joinedStr.replace(/-\s/g,"-");
       joinedStr = joinedStr.replace(/\(\s/g," (");
       joinedStr = joinedStr.replace(/\(\s/g," (");
-      joinedStr = joinedStr.replace(/"/g," ");
-      joinedStr = joinedStr.replace(/'\s/g," ");
+      joinedStr = joinedStr.replace(/'\s/g," ' ");
+      joinedStr = joinedStr.replace(/'\./g," '.");
+      joinedStr = joinedStr.replace(/'\s([a-zA-Z]*)\s'/g,"'$1'");
       // joinedStr = joinedStr.replace(/\s"/g,"\"");
       joinedStr = joinedStr.replace(/\[\s/g," [");
 
