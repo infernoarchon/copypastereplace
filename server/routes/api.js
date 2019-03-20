@@ -67,9 +67,18 @@ router.get("/story/:id", (req,res) => {
 router.get("/stories/:id", (req,res) => {
     console.log("getting user stories")
     console.log(req.params.id)
-    Story.findAll({author: req.params.id }, (err, stories) => {
+    Story.find({author: req.params.id }, (err, stories) => {
         if (err) return res.status(500).send(err)
         return res.status(200).send(stories)
+    })
+})
+
+router.get("/user/:id", (req,res) => {
+    console.log("getting user info")
+    console.log(req.params.id)
+    Story.find({author: req.params.id }, (err, user) => {
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(user)
     })
 })
 

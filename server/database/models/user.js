@@ -9,7 +9,8 @@ const userSchema = new Schema({
 	username: { type: String, unique: false, required: false },
 	password: { type: String, unique: false, required: false },
 	color: { type: String, unique: false, required: false},
-	icon: { type: String, unique: false, required: false }
+	icon: { type: String, unique: false, required: false },
+    date: { type: Date, default: Date.now },
 
 })
 

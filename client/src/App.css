@@ -199,10 +199,33 @@ a:hover {
   margin: 0.25em 0.75em 0 0;
 }
 
+.profile-name {
+  line-height: 2;
+}
+
+.profile-subtext {
+  font-size: 1rem;
+}
+
 .profile-pic-feed i {
   font-size: 1.375rem;
   color: #fff;
   margin-top: 0.375em;
+}
+
+.profile-pic-profile {
+  height: 60px;
+  float: left;
+  width: 60px;
+  border-radius: 4rem;
+  text-align: center;
+  margin: 0.25em 0.75em 0 0;
+}
+
+.profile-pic-profile i {
+  font-size: 2.25rem;
+  color: #fff;
+  margin-top: 0.75rem;
 }
 
 .dropdown-item i {

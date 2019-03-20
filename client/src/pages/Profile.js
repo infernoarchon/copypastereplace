@@ -9,7 +9,8 @@ const moment = require('moment');
 
 class Profile extends Component {
   state = {
-    stories : []
+    stories : [],
+    user : []
   }
   constructor(props) {
       super(props);
@@ -20,7 +21,13 @@ class Profile extends Component {
     API.getUserStories(this.props.match.params.id)
       .then(res => this.setState({ stories: res.data }))
       .catch(err => console.log(err));
+    API.getUserInfo(this.props.match.params.id)
+    .then(res => this.setState({ user: res.data }))
+    .catch(err => console.log(err));
   }
+
+
+    
 
   goBack() {
       this.props.history.goBack();
@@ -28,6 +35,8 @@ class Profile extends Component {
 
     render() {
         console.log(this.props.match.params.id)
+        console.log(this.state.stories)
+        console.log(this.state.user)
     return(
       <Container fluid>
       <Row>
@@ -37,16 +46,10 @@ class Profile extends Component {
             
           {/* {this.props.history.action==="PUSH" ? <div className="back-button mb-3" onClick={this.goBack}><a href="#"><i className="fas fa-arrow-left"></i> Go Back</a></div> : null} */}
           
-          {/* <div className="profile-pic-feed" style={{backgroundColor: this.state.story.color}}><i className={this.state.story.icon}></i></div>
-          <h1>{this.state.story.title}</h1>
-          <p className="author-attr">created {moment(this.state.story.date).fromNow()} by {this.state.story.author}</p>
-          <hr />
-          <p className="story-summary">{this.state.story.content}</p>
-          <div className="audio-container justify-content-center d-flex mt-4 mb-5">
-            <audio controls src={"data:audio/mp3;base64," + this.state.story.base64}></audio>
-          </div> */}
-          
-          
+          <div className="profile-pic-profile" style={{backgroundColor: this.state.user.color}}><i className={this.state.user.icon}></i></div>
+          <h1 className="profile-name"><strong>{this.state.user.username}</strong></h1>
+          <h2 className="profile-subtext">Joined {moment(this.state.user.date).fromNow()}</h2>
+          <hr/>
           </div>
 
         </div>

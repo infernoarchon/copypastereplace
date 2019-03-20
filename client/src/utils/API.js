@@ -15,7 +15,11 @@ export default {
   },
 
   getUserStories: function(user) {
-    return axios.get("api/stories/" + user)
+    return axios.get("/api/stories/" + user)
+  },
+
+  getUserInfo: function(user) {
+    return axios.get("/user/info/" + user)
   },
   // searchBooks: function(query) {
   //   return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query+ "&key=");

@@ -76,6 +76,15 @@ router.get("/icon", (req,res) => {
     })
 })
 
+router.get("/info/:id", (req,res) => {
+    console.log("getting user info")
+    console.log(req.params.id)
+    User.findOne({username: req.params.id }, (err, user) => {
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(user)
+    })
+})
+
 
 
 // title: { type: String, unique: false, required: false },
