@@ -65,11 +65,11 @@ logout(event) {
             {loggedIn 
             ? <div>
                         <a className="nav-link dropdown-toggle" id="userDropdownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div className="profile-pic" style={{backgroundColor: this.props.userColor}}><i className={this.props.userIcon}></i></div>
+                        <div className="profile-pic d-flex align-items-center justify-content-center" style={{backgroundColor: this.props.userColor}}><i className={this.props.userIcon}></i></div>
                         </a>
                         <div className="dropdown-menu user-dropdown" aria-labelledby="navbarDropdownMenuLink">
                         <h3 className="dropdown-header"><strong>{this.props.userName}</strong></h3>
-                        <NavLink to="#" className="dropdown-item">Profile</NavLink>
+                        <NavLink to={"/" + this.props.userName} className="dropdown-item">Profile</NavLink>
                         <NavLink to="#" className="dropdown-item" onClick={this.logout}>Log Out</NavLink>
                         </div>
               </div>

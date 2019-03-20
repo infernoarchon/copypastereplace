@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 // import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
+import { NavLink } from 'react-router-dom'
 import axios from "axios";
 
 // import { isDate } from "util";
@@ -24,6 +25,7 @@ class Profile extends Component {
     API.getUserInfo(this.props.match.params.id)
     .then(res => this.setState({ user: res.data }))
     .catch(err => console.log(err));
+    this.setState({ state: this.state})
   }
 
 
@@ -34,6 +36,7 @@ class Profile extends Component {
   }
 
     render() {
+      
         console.log(this.props.match.params.id)
         console.log(this.state.stories)
         console.log(this.state.user)
@@ -46,10 +49,29 @@ class Profile extends Component {
             
           {/* {this.props.history.action==="PUSH" ? <div className="back-button mb-3" onClick={this.goBack}><a href="#"><i className="fas fa-arrow-left"></i> Go Back</a></div> : null} */}
           
-          <div className="profile-pic-profile" style={{backgroundColor: this.state.user.color}}><i className={this.state.user.icon}></i></div>
+          <div className="profile-pic-profile d-flex align-items-center justify-content-center" style={{backgroundColor: this.state.user.color}}><i className={this.state.user.icon}></i></div>
           <h1 className="profile-name"><strong>{this.state.user.username}</strong></h1>
           <h2 className="profile-subtext">Joined {moment(this.state.user.date).fromNow()}</h2>
-          <hr/>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Summary</th>
+                <th scope="col">Date Created</th>
+              </tr>
+            </thead>
+            <tbody>
+            {this.state.stories.map(story => (
+              <tr>
+                <td><NavLink to={"/story/" + story._id}>{story.title}</NavLink></td>
+                <td>{story.content.slice(0,90) + " ..."}</td>
+                <td>{moment(story.date).fromNow()}</td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+
+
           </div>
 
         </div>

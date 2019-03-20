@@ -38,7 +38,7 @@ class Detail extends Component {
           <div id="story-container">
 
           {this.props.history.action==="PUSH" ? <div className="back-button mb-3" onClick={this.goBack}><a href="#"><i className="fas fa-arrow-left"></i> Go Back</a></div> : null}
-          <div className="profile-pic-feed" style={{backgroundColor: this.state.story.color}}><i className={this.state.story.icon}></i></div>
+          <div className="profile-pic-feed d-flex align-items-center justify-content-center" style={{backgroundColor: this.state.story.color}}><i className={this.state.story.icon}></i></div>
           <h1>{this.state.story.title}</h1>
           <p className="author-attr">created {moment(this.state.story.date).fromNow()} by <NavLink to={"/" + this.state.story.author}>{this.state.story.author}</NavLink></p>
           <hr />

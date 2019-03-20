@@ -44,7 +44,7 @@ class Popular extends Component {
         {this.state.stories.map(story => (
         <div className="story-wrapper card mb-3">
           <div id="story-container">
-          <div className="profile-pic-feed" style={{backgroundColor: story.color}}><i className={story.icon}></i></div>
+          <div className="profile-pic-feed d-flex align-items-center justify-content-center" style={{backgroundColor: story.color}}><i className={story.icon}></i></div>
           <NavLink to={"/story/" + story._id}><h1 id={story._id} onClick={this.incrementView}>{story.title}</h1></NavLink>          <p className="author-attr">created {moment(story.date).fromNow()} by <NavLink to={"/" + story.author}>{story.author}</NavLink></p>
           <p className="story-summary">{story.content.slice(0,260) + "..."}</p>
           
