@@ -63,8 +63,8 @@ class Profile extends Component {
             <tbody>
             {this.state.stories.map(story => (
               <tr>
-                <td><NavLink to={"/story/" + story._id}>{story.title}</NavLink></td>
-                <td>{story.content.slice(0,90) + " ..."}</td>
+                <td><NavLink to={"/story/" + story._id}>{story.title.length > 30 ? story.title.slice(0,30) + "..." : story.title}</NavLink></td>
+                <td>{story.content.slice(0,90) + "..."}</td>
                 <td>{moment(story.date).fromNow()}</td>
               </tr>
             ))}

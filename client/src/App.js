@@ -25,7 +25,8 @@ class App extends Component {
       loggedIn: false,
       username: null,
       color: null,
-      icon: null
+      icon: null,
+      refreshProfile: false
     }
 
     this.getUser = this.getUser.bind(this)
