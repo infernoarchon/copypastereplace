@@ -168,6 +168,8 @@ class SignUp extends Component {
     handleIconSelect = (event) => {
       event.preventDefault()
       this.setState({icon: event.target.value})
+      console.log("Icon State Is" + this.state.icon)
+      console.log("Event target value is" + event.target.value)
     }
     
 

@@ -13,6 +13,10 @@ export default {
   getPopular: function() {
     return axios.get("/api/popular");
   },
+
+  getUserStories: function(user) {
+    return axios.get("api/stories/" + user)
+  },
   // searchBooks: function(query) {
   //   return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query+ "&key=");
   // },

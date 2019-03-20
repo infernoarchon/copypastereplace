@@ -4,6 +4,7 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import axios from "axios";
 import { NavLink } from 'react-router-dom'
+import { userInfo } from "os";
 
 // import { isDate } from "util";
 const moment = require('moment');
@@ -45,7 +46,7 @@ class Latest extends Component {
           <div id="story-container">
           <div className="profile-pic-feed" style={{backgroundColor: story.color}}><i className={story.icon}></i></div>
           <NavLink to={"/story/" + story._id}><h1 id={story._id} onClick={this.incrementView}>{story.title}</h1></NavLink>
-          <p className="author-attr">created {moment(story.date).fromNow()} by {story.author}</p>
+          <p className="author-attr">created {moment(story.date).fromNow()} by <NavLink to={"/" + story.author}>{story.author}</NavLink></p>
           <p className="story-summary">{story.content.slice(0,260) + "..."}</p>
           
           

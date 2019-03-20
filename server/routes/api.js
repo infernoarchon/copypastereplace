@@ -64,6 +64,15 @@ router.get("/story/:id", (req,res) => {
     })
 })
 
+router.get("/stories/:id", (req,res) => {
+    console.log("getting user stories")
+    console.log(req.params.id)
+    Story.findAll({author: req.params.id }, (err, stories) => {
+        if (err) return res.status(500).send(err)
+        return res.status(200).send(stories)
+    })
+})
+
 // title: { type: String, unique: false, required: false },
 // author: { type: String, unique: false, required: false },
 // date: { type: Date, default: Date.now },

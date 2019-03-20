@@ -50,8 +50,6 @@ export function SearchBox(props) {
       <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-search"></i></button>
         <div className="dropdown-menu dropdown-menu-right search-dropdown">
           <a className="dropdown-item" href="#">Movies & Shows</a>
-          <a className="dropdown-item" href="#">Books</a>
-          <a className="dropdown-item" href="#">News Articles</a>
         </div>
       </div>
     </div>

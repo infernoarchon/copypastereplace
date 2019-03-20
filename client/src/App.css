@@ -292,6 +292,10 @@ label {
   overflow-y: scroll;
 }
 
+.dropdown-menu i {
+  pointer-events: none;
+}
+
 /* .login-links {
   display: inline;
 } */

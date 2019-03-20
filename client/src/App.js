@@ -7,6 +7,7 @@ import Popular from "./pages/Popular";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Detail from "./pages/Detail";
+import Profile from "./pages/Profile";
 
 
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
@@ -84,6 +85,7 @@ class App extends Component {
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <SignUp/>} />
             <Route exact path="/story/:id" component={Detail} />
+            <Route exact path="/:id" component={Profile} />
             <Route component={NoMatch} />
         </Switch>
   
