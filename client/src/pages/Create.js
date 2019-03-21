@@ -71,7 +71,12 @@ class Create extends Component {
           || e.lemma === "full"
           || e.lemma === "order"
           || e.lemma === "plan"
+          || e.lemma === "long"
           || e.partOfSpeech.mood === "INDICATIVE") {
+            return
+          }
+          //Exclude amod verbs
+          if(e.partOfSpeech.tag === "VERB" && e.dependencyEdge.label === "AMOD") {
             return
           }
           else{
@@ -206,7 +211,7 @@ class Create extends Component {
       // joinedStr = joinedStr.replace(/\(\s/g," ( ");
       // joinedStr = joinedStr.replace(/'\s/g," ' ");
       // joinedStr = joinedStr.replace(/'\./g," '.");
-      // joinedStr = joinedStr.replace(/'\s([0-9a-zA-Z\s]*)\s'/g,"'$1'");
+      joinedStr = joinedStr.replace(/'\s([0-9a-zA-Z\s]*)\s'/g,"'$1'");
       // joinedStr = joinedStr.replace(/"\s([\W\w]*)\s"/g,"\"$1\"");
       // joinedStr = joinedStr.replace(/\[\s/g," [");
 
