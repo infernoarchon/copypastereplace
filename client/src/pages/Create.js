@@ -360,12 +360,15 @@ class Create extends Component {
           event.preventDefault();
           document.getElementById("story-input").value = ''
           API.searchBooks(event.target.value).then( response => {
-            console.log(response)
             if(response.data.totalItems > 0) {
+              if(!response.data.items[0].volumeInfo.description) {
+                return
+              } else{
               document.getElementById("story-input").value=response.data.items[0].volumeInfo.description
               this.setState({pasted:response.data.items[0].volumeInfo.description})
               console.log(this.state.pasted)
               document.getElementById("preset-search").value=''
+              }
             } else{
               return
             }
