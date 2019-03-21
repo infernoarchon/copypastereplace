@@ -199,6 +199,7 @@ a:hover {
 
 .profile-subtext {
   font-size: 0.875rem;
+  line-height: 1.6;
 }
 
 .profile-subtext::first-letter {

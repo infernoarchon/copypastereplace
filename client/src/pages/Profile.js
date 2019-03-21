@@ -28,8 +28,7 @@ class Profile extends Component {
     .catch(err => console.log(err));
     API.getUserInfo(this.props.match.params.id)
     .then(res => 
-      API.getBio(moment(res.data.date).format("SSS")/2,res.data.username).then(res => this.setState({ bio: res.data.value.joke}))
-      )
+      API.getBio(Math.floor(moment(res.data.date).format("SSS")/2),res.data.username).then(res => {document.getElementById("profile-bio").innerHTML = res.data.value.joke}))
     .catch(err => console.log(err));
     
 
@@ -46,9 +45,8 @@ class Profile extends Component {
     render() {
 
 
-        console.log(this.state.user)
-        console.log(moment(this.state.user.date).format("SSS")/2)
-        console.log(this.state.bio)
+
+        console.log(moment(this.state.user.date).format("SSS"))
 
     return(
       <Container fluid>
@@ -63,15 +61,14 @@ class Profile extends Component {
           <h1 className="profile-name"><strong>{this.state.user.username}</strong></h1>
           <h3 className="profile-eyebrow">moving side to side since {moment(this.state.user.date).format("MMMM YYYY")}<br/><br/></h3>
           </div>
-          <h2 className="profile-subtext">
-          {this.state.bio}
+          <h2 id="profile-bio" className="profile-subtext">
           </h2>
           <table className="table">
             <thead>
               <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Summary</th>
-                <th scope="col">Date Created</th>
+                <th scope="col">Created</th>
               </tr>
             </thead>
             <tbody>
