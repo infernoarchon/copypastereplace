@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { Component } from "react";
 import API from "../utils/API";
-import { Label, FormGroup, Input, TextArea, FormBtn, SearchBox } from "../components/Form";
+import { Label, FormGroup, Input, TextArea, FormBtn } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
 // import { Redirect } from 'react-router-dom'
 
@@ -35,11 +35,13 @@ class Create extends Component {
       title: [],
       redirectTo: null,
       username: [],
-      password: []
+      password: [],
+      search: "movie"
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.handleKeyDownInput = this.handleKeyDownInput.bind(this);
+    this.handleSearchType = this.handleSearchType.bind(this)
 
   }    
 
@@ -195,15 +197,18 @@ class Create extends Component {
         }
       })
       let joinedStr = storyStr.join(' ')
-      joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
-      joinedStr = joinedStr.replace(/-\s/g,"-");
-      joinedStr = joinedStr.replace(/\(\s/g," (");
-      joinedStr = joinedStr.replace(/\(\s/g," (");
-      joinedStr = joinedStr.replace(/'\s/g," ' ");
-      joinedStr = joinedStr.replace(/'\./g," '.");
-      joinedStr = joinedStr.replace(/'\s([0-9a-zA-Z\s]*)\s'/g,"'$1'");
-      // joinedStr = joinedStr.replace(/\s"/g,"\"");
-      joinedStr = joinedStr.replace(/\[\s/g," [");
+      joinedStr = joinedStr.replace(/\s([!.,?;:\/$%&]*)/g,"$1 ")
+      // joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
+      joinedStr = joinedStr.replace(/\s-\s/g,"-");
+      joinedStr = joinedStr.replace(/\s's/g,"'s");
+
+
+      // joinedStr = joinedStr.replace(/\(\s/g," ( ");
+      // joinedStr = joinedStr.replace(/'\s/g," ' ");
+      // joinedStr = joinedStr.replace(/'\./g," '.");
+      // joinedStr = joinedStr.replace(/'\s([0-9a-zA-Z\s]*)\s'/g,"'$1'");
+      // joinedStr = joinedStr.replace(/"\s([\W\w]*)\s"/g,"\"$1\"");
+      // joinedStr = joinedStr.replace(/\[\s/g," [");
 
       //Fix lowercase contractions
       joinedStr = joinedStr.replace(/are\sn't/g,"aren't");
@@ -333,27 +338,48 @@ class Create extends Component {
         }
       }
 
-      handleMovieSearch = event => {
+    handleMovieSearch = event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById("story-input").value = ''
+        API.searchOMDB(event.target.value).then( response => {
+          if(response.data.Response==="False") {
+            return
+          } else{
+            document.getElementById("story-input").value=response.data.Plot
+            this.setState({pasted:response.data.Plot})
+            document.getElementById("preset-search").value=''
+            console.log(this.state.pasted)
+          }
+        })
+        }
+      }
+
+      handleBookSearch = event => {
         if (event.key === 'Enter') {
           event.preventDefault();
-          API.searchOMDB(event.target.value).then( response => {
-            if(response.data.Response==="False") {
-              return
-            } else{
-              console.log("did not find anything")
-              document.getElementById("story-input").value=response.data.Plot
-              this.setState({pasted:response.data.Plot})
-              document.getElementById("preset-search").value=''
+          document.getElementById("story-input").value = ''
+          API.searchBooks(event.target.value).then( response => {
+            console.log(response)
+            if(response.data.totalItems > 0) {
+              document.getElementById("story-input").value=response.data.items[0].volumeInfo.description
+              this.setState({pasted:response.data.items[0].volumeInfo.description})
               console.log(this.state.pasted)
+              document.getElementById("preset-search").value=''
+            } else{
+              return
             }
           })
-      }
-    }
+          }
+        }
+
+        
 
       getStory = ()=> {
         console.log("creating story")
         let finalStory = this.joinWords(this.state.data, this.state.inputs)
-        document.getElementById("story-container").textContent = finalStory
+        console.log(finalStory)
+        document.getElementById("story-container").innerHTML = finalStory
         this.setState({final: finalStory})
         API.sendTextToSpeech(finalStory).then(response =>{
           this.setState({audio: response.data.audioContent})
@@ -429,6 +455,20 @@ class Create extends Component {
         })
       }
 
+      handleSearchType(event) {
+        switch (event.target.id) {
+          case "movie-search" :
+            this.setState({search : "movie"})
+          break;
+          case "book-search" :
+            this.setState({search : "book"})
+          break;
+          case "word-search" :
+            this.setState({search : "word"})
+          break;
+        }
+      }
+
     
     render() {
       // console.log(this.state)
@@ -444,7 +484,29 @@ class Create extends Component {
           <h1>Create Story</h1>
         </div>
         <div className="col-7 p-0 d-flex justify-content-end">
-          { this.state.showTextArea ? <SearchBox name="preset" id="preset-search" placeholder="Movie or Show" onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch}/> : null}
+          { this.state.showTextArea ? 
+          
+          // <SearchBox name="preset" id="preset-search" placeholder="Movie or Show" onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch}/> 
+          <div className="input-group preset-search-container">
+          { this.state.search === "movie" && <input type="text" className="form-control search-input" name="preset" id="preset-search" placeholder="Movie or Show" onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch} /> }
+          { this.state.search === "book" && <input type="text" className="form-control search-input" name="preset" id="preset-search" placeholder="Book" onChange={this.handleInputChange} onKeyDown={this.handleBookSearch} /> }
+          { this.state.search === "word" && <input type="text" className="form-control search-input" name="preset" id="preset-search" placeholder="Word" onChange={this.handleInputChange} onKeyDown={this.handleWordSearch} /> }
+
+
+
+          <div className="input-group-append">
+          <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-search"></i></button>
+            <div className="dropdown-menu dropdown-menu-right search-dropdown">
+              <a className="dropdown-item" href="#" id="movie-search" onClick={this.handleSearchType}><i className="fas fa-tv"></i> Movies & Shows</a>
+              <a className="dropdown-item" href="#" id="book-search" onClick={this.handleSearchType}><i className="fas fa-book-open"></i> Books</a>
+              <a className="dropdown-item" href="#" id="word-search" onClick={this.handleSearchType}><i className="fas fa-font"></i> Word History</a>
+
+
+            </div>
+          </div>
+        </div>
+          
+          : null}
         </div>
         </div>
             { this.state.showTextArea ?

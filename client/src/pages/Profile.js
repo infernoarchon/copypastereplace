@@ -109,7 +109,7 @@ class Profile extends Component {
       "fas fa-ghost" : "chasing Pac-man",
       "fas fa-poo" : "an emoji",
       "fas fa-skull" : "spooky",
-      "fas fa-robot" : "mark zuckerberg",
+      "fas fa-robot" : "running Facebook",
       "fas fa-pastafarianism" : "worshipped",
       "fas fa-car-side" : "road tripping",
       "fas fa-motorcycle" : "moving the soul",

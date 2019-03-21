@@ -44,9 +44,14 @@ export default {
     })
   },
 
-  searchOMDB: function(text) {
-    return axios.get("http://www.omdbapi.com/?apikey=" + process.env.REACT_APP_OMDB_API_KEY  + "&t=" + text + "&plot=full")
+  searchOMDB: function(query) {
+    return axios.get("http://www.omdbapi.com/?apikey=" + process.env.REACT_APP_OMDB_API_KEY  + "&t=" + query + "&plot=full")
   },
+
+  searchBooks: function(query) {
+    return axios.get("https://www.googleapis.com/books/v1/volumes?q=" + query + "&key=" + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
+  },
+  
   sendTextToSpeech: function(text) {
     return axios.post("https://texttospeech.googleapis.com/v1/text:synthesize?key=" + process.env.REACT_APP_GOOGLE_API_KEY, {
       input: {text: text},

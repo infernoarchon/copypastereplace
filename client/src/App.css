@@ -294,6 +294,11 @@ option {
    width: 0 !important;
  }
 
+ .search-dropdown i {
+   font-size: 1rem;
+   width: 1.75rem;
+ }
+
 
  .main-container {
    width: 100vw !important;
