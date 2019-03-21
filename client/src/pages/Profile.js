@@ -11,7 +11,8 @@ const moment = require('moment');
 class Profile extends Component {
   state = {
     stories : [],
-    user : []
+    user : [],
+    bio : []
   }
   constructor(props) {
       super(props);
@@ -25,7 +26,14 @@ class Profile extends Component {
     API.getUserInfo(this.props.match.params.id)
     .then(res => this.setState({ user: res.data }))
     .catch(err => console.log(err));
-    this.setState({ state: this.state})
+    API.getUserInfo(this.props.match.params.id)
+    .then(res => 
+      API.getBio(moment(res.data.date).format("SSS")/2,res.data.username).then(res => this.setState({ bio: res.data.value.joke}))
+      )
+    .catch(err => console.log(err));
+    
+
+    
   }
 
 
@@ -36,10 +44,12 @@ class Profile extends Component {
   }
 
     render() {
-      
-        console.log(this.props.match.params.id)
-        console.log(this.state.stories)
+
+
         console.log(this.state.user)
+        console.log(moment(this.state.user.date).format("SSS")/2)
+        console.log(this.state.bio)
+
     return(
       <Container fluid>
       <Row>
@@ -48,10 +58,14 @@ class Profile extends Component {
           <div id="story-container">
             
           {/* {this.props.history.action==="PUSH" ? <div className="back-button mb-3" onClick={this.goBack}><a href="#"><i className="fas fa-arrow-left"></i> Go Back</a></div> : null} */}
-          
+          <div>
           <div className="profile-pic-profile d-flex align-items-center justify-content-center" style={{backgroundColor: this.state.user.color}}><i className={this.state.user.icon}></i></div>
           <h1 className="profile-name"><strong>{this.state.user.username}</strong></h1>
-          <h2 className="profile-subtext">Joined {moment(this.state.user.date).fromNow()}</h2>
+          <h3 className="profile-eyebrow">moving side to side since {moment(this.state.user.date).format("MMMM YYYY")}</h3>
+          </div>
+          <h2 className="profile-subtext"><br/>
+          {this.state.bio}
+          </h2>
           <table className="table">
             <thead>
               <tr>

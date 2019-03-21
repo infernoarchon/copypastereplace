@@ -54,6 +54,9 @@ export default {
       audioConfig: {audioEncoding: "MP3"}
     })
   },
+  getBio: function(key, user) {
+    return axios.get("http://api.icndb.com/jokes/" + key + "?firstName=User&lastName=" + user )
+  }
 
 
 };
