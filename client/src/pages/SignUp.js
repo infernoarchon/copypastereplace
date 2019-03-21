@@ -46,7 +46,6 @@ class SignUp extends Component {
         "fas fa-grin-beam-sweat",
         "fas fa-grin-hearts",
         "fas fa-grin-squint",
-        "fas fa-grin-squint",
         "fas fa-grin-squint-tears",
         "fas fa-grin-stars",
         "fas fa-grin-tears",
@@ -121,7 +120,6 @@ class SignUp extends Component {
         "fas fa-brain",
         "fas fa-meteor",
         "fas fa-yin-yang",
-        "fas fa-haykal",
         "fas fa-dice-d20",
         "fas fa-hand-spock",
       ]
@@ -247,9 +245,6 @@ class SignUp extends Component {
                   </IconItem>
                   <IconItem value="fas fa-grin-hearts" onClick={this.handleIconSelect}>
                     <IconIcon className="fas fa-grin-hearts" />
-                  </IconItem>
-                  <IconItem value="fas fa-grin-squint" onClick={this.handleIconSelect}>
-                    <IconIcon className="fas fa-grin-squint" />
                   </IconItem>
                   <IconItem value="fas fa-grin-squint" onClick={this.handleIconSelect}>
                     <IconIcon className="fas fa-grin-squint" />
@@ -475,9 +470,6 @@ class SignUp extends Component {
                   </IconItem>
                   <IconItem value="fas fa-yin-yang" onClick={this.handleIconSelect}>
                     <IconIcon className="fas fa-yin-yang" />
-                  </IconItem>
-                  <IconItem value="fas fa-haykal" onClick={this.handleIconSelect}>
-                    <IconIcon className="fas fa-haykal" />
                   </IconItem>
                   <IconItem value="fas fa-dice-d20" onClick={this.handleIconSelect}>
                     <IconIcon className="fas fa-dice-d20" />
