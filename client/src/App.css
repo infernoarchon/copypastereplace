@@ -296,7 +296,12 @@ option {
 
  .search-dropdown i {
    font-size: 1rem;
-   width: 1.75rem;
+   width: 2rem;
+   text-align: center;
+ }
+
+ .search-dropdown .dropdown-item {
+   padding-left: 0.5rem !important;
  }
 
 
