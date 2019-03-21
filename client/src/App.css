@@ -197,6 +197,15 @@ a:hover {
   color: #999;
 }
 
+.profile-subtext {
+  font-size: 0.875rem;
+}
+
+.profile-subtext::first-letter {
+  text-transform: capitalize;
+}
+
+
 .profile-pic-feed {
   height: 40px;
   float: left;
@@ -210,13 +219,7 @@ a:hover {
   line-height: 2;
 }
 
-.profile-subtext {
-  font-size: 0.875rem;
-}
 
-.profile-subtext:first-letter{
-  text-transform: capitalize;
-}
 
 .profile-pic-feed i {
   font-size: 1.375rem;

@@ -61,9 +61,9 @@ class Profile extends Component {
           <div>
           <div className="profile-pic-profile d-flex align-items-center justify-content-center" style={{backgroundColor: this.state.user.color}}><i className={this.state.user.icon}></i></div>
           <h1 className="profile-name"><strong>{this.state.user.username}</strong></h1>
-          <h3 className="profile-eyebrow">moving side to side since {moment(this.state.user.date).format("MMMM YYYY")}</h3>
+          <h3 className="profile-eyebrow">moving side to side since {moment(this.state.user.date).format("MMMM YYYY")}<br/><br/></h3>
           </div>
-          <h2 className="profile-subtext"><br/>
+          <h2 className="profile-subtext">
           {this.state.bio}
           </h2>
           <table className="table">
