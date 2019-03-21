@@ -463,9 +463,6 @@ class Create extends Component {
           case "book-search" :
             this.setState({search : "book"})
           break;
-          case "word-search" :
-            this.setState({search : "word"})
-          break;
         }
       }
 
@@ -490,7 +487,6 @@ class Create extends Component {
           <div className="input-group preset-search-container">
           { this.state.search === "movie" && <input type="text" className="form-control search-input" name="preset" id="preset-search" placeholder="Movie or Show" onChange={this.handleInputChange} onKeyDown={this.handleMovieSearch} /> }
           { this.state.search === "book" && <input type="text" className="form-control search-input" name="preset" id="preset-search" placeholder="Book" onChange={this.handleInputChange} onKeyDown={this.handleBookSearch} /> }
-          { this.state.search === "word" && <input type="text" className="form-control search-input" name="preset" id="preset-search" placeholder="Word" onChange={this.handleInputChange} onKeyDown={this.handleWordSearch} /> }
 
 
 
@@ -499,7 +495,6 @@ class Create extends Component {
             <div className="dropdown-menu dropdown-menu-right search-dropdown">
               <a className="dropdown-item" href="#" id="movie-search" onClick={this.handleSearchType}><i className="fas fa-tv"></i> Movies & Shows</a>
               <a className="dropdown-item" href="#" id="book-search" onClick={this.handleSearchType}><i className="fas fa-book-open"></i> Books</a>
-              <a className="dropdown-item" href="#" id="word-search" onClick={this.handleSearchType}><i className="fas fa-font"></i> Word History</a>
 
 
             </div>
