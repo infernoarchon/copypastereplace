@@ -182,8 +182,9 @@ class SignUp extends Component {
 
         <div className="wrapper card">
         <div id="story-container">
-        <h5 className="pt-2"><strong>Create an account</strong></h5>
-        <form className="mt-4">
+        <form className="pt-2">
+        <h5 className="mb-4"><strong>Create an account</strong></h5>
+
           <Label htmlFor="username">Username</Label>
           <Input name="username" type="text" value={this.state.username} onChange={this.handleChange} />
           <Label className="mt-3" htmlFor="password">Password</Label>
