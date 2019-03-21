@@ -55,7 +55,7 @@ export default {
     })
   },
   getBio: function(key, user) {
-    return axios.get("http://api.icndb.com/jokes/" + key + "?firstName=User&lastName=" + user )
+    return axios.get("http://api.icndb.com/jokes/" + key + "?firstName=user&lastName=" + user )
   }
 
 

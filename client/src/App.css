@@ -214,6 +214,10 @@ a:hover {
   font-size: 0.875rem;
 }
 
+.profile-subtext:first-letter{
+  text-transform: capitalize;
+}
+
 .profile-pic-feed i {
   font-size: 1.375rem;
   color: #fff;
