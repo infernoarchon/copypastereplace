@@ -71,6 +71,7 @@ class App extends Component {
   }
 
   refresh() {
+    console.log("key test")
     this.setState({key: this.state.key + 1})
   }
 
