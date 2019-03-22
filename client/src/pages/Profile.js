@@ -21,7 +21,6 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log('inside profile>>>>>', this.props)
     
     API.getUserStories(this.props.match.params.id)
       .then(res => this.setState({ stories: res.data }))
@@ -152,7 +151,6 @@ class Profile extends Component {
       <Container fluid>
       <Row>
         <Col size="md-12">
-        {console.log(this.props.key)}
         <div className="story-wrapper card mb-3" key={this.props.key}>
           <div id="story-container">
             

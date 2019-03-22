@@ -36,7 +36,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('getting usr')
     this.getUser()
   }
 
@@ -72,7 +71,6 @@ class App extends Component {
   }
 
   refresh() {
-    console.log("test")
     this.setState({key: this.state.key + 1})
   }
 
