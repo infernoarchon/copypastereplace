@@ -26,7 +26,8 @@ class App extends Component {
       username: null,
       color: null,
       icon: null,
-      refreshProfile: false
+      refreshProfile: false,
+      key: 0
     }
 
     this.getUser = this.getUser.bind(this)
@@ -35,6 +36,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log('getting usr')
     this.getUser()
   }
 
@@ -69,6 +71,11 @@ class App extends Component {
     })
   }
 
+  refresh() {
+    console.log("test")
+    this.setState({key: this.state.key + 1})
+  }
+
 
   render() {
     return (
@@ -76,7 +83,7 @@ class App extends Component {
         <div className="main-wrapper">
         <div className="nav-bg"></div>
       <div className="main-container">
-        <Nav updateUser={this.updateUser} loggedIn={this.state.loggedIn} userName ={this.state.username} userIcon = {this.state.icon} userColor = {this.state.color} />
+        <Nav refreshProfile={this.refresh.bind(this)} updateUser={this.updateUser} loggedIn={this.state.loggedIn} userName ={this.state.username} userIcon = {this.state.icon} userColor = {this.state.color} />
         <div className="spacer"></div>
         <Switch>
             <Route exact path="/" component={Latest} />
@@ -86,7 +93,7 @@ class App extends Component {
             <Route exact path="/signin" render={() => <SignIn updateUser={this.updateUser} />} />
             <Route exact path="/signup" render={() => <SignUp/>} />
             <Route exact path="/story/:id" component={Detail} />
-            <Route exact path="/:id" component={Profile} />
+            <Route exact path="/:id" render={(props) => <Profile {...props} key={this.state.key} /> } />
             <Route component={NoMatch} />
         </Switch>
   

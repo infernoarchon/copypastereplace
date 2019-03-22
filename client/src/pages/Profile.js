@@ -21,6 +21,8 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+    console.log('inside profile>>>>>', this.props)
+    
     API.getUserStories(this.props.match.params.id)
       .then(res => this.setState({ stories: res.data }))
       .catch(err => console.log(err));
@@ -144,13 +146,14 @@ class Profile extends Component {
 
 
 
-        console.log(moment(this.state.user.date).format("SSS"))
+        // console.log(moment(this.state.user.date).format("SSS"))
 
     return(
       <Container fluid>
       <Row>
         <Col size="md-12">
-        <div className="story-wrapper card mb-3">
+        {console.log(this.props.key)}
+        <div className="story-wrapper card mb-3" key={this.props.key}>
           <div id="story-container">
             
           {/* {this.props.history.action==="PUSH" ? <div className="back-button mb-3" onClick={this.goBack}><a href="#"><i className="fas fa-arrow-left"></i> Go Back</a></div> : null} */}

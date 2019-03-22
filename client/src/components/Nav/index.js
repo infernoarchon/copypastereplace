@@ -69,7 +69,8 @@ logout(event) {
                         </a>
                         <div className="dropdown-menu user-dropdown" aria-labelledby="navbarDropdownMenuLink">
                         <h3 className="dropdown-header"><strong>{this.props.userName}</strong></h3>
-                        <NavLink to={"/" + this.props.userName} className="dropdown-item">Profile</NavLink>
+                        <NavLink to={"/" + this.props.userName} className="dropdown-item" onClick={this.props.refreshProfile}>Profile</NavLink>
+                        {/* <button onClick={this.props.refreshProfile}>Refresh</button> */}
                         <NavLink to="#" className="dropdown-item" onClick={this.logout}>Log Out</NavLink>
                         </div>
               </div>
