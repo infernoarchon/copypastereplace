@@ -190,8 +190,8 @@ class SignUp extends Component {
           <Label className="mt-3" htmlFor="password">Password</Label>
           <Input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
           <Label className="mt-3" htmlFor="colorDropdown">Your Favorite Color</Label>
-          <div className="row w-25 p-0">
-            <div className="col-2 p-0"><div className="swatch"><div className="swatch-preview" style={{ backgroundColor: this.state.color}}></div></div></div>
+          <div className="row p-0 signup-container">
+            <div className="col-2 p-0 swatch-container"><div className="swatch"><div className="swatch-preview" style={{ backgroundColor: this.state.color}}></div></div></div>
             <div className="col-10 p-0">
             <div className="dropdown">
               <button className="btn btn-secondary-outline dropdown-toggle text-left" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -215,8 +215,8 @@ class SignUp extends Component {
             </div>
           </div>
           <Label className="mt-3" htmlFor="iconDropdown">Your Profile Pic</Label>
-          <div className="row w-25 p-0">
-            <div className="col-2 p-0"><div className="icon-preview"><i style={{backgroundColor: this.state.color}} className={this.state.icon}></i></div></div>
+          <div className="row p-0 signup-container">
+            <div className="col-2 p-0 swatch-container"><div className="icon-preview"><i style={{backgroundColor: this.state.color}} className={this.state.icon}></i></div></div>
             <div className="col-10 p-0">
             <div className="dropdown">
             <button className="btn btn-secondary-outline dropdown-toggle text-left" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

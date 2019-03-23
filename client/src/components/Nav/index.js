@@ -55,6 +55,31 @@ logout(event) {
           <li className="nav-item">
             <NavLink to="/create" className="nav-link">Create</NavLink>
           </li>
+          <li className="nav-item">
+            <hr/>
+          </li>
+
+          {loggedIn ?
+          <li className="nav-item nav-mobile">                          
+              <NavLink to={"/" + this.props.userName} className="nav-link" onClick={this.props.refreshProfile}>{this.props.userName}</NavLink>
+          </li>
+          : 
+          <li className="nav-item nav-mobile">
+          <NavLink to="/signin" className="nav-link">Sign In</NavLink>
+          </li>
+          }
+          {loggedIn ?
+          <li className="nav-item nav-mobile">                          
+            <NavLink to="#" className="nav-link" onClick={this.logout}>Log Out</NavLink>
+          </li>
+          : 
+          <li className="nav-item nav-mobile">
+            <NavLink to="/signup" className="nav-link">Sign Up</NavLink>
+          </li>
+          }
+
+          
+          
         </ul>
         
         </div>

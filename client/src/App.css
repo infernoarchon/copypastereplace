@@ -135,6 +135,10 @@ a:hover {
   text-decoration: underline
 }
 
+.signup-container {
+  max-width: 220px;
+}
+
 .story-wrapper {
   max-width: 1024px;
   padding: 1.5rem;
@@ -359,14 +363,27 @@ label {
   display: inline;
 } */
 
+.nav-mobile {
+  display: none;
+}
+
+.auth-inputs {
+  max-width: 360px;
+}
+
 @media screen and (max-width: 992px) {
   .wrapper {
     max-width: 95%;
   }
   .navbar {
-    max-width: 95%;
+    padding: 1em;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
   }
   .nav-link {
     font-size: 1.5em;
+  }
+  .nav-mobile {
+    display: inline;
   }
 }

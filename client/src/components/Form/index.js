@@ -16,7 +16,7 @@ export function Label(props) {
 export function Input(props) {
   return (
     <div className="input-group">
-      <input className="w-25" {...props} />
+      <input className="w-100 auth-inputs" {...props} />
       {/* <div className="input-group-append">
         <button className="btn btn-outline-primary ml-1" type="button">Submit</button>
       </div> */}
