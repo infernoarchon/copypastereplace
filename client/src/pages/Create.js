@@ -6,6 +6,8 @@ import { Col, Row, Container } from "../components/Grid";
 import { NavLink } from 'react-router-dom'
 // import { Redirect } from 'react-router-dom'
 
+const json = require('../data/wordnet.json'); //with path
+const jsonQuery = require('json-query')
 const a = require('indefinite');
 
 
@@ -44,6 +46,7 @@ class Create extends Component {
       newicon: [],
       showsignup: false,
       showsignin: true,
+      categories: [],
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
@@ -57,7 +60,7 @@ class Create extends Component {
 
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["POBJ","AMOD","RCMOD", "ADVPHMOD", "ATTR"]
+      const wordTypes =["POBJ","AMOD","RCMOD", "ATTR"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -96,9 +99,9 @@ class Create extends Component {
               //   else 
               //     {helpText="Enter a targeted verb (buy, carry)..."}
               //   break;
-              case "ADVPHMOD":
-                helpText="Enter an adverb."
-                break;
+              // case "ADVPHMOD":
+              //   helpText="Enter an adverb."
+              //   break;
               // case "CONJ":
               //   if(e.partOfSpeech.tag === "NOUN")
               //     {e.partOfSpeech.number === "PLURAL" ? helpText="Enter a plural noun." : helpText="Enter a singular noun."}
@@ -112,9 +115,12 @@ class Create extends Component {
               //   break;
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
-                  {helpText="Enter a plural noun."} 
+                  { helpText="Enter a plural noun."} 
                 else if(e.partOfSpeech.number === "SINGULAR")
-                  {helpText="Enter a singular noun."}
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    console.log(e.lemma, cat)
+                    this.setState({categories: []})
+                    helpText="Enter a singular noun."}
                 else if(e.partOfSpeech.tag === "ADJ" )
                   {helpText="Enter an adjective."}
                 else 
@@ -168,6 +174,66 @@ class Create extends Component {
     capitalizeString = string => {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
+    handleCats = input => {
+      if(input.includes("emotion")) {
+        return "emotion"
+      }
+      else if(input.includes("organization") || input.includes("social_group") || input.includes("group")) {
+        return "organization"
+      }
+      else if(input.includes("event") || input.includes("activity")) {
+        return "event"
+      }
+      else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
+        return "location"
+      }
+      else if(input.includes("living_thing")) {
+        return "living"
+      }
+      else if(input.includes("object")) {
+        return "object"
+      }
+      else {
+        return null
+      }
+    }
+    
+    getcat = input => {
+      let cats = [
+          "emotion",
+          "organization", "social_group", "group",
+          "event", "activity", 
+          "location", "area", "structure", "land",
+          "living_thing",   
+          "object"] // if contains object, return object, otherwise return noun
+      let serial = input[0].synset 
+      if(cats.includes(json.synset[serial].word[0])) {
+          return this.setState({categories: [...this.state.categories, json.synset[serial].word[0]] })
+      } else if (json.synset[serial].word[0] === "entity") {
+          return 
+      }
+      else {
+          // console.log("next synset is" + json.synset[serial].pointer[0].synset)
+          this.getcat(json.synset[serial].pointer)
+      }
+  }
+
+   getword = input => {
+      let result = jsonQuery('synset[**][*:filterWord]', {
+          data: json,
+          locals: {
+            filterWord: function (item) {
+              let word = item.word
+              return word.includes(input) && item.pos === "n"
+            }
+          }
+        }).value
+        for(var i = 0; i < result.length; i++) {
+          this.getcat(result[i].pointer)
+        }
+        return this.state.categories
+  }
 
     joinWords = (token,list) => {
       let storyStr = []
@@ -281,6 +347,7 @@ class Create extends Component {
 
     handleFormSubmit = event => {
       event.preventDefault()
+        document.getElementById("create-button").innerHTML = "Analyzing..."
         API.sendText({
           document : {
               type: "PLAIN_TEXT",
@@ -532,7 +599,6 @@ class Create extends Component {
     
     render() {
       // console.log(this.state)
-
     return(
       <Container fluid>
       <Row>
@@ -570,7 +636,7 @@ class Create extends Component {
             { this.state.showTextArea ?
                 <div>
               <TextArea id="story-input" name="pasted" placeholder="Paste your story here..." onChange={this.handleInputChange} />
-              <FormBtn disabled={this.state.pasted.length === 0 ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
+              <FormBtn id="create-button" disabled={this.state.pasted.length === 0 ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
                 </div>
               : null}
         <br/>
