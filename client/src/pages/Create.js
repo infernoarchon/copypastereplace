@@ -3,11 +3,9 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Label, FormGroup, Input, TextArea, FormBtn, ColorDropdown, IconItem, IconIcon } from "../components/Form";
 import { Col, Row, Container } from "../components/Grid";
-import { NavLink } from 'react-router-dom'
-// import { Redirect } from 'react-router-dom'
 
 // const json = require('../data/wordnet.json'); //with path
-const jsonQuery = require('json-query')
+// const jsonQuery = require('json-query')
 const a = require('indefinite');
 
 
@@ -116,48 +114,48 @@ class Create extends Component {
               //   else 
               //     {helpText="Enter a state of being (frustrated, gigantic)."}
               //   break;
-              case "POBJ":
-                if(e.partOfSpeech.number === "PLURAL")
-                  { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
-                    helpText=cat + " (plural)."
-                    this.setState({categories: []})}
-                else if(e.partOfSpeech.number === "SINGULAR")
-                  { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
-                    helpText=cat + " (singular)."
-                    this.setState({categories: []})}
-                else 
-                  {helpText="Enter a noun."}
-                break;
-              case "NSUBJ":
-                if(e.partOfSpeech.number === "PLURAL")
-                  { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
-                    helpText=cat + " (plural)."
-                    this.setState({categories: []})}
-                else if(e.partOfSpeech.number === "SINGULAR")
-                  { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
-                    helpText=cat + " (singular)."
-                    this.setState({categories: []})}
-                else 
-                  {helpText="Enter a noun."}
-                break;
-              case "APPOS":
-                if(e.partOfSpeech.number === "PLURAL")
-                  { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
-                    helpText=cat + " (plural)."
-                    this.setState({categories: []})}
-                else if(e.partOfSpeech.number === "SINGULAR")
-                  { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
-                    helpText=cat + " (singular)."
-                    this.setState({categories: []})}
-                else 
-                  {helpText="Enter a noun."}
-                break;
+              // case "POBJ":
+              //   if(e.partOfSpeech.number === "PLURAL")
+              //     { let cat = this.handleCats(this.getword(e.lemma))
+              //       console.log(e.lemma, cat)
+              //       helpText=cat + " (plural)."
+              //       this.setState({categories: []})}
+              //   else if(e.partOfSpeech.number === "SINGULAR")
+              //     { let cat = this.handleCats(this.getword(e.lemma))
+              //       console.log(e.lemma, cat)
+              //       helpText=cat + " (singular)."
+              //       this.setState({categories: []})}
+              //   else 
+              //     {helpText="Enter a noun."}
+              //   break;
+              // case "NSUBJ":
+              //   if(e.partOfSpeech.number === "PLURAL")
+              //     { let cat = this.handleCats(this.getword(e.lemma))
+              //       console.log(e.lemma, cat)
+              //       helpText=cat + " (plural)."
+              //       this.setState({categories: []})}
+              //   else if(e.partOfSpeech.number === "SINGULAR")
+              //     { let cat = this.handleCats(this.getword(e.lemma))
+              //       console.log(e.lemma, cat)
+              //       helpText=cat + " (singular)."
+              //       this.setState({categories: []})}
+              //   else 
+              //     {helpText="Enter a noun."}
+              //   break;
+              // case "APPOS":
+              //   if(e.partOfSpeech.number === "PLURAL")
+              //     { let cat = this.handleCats(this.getword(e.lemma))
+              //       console.log(e.lemma, cat)
+              //       helpText=cat + " (plural)."
+              //       this.setState({categories: []})}
+              //   else if(e.partOfSpeech.number === "SINGULAR")
+              //     { let cat = this.handleCats(this.getword(e.lemma))
+              //       console.log(e.lemma, cat)
+              //       helpText=cat + " (singular)."
+              //       this.setState({categories: []})}
+              //   else 
+              //     {helpText="Enter a noun."}
+              //   break;
               case "AMOD":
                   helpText="Enter an adjective."
                   break;
@@ -201,69 +199,69 @@ class Create extends Component {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    handleCats = input => {
-      if(input.includes("emotion")) {
-        return "Enter an emotion i.e. fear, anger"
-      }
-      else if(input.includes("organization") || input.includes("social_group") || input.includes("group")) {
-        return "Enter a company, group, or organization"
-      }
-      else if(input.includes("event") || input.includes("activity")) {
-        return "Enter an event or activity"
-      }
-      else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
-        return "Enter a location"
-      }
-      else if(input.includes("property")) {
-        return "Enter a superpower"
-      }
-      else if(input.includes("living_thing")) {
-        return "Enter a living thing"
-      }
-      else if(input.includes("object")) {
-        return "Enter an object"
-      }
-      else {
-        return "Enter a noun"
-      }
-    }
+  //   handleCats = input => {
+  //     if(input.includes("emotion")) {
+  //       return "Enter an emotion i.e. fear, anger"
+  //     }
+  //     else if(input.includes("organization") || input.includes("social_group") || input.includes("group")) {
+  //       return "Enter a company, group, or organization"
+  //     }
+  //     else if(input.includes("event") || input.includes("activity")) {
+  //       return "Enter an event or activity"
+  //     }
+  //     else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
+  //       return "Enter a location"
+  //     }
+  //     else if(input.includes("property")) {
+  //       return "Enter a superpower"
+  //     }
+  //     else if(input.includes("living_thing")) {
+  //       return "Enter a living thing"
+  //     }
+  //     else if(input.includes("object")) {
+  //       return "Enter an object"
+  //     }
+  //     else {
+  //       return "Enter a noun"
+  //     }
+  //   }
     
-    getcat = input => {
-      let cats = [
-          "emotion",
-          "organization", "social_group", "group",
-          "event", "activity", 
-          "location", "area", "structure", "land",
-          "property",
-          "living_thing",   
-          "object"] // if contains object, return object, otherwise return noun
-      let serial = input[0].synset 
-      if(cats.includes(json.synset[serial].word[0])) {
-          return this.setState({categories: [...this.state.categories, json.synset[serial].word[0]] })
-      } else if (json.synset[serial].word[0] === "entity") {
-          return 
-      }
-      else {
-          // console.log("next synset is" + json.synset[serial].pointer[0].synset)
-          this.getcat(json.synset[serial].pointer)
-      }
-  }
+  //   getcat = input => {
+  //     let cats = [
+  //         "emotion",
+  //         "organization", "social_group", "group",
+  //         "event", "activity", 
+  //         "location", "area", "structure", "land",
+  //         "property",
+  //         "living_thing",   
+  //         "object"] // if contains object, return object, otherwise return noun
+  //     let serial = input[0].synset 
+  //     if(cats.includes(json.synset[serial].word[0])) {
+  //         return this.setState({categories: [...this.state.categories, json.synset[serial].word[0]] })
+  //     } else if (json.synset[serial].word[0] === "entity") {
+  //         return 
+  //     }
+  //     else {
+  //         // console.log("next synset is" + json.synset[serial].pointer[0].synset)
+  //         this.getcat(json.synset[serial].pointer)
+  //     }
+  // }
 
-   getword = input => {
-      let result = jsonQuery('synset[**][*:filterWord]', {
-          data: json,
-          locals: {
-            filterWord: function (item) {
-              let word = item.word
-              return word.includes(input) && item.pos === "n"
-            }
-          }
-        }).value
-        for(var i = 0; i < result.length; i++) {
-          this.getcat(result[i].pointer)
-        }
-        return this.state.categories
-  }
+  //  getword = input => {
+  //     let result = jsonQuery('synset[**][*:filterWord]', {
+  //         data: json,
+  //         locals: {
+  //           filterWord: function (item) {
+  //             let word = item.word
+  //             return word.includes(input) && item.pos === "n"
+  //           }
+  //         }
+  //       }).value
+  //       for(var i = 0; i < result.length; i++) {
+  //         this.getcat(result[i].pointer)
+  //       }
+  //       return this.state.categories
+  // }
 
     joinWords = (token,list) => {
       let storyStr = []
