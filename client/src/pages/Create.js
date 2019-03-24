@@ -310,7 +310,7 @@ class Create extends Component {
       joinedStr = joinedStr.replace(/\s([!.,?;:\/$%&]*)/g,"$1 ")
       // joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
       joinedStr = joinedStr.replace(/\s-\s/g,"-");
-      joinedStr = joinedStr.replace(/\s's/g,"'s");
+      joinedStr = joinedStr.replace(/\s's\s/g,"'s ");
 
 
       // joinedStr = joinedStr.replace(/\(\s/g," ( ");
