@@ -2,6 +2,45 @@
   text-align: center;
 }
 
+.loading::after {
+  content: "Analyzing..." !important
+}
+
+.create-text::after {
+  content: "Start Replacing"
+}
+
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0.3; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.3; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.3; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0.3; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation: flickerAnimation 1s infinite;
+   -moz-animation: flickerAnimation 1s infinite;
+   -o-animation: flickerAnimation 1s infinite;
+    animation: flickerAnimation 1s infinite;
+}
+
+.fa-redo-alt {
+  margin-right: 0.5em;
+}
+
 h1 {
   font-size: 1.25rem;
   font-weight: 500;

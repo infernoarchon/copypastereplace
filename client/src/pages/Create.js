@@ -60,7 +60,7 @@ class Create extends Component {
 
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["POBJ","AMOD","RCMOD", "ATTR"]
+      const wordTypes =["APPOS","AMOD","RCMOD", "NSUBJ", "POBJ"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -84,6 +84,9 @@ class Create extends Component {
           || e.lemma === "order"
           || e.lemma === "plan"
           || e.lemma === "long"
+          || e.lemma === "few"
+          || e.lemma === "responsible"
+          || e.lemma === "series"
           || e.partOfSpeech.mood === "INDICATIVE") {
             return
           }
@@ -115,22 +118,45 @@ class Create extends Component {
               //   break;
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
-                  { helpText="Enter a plural noun."} 
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    console.log(e.lemma, cat)
+                    helpText=cat + " (plural)."
+                    this.setState({categories: []})}
                 else if(e.partOfSpeech.number === "SINGULAR")
                   { let cat = this.handleCats(this.getword(e.lemma))
                     console.log(e.lemma, cat)
-                    this.setState({categories: []})
-                    helpText="Enter a singular noun."}
-                else if(e.partOfSpeech.tag === "ADJ" )
-                  {helpText="Enter an adjective."}
+                    helpText=cat + " (singular)."
+                    this.setState({categories: []})}
                 else 
                   {helpText="Enter a noun."}
                 break;
-              case "ATTR":
+              case "NSUBJ":
                 if(e.partOfSpeech.number === "PLURAL")
-                  {helpText="Enter a plural noun."} 
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    console.log(e.lemma, cat)
+                    helpText=cat + " (plural)."
+                    this.setState({categories: []})}
+                else if(e.partOfSpeech.number === "SINGULAR")
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    console.log(e.lemma, cat)
+                    helpText=cat + " (singular)."
+                    this.setState({categories: []})}
                 else 
-                  {helpText="Enter a singular noun."}
+                  {helpText="Enter a noun."}
+                break;
+              case "APPOS":
+                if(e.partOfSpeech.number === "PLURAL")
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    console.log(e.lemma, cat)
+                    helpText=cat + " (plural)."
+                    this.setState({categories: []})}
+                else if(e.partOfSpeech.number === "SINGULAR")
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    console.log(e.lemma, cat)
+                    helpText=cat + " (singular)."
+                    this.setState({categories: []})}
+                else 
+                  {helpText="Enter a noun."}
                 break;
               case "AMOD":
                   helpText="Enter an adjective."
@@ -177,25 +203,28 @@ class Create extends Component {
 
     handleCats = input => {
       if(input.includes("emotion")) {
-        return "emotion"
+        return "Enter an emotion i.e. fear, anger"
       }
       else if(input.includes("organization") || input.includes("social_group") || input.includes("group")) {
-        return "organization"
+        return "Enter a company, group, or organization"
       }
       else if(input.includes("event") || input.includes("activity")) {
-        return "event"
+        return "Enter an event or activity"
       }
       else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
-        return "location"
+        return "Enter a location"
+      }
+      else if(input.includes("property")) {
+        return "Enter a superpower"
       }
       else if(input.includes("living_thing")) {
-        return "living"
+        return "Enter a living thing"
       }
       else if(input.includes("object")) {
-        return "object"
+        return "Enter an object"
       }
       else {
-        return null
+        return "Enter a noun"
       }
     }
     
@@ -205,6 +234,7 @@ class Create extends Component {
           "organization", "social_group", "group",
           "event", "activity", 
           "location", "area", "structure", "land",
+          "property",
           "living_thing",   
           "object"] // if contains object, return object, otherwise return noun
       let serial = input[0].synset 
@@ -286,7 +316,9 @@ class Create extends Component {
       // joinedStr = joinedStr.replace(/\(\s/g," ( ");
       // joinedStr = joinedStr.replace(/'\s/g," ' ");
       // joinedStr = joinedStr.replace(/'\./g," '.");
-      joinedStr = joinedStr.replace(/'\s([0-9a-zA-Z\s]*)\s'/g,"'$1'");
+      joinedStr = joinedStr.replace(/'\s([0-9a-zA-Z\s'.,]*)\s'/g,"'$1'");
+      joinedStr = joinedStr.replace(/\(\s([0-9a-zA-Z\s'.,]*)\s\)/g,"($1)");
+
       // joinedStr = joinedStr.replace(/"\s([\W\w]*)\s"/g,"\"$1\"");
       // joinedStr = joinedStr.replace(/\[\s/g," [");
 
@@ -347,7 +379,7 @@ class Create extends Component {
 
     handleFormSubmit = event => {
       event.preventDefault()
-        document.getElementById("create-button").innerHTML = "Analyzing..."
+        document.getElementById("create-button").className += " loading animate-flicker"
         API.sendText({
           document : {
               type: "PLAIN_TEXT",
@@ -596,6 +628,11 @@ class Create extends Component {
         this.setState({showsignin: true})
       }
 
+      refreshPage = (event) => {
+        event.preventDefault()
+        window.location.reload()
+      }
+
     
     render() {
       // console.log(this.state)
@@ -636,7 +673,7 @@ class Create extends Component {
             { this.state.showTextArea ?
                 <div>
               <TextArea id="story-input" name="pasted" placeholder="Paste your story here..." onChange={this.handleInputChange} />
-              <FormBtn id="create-button" disabled={this.state.pasted.length === 0 ? true : false} onClick={this.handleFormSubmit}>Start Replacing</FormBtn>
+              <FormBtn disabled={this.state.pasted.length === 0 ? true : false} onClick={this.handleFormSubmit}><span id="create-button" className="create-text"></span></FormBtn>
                 </div>
               : null}
         <br/>
@@ -655,8 +692,11 @@ class Create extends Component {
         <div id="story-container"></div>
           {this.state.final.length === 0 ? null : 
           <div>
-          <div className="audio-container justify-content-center d-flex mt-4 mb-5">
+          <div className="audio-container justify-content-center d-flex mt-4">
             <audio controls src={"data:audio/mp3;base64," + this.state.audio}></audio>
+          </div>
+          <div className="justify-content-center d-flex mt-4 mb-5">
+            <FormBtn onClick={this.refreshPage}><i className="fas fa-redo-alt"></i>Play Again</FormBtn>
           </div>
           <hr />
                 {!this.props.userName && this.state.showsignin ? 
