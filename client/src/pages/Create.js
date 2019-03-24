@@ -6,7 +6,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { NavLink } from 'react-router-dom'
 // import { Redirect } from 'react-router-dom'
 
-const json = require('../data/wordnet.json'); //with path
+// const json = require('../data/wordnet.json'); //with path
 const jsonQuery = require('json-query')
 const a = require('indefinite');
 
