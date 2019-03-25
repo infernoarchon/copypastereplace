@@ -60,7 +60,7 @@ class Create extends Component {
 
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["APPOS","AMOD","RCMOD", "NSUBJ", "POBJ"]
+      const wordTypes =["ACOMP", "APPOS","AMOD","RCMOD", "NSUBJ", "POBJ"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -87,6 +87,7 @@ class Create extends Component {
           || e.lemma === "few"
           || e.lemma === "responsible"
           || e.lemma === "series"
+          || e.lemma === "let"
           || e.partOfSpeech.mood === "INDICATIVE") {
             return
           }
@@ -119,46 +120,49 @@ class Create extends Component {
               case "POBJ":
                 if(e.partOfSpeech.number === "PLURAL")
                   { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
+                    // console.log(e.lemma, cat)
                     helpText=cat + " (plural)."
                     this.setState({categories: []})}
                 else if(e.partOfSpeech.number === "SINGULAR")
                   { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
+                    // console.log(e.lemma, cat)
                     helpText=cat + " (singular)."
                     this.setState({categories: []})}
                 else 
-                  {helpText="Enter a noun."}
+                  {helpText="Enter an idea."}
                 break;
               case "NSUBJ":
                 if(e.partOfSpeech.number === "PLURAL")
                   { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
+                    // console.log(e.lemma, cat)
                     helpText=cat + " (plural)."
                     this.setState({categories: []})}
                 else if(e.partOfSpeech.number === "SINGULAR")
                   { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
+                    // console.log(e.lemma, cat)
                     helpText=cat + " (singular)."
                     this.setState({categories: []})}
                 else 
-                  {helpText="Enter a noun."}
+                  {helpText="Enter an idea."}
                 break;
               case "APPOS":
                 if(e.partOfSpeech.number === "PLURAL")
                   { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
+                    // console.log(e.lemma, cat)
                     helpText=cat + " (plural)."
                     this.setState({categories: []})}
                 else if(e.partOfSpeech.number === "SINGULAR")
                   { let cat = this.handleCats(this.getword(e.lemma))
-                    console.log(e.lemma, cat)
+                    // console.log(e.lemma, cat)
                     helpText=cat + " (singular)."
                     this.setState({categories: []})}
                 else 
-                  {helpText="Enter a noun."}
+                  {helpText="Enter an idea."}
                 break;
               case "AMOD":
+                  helpText="Enter an adjective."
+                  break;
+              case "ACOMP":
                   helpText="Enter an adjective."
                   break;
               // case "NN":
@@ -202,10 +206,7 @@ class Create extends Component {
     }
 
     handleCats = input => {
-      if(input.includes("emotion")) {
-        return "Enter an emotion i.e. fear, anger"
-      }
-      else if(input.includes("organization") || input.includes("social_group") || input.includes("group")) {
+      if(input.includes("organization") || input.includes("social_group") || input.includes("group")) {
         return "Enter a company, group, or organization"
       }
       else if(input.includes("event") || input.includes("activity")) {
@@ -213,6 +214,9 @@ class Create extends Component {
       }
       else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
         return "Enter a location"
+      }
+      else if(input.includes("emotion")) {
+        return "Enter an emotion i.e. fear, anger"
       }
       else if(input.includes("property")) {
         return "Enter a superpower"
@@ -224,7 +228,7 @@ class Create extends Component {
         return "Enter an object"
       }
       else {
-        return "Enter a noun"
+        return "Enter an idea"
       }
     }
     
