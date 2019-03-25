@@ -88,11 +88,15 @@ class Create extends Component {
           || e.lemma === "responsible"
           || e.lemma === "series"
           || e.lemma === "let"
+          || e.lemma === "search"
           || e.partOfSpeech.mood === "INDICATIVE") {
             return
           }
           //Exclude amod verbs
           if(e.partOfSpeech.tag === "VERB" && e.dependencyEdge.label === "AMOD") {
+            return
+          }
+          if(this.handleCats(this.getword(e.lemma)) === "blank") {
             return
           }
           else{
@@ -206,17 +210,17 @@ class Create extends Component {
     }
 
     handleCats = input => {
-      if(input.includes("organization") || input.includes("social_group") || input.includes("group")) {
-        return "Enter a company, group, or organization"
+      if(input.includes("social_group") || input.includes("group")) {
+        return "Enter a group or club"
+      }
+      else if(input.includes("organization")) {
+        return "Enter a company or organization"
       }
       else if(input.includes("event") || input.includes("activity")) {
         return "Enter an event or activity"
       }
       else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
         return "Enter a location"
-      }
-      else if(input.includes("emotion")) {
-        return "Enter an emotion i.e. fear, anger"
       }
       else if(input.includes("property")) {
         return "Enter a superpower"
@@ -228,13 +232,12 @@ class Create extends Component {
         return "Enter an object"
       }
       else {
-        return "Enter an idea"
+        return "blank"
       }
     }
     
     getcat = input => {
       let cats = [
-          "emotion",
           "organization", "social_group", "group",
           "event", "activity", 
           "location", "area", "structure", "land",
@@ -311,7 +314,7 @@ class Create extends Component {
         }
       })
       let joinedStr = storyStr.join(' ')
-      joinedStr = joinedStr.replace(/\s([!.,?;:\/$%&]*)/g,"$1 ")
+      joinedStr = joinedStr.replace(/\s([!.,?;:\/$%&+]*)/g,"$1 ")
       // joinedStr = joinedStr.replace(/\s+(\W)/g,"$1");
       joinedStr = joinedStr.replace(/\s-\s/g,"-");
       joinedStr = joinedStr.replace(/\s's\s/g,"'s ");
@@ -322,6 +325,8 @@ class Create extends Component {
       // joinedStr = joinedStr.replace(/'\./g," '.");
       joinedStr = joinedStr.replace(/'\s([0-9a-zA-Z\s'.,]*)\s'/g,"'$1'");
       joinedStr = joinedStr.replace(/\(\s([0-9a-zA-Z\s'.,]*)\s\)/g,"($1)");
+      joinedStr = joinedStr.replace(/"\s([0-9a-zA-Z\s'.,]*)\s"/g,"\"$1\"");
+
 
       // joinedStr = joinedStr.replace(/"\s([\W\w]*)\s"/g,"\"$1\"");
       // joinedStr = joinedStr.replace(/\[\s/g," [");
