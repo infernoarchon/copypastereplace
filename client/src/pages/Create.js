@@ -60,7 +60,7 @@ class Create extends Component {
 
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["ACOMP", "APPOS","AMOD","RCMOD", "NSUBJ", "POBJ"]
+      const wordTypes =["ACOMP", "APPOS","AMOD","RCMOD", "NSUBJ", "POBJ", "POSS"]
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
@@ -89,6 +89,7 @@ class Create extends Component {
           || e.lemma === "series"
           || e.lemma === "let"
           || e.lemma === "search"
+          || e.lemma === "first"
           || e.partOfSpeech.mood === "INDICATIVE") {
             return
           }
@@ -163,6 +164,20 @@ class Create extends Component {
                 else 
                   {helpText="Enter an idea."}
                 break;
+              case "POSS":
+                if(e.partOfSpeech.number === "PLURAL")
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    // console.log(e.lemma, cat)
+                    helpText=cat + " (plural)."
+                    this.setState({categories: []})}
+                else if(e.partOfSpeech.number === "SINGULAR")
+                  { let cat = this.handleCats(this.getword(e.lemma))
+                    // console.log(e.lemma, cat)
+                    helpText=cat + " (singular)."
+                    this.setState({categories: []})}
+                else 
+                  {helpText="Enter an idea."}
+                break;
               case "AMOD":
                   helpText="Enter an adjective."
                   break;
@@ -211,7 +226,7 @@ class Create extends Component {
 
     handleCats = input => {
       if(input.includes("social_group") || input.includes("group")) {
-        return "Enter a group or club"
+        return "Enter a member of a group or club"
       }
       else if(input.includes("organization")) {
         return "Enter a company or organization"
