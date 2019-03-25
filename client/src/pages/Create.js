@@ -90,6 +90,7 @@ class Create extends Component {
           || e.lemma === "let"
           || e.lemma === "search"
           || e.lemma === "first"
+          || e.lemma === "only"
           || e.partOfSpeech.mood === "INDICATIVE") {
             return
           }
