@@ -104,6 +104,10 @@ class Create extends Component {
           if(e.partOfSpeech.tag === "VERB" && e.dependencyEdge.label === "AMOD") {
             return
           }
+          //Exclude APPOS adjectives
+          if(e.partOfSpeech.tag === "ADJ" && e.dependencyEdge.label === "APPOS") {
+            return
+          }
           if(e.partOfSpeech.tag === "NOUN" && this.handleCats(this.getword(e.lemma)) === "blank") {
             return
           }
@@ -234,8 +238,20 @@ class Create extends Component {
     }
 
     handleCats = input => {
-      if(input.includes("social_group") || input.includes("group")) {
-        return "Enter a member of a group or club"
+      if(input.includes("furniture")) {
+        return "Enter a piece of furniture"
+      }
+      else if(input.includes("natural_object")) {
+        return "Enter a location"
+      }
+      else if(input.includes("event") && input.includes("living_thing")) {
+        return "Enter an event or activity"
+      }
+      else if(input.includes("event") && input.includes("social_group")) {
+        return "Enter an event or activity"
+      }
+      else if(input.includes("social_group") || input.includes("group")) {
+        return "Enter a group or club"
       }
       else if(input.includes("organization")) {
         return "Enter a company or organization"
@@ -266,7 +282,9 @@ class Create extends Component {
           "location", "area", "structure", "land",
           "property",
           "living_thing", 
-          "event", "activity",  
+          "event", "activity", 
+          "natural_object", 
+          "furniture",
           "object"] // if contains object, return object, otherwise return noun
       let serial = input[0].synset 
       if(cats.includes(json.synset[serial].word[0])) {
