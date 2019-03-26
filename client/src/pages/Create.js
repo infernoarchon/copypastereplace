@@ -247,7 +247,7 @@ class Create extends Component {
       else if(input.includes("event") && input.includes("living_thing")) {
         return "Enter an event or activity"
       }
-      else if(input.includes("event") && input.includes("social_group")) {
+      else if(input.includes("activity") && input.includes("social_group")) {
         return "Enter an event or activity"
       }
       else if(input.includes("social_group") || input.includes("group")) {
