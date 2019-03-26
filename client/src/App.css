@@ -2,13 +2,13 @@
   text-align: center;
 }
 
-.loading::after {
+/* .loading::after {
   content: "Analyzing..." !important
 }
 
 .create-text::after {
   content: "Start Replacing"
-}
+} */
 
 @keyframes flickerAnimation {
   0%   { opacity:1; }

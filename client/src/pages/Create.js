@@ -55,16 +55,22 @@ class Create extends Component {
     this.handleNewSubmit = this.handleNewSubmit.bind(this)
 
 
+
   }    
+
+  // showLoading = input => {
+  //   document.getElementById('create-button').innerHTML = ''
+  // }
 
 
     getWords = token => {
       let masterObj = [];
-      const wordTypes =["ACOMP", "APPOS","AMOD","RCMOD", "NSUBJ", "POBJ", "POSS"]
+      const wordTypes =["ACOMP", "APPOS","AMOD","RCMOD", "NSUBJ", "POBJ", "POSS"]   
       wordTypes.forEach(d => {
         let filteredArr = token.filter(function(o) {
           return o.dependencyEdge.label === d
         })
+        // console.log(Math.floor(wordCount * 100/wordTotal))
         filteredArr.forEach(e => {
           let helpText;
           //General exceptions to replacing a word
@@ -98,7 +104,7 @@ class Create extends Component {
           if(e.partOfSpeech.tag === "VERB" && e.dependencyEdge.label === "AMOD") {
             return
           }
-          if(this.handleCats(this.getword(e.lemma)) === "blank") {
+          if(e.partOfSpeech.tag === "NOUN" && this.handleCats(this.getword(e.lemma)) === "blank") {
             return
           }
           else{
@@ -190,8 +196,10 @@ class Create extends Component {
               //   break;
               case "RCMOD":
                 if(e.partOfSpeech.tense === "PAST")
-                  {helpText="Enter a verb in past tense (e.g. flew, kissed, won)."} 
+                  { 
+                    helpText="Enter a verb in past tense (e.g. flew, kissed, won)."} 
                 else
+                  
                   {e.text.content.match(/ing/g) ? helpText="Enter a verb ending in -ing." : helpText="Enter a verb in present tense (e.g. drive, make, dance)."}
                 break;
               // case "APPOS":
@@ -232,9 +240,6 @@ class Create extends Component {
       else if(input.includes("organization")) {
         return "Enter a company or organization"
       }
-      else if(input.includes("event") || input.includes("activity")) {
-        return "Enter an event or activity"
-      }
       else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
         return "Enter a location"
       }
@@ -243,6 +248,9 @@ class Create extends Component {
       }
       else if(input.includes("living_thing")) {
         return "Enter a living thing"
+      }
+      else if(input.includes("event") || input.includes("activity")) {
+        return "Enter an event or activity"
       }
       else if(input.includes("object")) {
         return "Enter an object"
@@ -255,10 +263,10 @@ class Create extends Component {
     getcat = input => {
       let cats = [
           "organization", "social_group", "group",
-          "event", "activity", 
           "location", "area", "structure", "land",
           "property",
-          "living_thing",   
+          "living_thing", 
+          "event", "activity",  
           "object"] // if contains object, return object, otherwise return noun
       let serial = input[0].synset 
       if(cats.includes(json.synset[serial].word[0])) {
@@ -404,17 +412,19 @@ class Create extends Component {
 
     handleFormSubmit = event => {
       event.preventDefault()
-        document.getElementById("create-button").className += " loading animate-flicker"
+        document.getElementById("create-button").className += " animate-flicker"
+        document.getElementById("create-button").innerHTML = "Analyzing..."
         API.sendText({
           document : {
               type: "PLAIN_TEXT",
               content: this.state.pasted
           }
         }).then(response => {
-          const ent = response.data.entities
+          // const ent = response.data.entities
           const tok = response.data.tokens
           
           this.getWords(tok)
+
           this.randomizeInputs()
           // console.log(document.getElementById("input-container").firstChild.firstChild.nextSibling.firstChild)
           document.getElementById("input-container").firstChild.firstChild.nextSibling.firstChild.focus()
@@ -698,7 +708,7 @@ class Create extends Component {
             { this.state.showTextArea ?
                 <div>
               <TextArea id="story-input" name="pasted" placeholder="Paste your story here..." onChange={this.handleInputChange} />
-              <FormBtn disabled={this.state.pasted.length === 0 ? true : false} onClick={this.handleFormSubmit}><span id="create-button" className="create-text"></span></FormBtn>
+              <FormBtn disabled={this.state.pasted.length === 0 ? true : false} onClick={this.handleFormSubmit}><span id="create-button" className="create-text">Start Replacing</span></FormBtn>
                 </div>
               : null}
         <br/>
