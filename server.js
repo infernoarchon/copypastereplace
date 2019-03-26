@@ -9,7 +9,6 @@ const passport = require('./server/passport')
 const user = require('./server/routes/user')
 const api = require('./server/routes/api')
 
-const bodyParser = require('body-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 

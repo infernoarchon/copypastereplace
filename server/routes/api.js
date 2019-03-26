@@ -4,7 +4,8 @@ const Story = require('../database/models/story')
 
 router.post('/save', (req, res) => {
     console.log('story save');
-
+    console.log(req.headers)
+    res.type('application/json')
     const { title, author, content, base64, color, icon } = req.body
     // ADD VALIDATION
     const newStory = new Story({
