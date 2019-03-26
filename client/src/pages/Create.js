@@ -238,6 +238,9 @@ class Create extends Component {
     }
 
     handleCats = input => {
+      if(input.includes("body_part")) {
+        return "Enter a body part"
+      }
       if(input.includes("furniture")) {
         return "Enter a piece of furniture"
       }
@@ -250,6 +253,9 @@ class Create extends Component {
       else if(input.includes("activity") && input.includes("social_group")) {
         return "Enter an event or activity"
       }
+      else if(input.includes("happening")) {
+        return "Enter an event or activity"
+      }
       else if(input.includes("social_group") || input.includes("group")) {
         return "Enter a group or club"
       }
@@ -258,9 +264,6 @@ class Create extends Component {
       }
       else if(input.includes("location") || input.includes("area") || input.includes("structure") || input.includes("land")) {
         return "Enter a location"
-      }
-      else if(input.includes("property")) {
-        return "Enter a superpower"
       }
       else if(input.includes("living_thing")) {
         return "Enter a living thing"
@@ -278,11 +281,11 @@ class Create extends Component {
     
     getcat = input => {
       let cats = [
+          "body_part",
           "organization", "social_group", "group",
           "location", "area", "structure", "land",
-          "property",
           "living_thing", 
-          "event", "activity", 
+          "event", "activity", "happening",
           "natural_object", 
           "furniture",
           "object"] // if contains object, return object, otherwise return noun
