@@ -47,7 +47,6 @@ class Create extends Component {
       showsignup: false,
       showsignin: true,
       categories: [],
-      person: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
@@ -439,7 +438,7 @@ class Create extends Component {
               content: this.state.pasted
           }
         }).then(response => {
-          const ent = response.data.entities
+          // const ent = response.data.entities
           const tok = response.data.tokens
           this.getWords(tok)
 
