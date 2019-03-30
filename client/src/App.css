@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 /* .loading::after {
   content: "Analyzing..." !important
 }
@@ -410,6 +412,42 @@ label {
   max-width: 360px;
 }
 
+.card-columns {
+  column-count: 5;
+}
+
+.gif-focused {
+  outline-color: lightblue;
+  outline-style: solid;
+  outline-width: thick;
+  opacity: 1 !important;
+}
+
+.gif-img {
+  opacity: 0.5;
+}
+
+.gif-feed img {
+  width: 100%;
+  height: auto;
+}
+
+.detail-thumb {
+  width: 80px;
+  height: auto;
+  float: left;
+  margin-right: 1em;
+}
+
+.detail-thumb img {
+  width: 80px;
+  margin-top: 0.25em;
+}
+
+.detail-header {
+  overflow: auto;
+}
+
 @media screen and (max-width: 992px) {
   .wrapper {
     max-width: 95%;
@@ -425,4 +463,11 @@ label {
   .nav-mobile {
     display: inline;
   }
+  .card-columns {
+    column-count: 4;
+  }
+  .story-desc {
+    margin-top: 1em;
+  }
 }
+

@@ -61,6 +61,10 @@ export default {
   },
   getBio: function(key, user) {
     return axios.get("http://api.icndb.com/jokes/" + key + "?firstName=user&lastName=" + user )
+  },
+
+  getGifs: function(ent1, ent2) {
+    return axios.get("https://api.giphy.com/v1/gifs/search?q=" + ent1 + "+" + ent2 + "&api_key=" + process.env.REACT_APP_GIPHY_API_KEY)
   }
 
 

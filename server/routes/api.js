@@ -6,7 +6,7 @@ router.post('/save', (req, res) => {
     console.log('story save');
     console.log(req.headers)
     res.type('application/json')
-    const { title, author, content, base64, color, icon } = req.body
+    const { title, author, content, base64, color, icon, gif, gif_s } = req.body
     // ADD VALIDATION
     const newStory = new Story({
         title: title,
@@ -14,7 +14,9 @@ router.post('/save', (req, res) => {
         content: content,
         base64: base64,
         color: color,
-        icon: icon
+        icon: icon,
+        gif: gif,
+        gif_s: gif_s
     })
     newStory.save((err, savedStory) => {
         if (err) return res.json(err)

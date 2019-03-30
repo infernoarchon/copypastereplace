@@ -47,6 +47,8 @@ class Create extends Component {
       showsignup: false,
       showsignin: true,
       categories: [],
+      gifs: [],
+      targetGif: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
@@ -553,6 +555,7 @@ class Create extends Component {
         console.log(finalStory)
         document.getElementById("story-container").innerHTML = finalStory
         this.setState({final: finalStory})
+        this.getEnt(finalStory)
         API.sendTextToSpeech(finalStory).then(response =>{
           this.setState({audio: response.data.audioContent})
         })
@@ -575,7 +578,9 @@ class Create extends Component {
           content: this.state.final,
           base64: this.state.audio,
           color: this.props.userColor,
-          icon: this.props.userIcon
+          icon: this.props.userIcon,
+          gif: this.state.targetGif,
+          gif_s: this.state.targetGif.replace(/200w_d.gif/g, "480w_s.jpg")
         })
           .then(response => {
             console.log(response)
@@ -689,6 +694,46 @@ class Create extends Component {
         window.location.reload()
       }
 
+      getEnt = (story) => {
+        API.sendText({
+          document : {
+              type: "PLAIN_TEXT",
+              content: story
+          }
+        }).then(response => {
+          const ent = response.data.entities
+          let ent1 = ent[0].name
+          let ent2 = ent[1].name
+          // let ent3 = ent[2].name
+          ent1 = ent1.replace(/\./g,'')
+          ent2 = ent2.replace(/\./g,'')
+          // ent3 = ent3.replace(/\./g,'')
+
+          ent1 = ent1.replace(/\s/g,'+')
+          ent2 = ent2.replace(/\s/g,'+')
+          // ent3 = ent3.replace(/\s/g,'-')
+          this.getGifs(ent1, ent2)
+        })
+      }
+
+      getGifs = (ent1, ent2) => {
+        API.getGifs(ent1, ent2).then(response => {
+          console.log(response)
+          this.setState({gifs: response.data.data})
+          console.log(this.state.gifs)
+        })
+      }
+
+      handleGif = (event) => {
+        console.log(event)
+        console.log(event.target.id)
+        this.setState({targetGif: event.target.id})
+        if(this.state.targetGif.length > 0) {
+          document.getElementById(this.state.targetGif).classList.remove('gif-focused')
+        }
+        document.getElementById(event.target.id).className += " gif-focused"
+      }
+
     
     render() {
       // console.log(this.state)
@@ -782,9 +827,23 @@ class Create extends Component {
               <form className="mt-4">
               <Label htmlFor="title">Story Title</Label>
               <Input name="title" type="text" className="w-50" value={this.state.title} onChange={this.handleInputChange} />
+              <div className="mt-4">
+              <Label>Select a Gif</Label>
+              </div>
+              <div className="card-columns">
+              {this.state.gifs.map(gif => (
 
+                  <div className="card">
+                    <img onClick={this.handleGif} id={gif.images.fixed_width_downsampled.url} className="card-img-top gif-img" src={gif.images.fixed_width_downsampled.url} alt="Card image cap" />
+                    {/* <div className="card-body">
+                      <h5 className="card-title">Card title that wraps to a new line</h5>
+                    </div> */}
+                  </div>
+                )
+              )}
+              </div>
               <button
-                className="btn btn-primary mt-2"
+                className="btn btn-primary mt-5 btn-lg btn-block"
                 onClick={this.handleSubmit}
               >Save Story</button>
             </form> : null  

@@ -13,6 +13,9 @@ const storySchema = new Schema({
     base64: { type: String, unique: false, required: false },
     color: { type: String, unique: false, required: false },
     icon: { type: String, unique: false, required: false },
+    gif: { type: String, unique: false, required: false },
+    gif_s: { type: String, unique: false, required: false }
+
 
 })
 
