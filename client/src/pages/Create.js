@@ -718,14 +718,12 @@ class Create extends Component {
 
       getGifs = (ent1, ent2) => {
         API.getGifs(ent1, ent2).then(response => {
-          console.log(response)
           this.setState({gifs: response.data.data})
           console.log(this.state.gifs)
         })
       }
 
       handleGif = (event) => {
-        console.log(event)
         console.log(event.target.id)
         this.setState({targetGif: event.target.id})
         if(this.state.targetGif.length > 0) {
