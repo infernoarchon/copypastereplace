@@ -64,7 +64,6 @@ export default {
   },
 
   getGifs: function(ent1, ent2) {
-    console.log(process.env)
     return axios.get("https://api.giphy.com/v1/gifs/search?q=" + ent1 + "+" + ent2 + "&api_key=" + process.env.REACT_APP_GIPHY_API_KEY)
   }
 
