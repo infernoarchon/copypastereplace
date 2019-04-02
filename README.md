@@ -22,4 +22,9 @@ A word replacement game.
 ## Technologies
 
 - MERN (MongoDB, Express, React, Node)
+- Passportjs
+- Axios
+- Momentjs
+- Json-query
+- Mongoose
 
