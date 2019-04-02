@@ -17,6 +17,7 @@ A word replacement game.
 - Google Books
 - OMDB
 - Wordnet
+- GIPHY
 
 ## Technologies
 
