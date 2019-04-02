@@ -1,6 +1,6 @@
 # Copy Paste Replace
 
-A word replacement game. Users can create funny stories using the OMDB, Google Books API, or paste in their own text.
+A word replacement game. Users can create funny stories using the OMDB, Google Books API, or paste in their own text content.
 
 ## Setup
 
