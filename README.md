@@ -5,7 +5,7 @@ A word replacement game.
 ## Setup
 
 1. `npm install`
-2. Set API keys in `env` file
+2. Set API keys in `.env` file
 3. Download and install MongoDB
 4. Run `mongod` to start MongoDB locally
 5. `npm start`
