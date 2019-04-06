@@ -28,3 +28,9 @@ A word replacement game. Users can create funny stories using the OMDB, Google B
 - Json-query
 - Mongoose
 
+## Team
+
+- Alan Chen
+- Daniel Han
+- Tracy Mah
+- Xiao Heng Chen
