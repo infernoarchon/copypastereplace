@@ -45,7 +45,7 @@ export default {
   },
 
   searchOMDB: function(query) {
-    return axios.get("http://www.omdbapi.com/?apikey=" + process.env.REACT_APP_OMDB_API_KEY  + "&t=" + query + "&plot=full")
+    return axios.get("https://www.omdbapi.com/?apikey=" + process.env.REACT_APP_OMDB_API_KEY  + "&t=" + query + "&plot=full")
   },
 
   searchBooks: function(query) {
@@ -60,7 +60,7 @@ export default {
     })
   },
   getBio: function(key, user) {
-    return axios.get("http://api.icndb.com/jokes/" + key + "?firstName=user&lastName=" + user )
+    return axios.get("https://api.icndb.com/jokes/" + key + "?firstName=user&lastName=" + user )
   },
 
   getGifs: function(ent1, ent2) {
