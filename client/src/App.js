@@ -11,12 +11,20 @@ import Profile from "./pages/Profile";
 
 
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Nav from "./components/Nav"
+import Nav from "./components/Nav";
 import NoMatch from "./pages/NoMatch.js";
 
-import axios from 'axios'
+import axios from 'axios';
 
+import sslRedirect from 'heroku-ssl-redirect';
+import express from 'express';
+const app = express();
 
+app.use(sslRedirect())
+app.get('/',(req, res) => {
+  res.send('hello world');
+})
+app.listen(process.env.PORT || 3000);
 
 class App extends Component {
   constructor() {
